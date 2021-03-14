@@ -1,0 +1,77 @@
+.home-jumbo {
+    background: url('../img/dark.jpg') center;
+}
+
+.footer{
+
+}
+
+.img-responsive{
+    width: 100%;
+    height: auto;
+}
+
+.card{
+
+}
+
+.main{
+    max-width: 1000px;
+    margin: auto;
+}
+
+.lessons{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.roundCard{
+    background-color: #1290b7;
+}
+
+.grade{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.subjects{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.col1{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 200
+}
+
+.col2{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 200
+
+}
+
+.col3{
+    text-align: center;
+    font-weight: 200
+}
+.student-add-button{
+    position:fixed;
+    width:100px;
+    height:100px;
+    bottom:30px;
+    right:40px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
