@@ -15,6 +15,7 @@
 
 }
 
+
 .main{
     max-width: 1000px;
     margin: auto;
@@ -63,15 +64,15 @@
     text-align: center;
     font-weight: 200
 }
-.student-add-button{
-    position:fixed;
-    width:100px;
-    height:100px;
-    bottom:30px;
-    right:40px;
 
+.user_add{
+    width: 150px;
+    height: 150px;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.radio_check{
+    text-align: inherit;
+}
+.avatars{
+    margin-left: 250px;
 }

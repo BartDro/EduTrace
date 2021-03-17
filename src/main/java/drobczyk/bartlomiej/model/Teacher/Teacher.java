@@ -15,7 +15,9 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
     private Long id;
+    @Column(unique = true)
     private String login;
+    @Column(unique = true)
     private String email;
     private String password;
     private LocalDateTime regisrationDate;
@@ -24,7 +26,8 @@ public class Teacher {
 
     public Teacher(){};
 
-    public Teacher(String login, String email, String password, LocalDateTime regisrationDate, Set<Student> students) {
+    public Teacher(String login, String email, String password,
+                   LocalDateTime regisrationDate, Set<Student> students) {
         this.login = login;
         this.email = email;
         this.password = password;

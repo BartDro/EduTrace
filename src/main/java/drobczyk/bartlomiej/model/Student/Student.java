@@ -2,6 +2,7 @@ package drobczyk.bartlomiej.model.Student;
 
 import drobczyk.bartlomiej.model.Lesson.Lesson;
 import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.enums.Subject;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class Student {
     private String surname;
     private String phone;
     private String email;
+    private Integer grade;
     private String parent;
     private String parentNumber;
     private String additionalInfo;
@@ -36,12 +38,13 @@ public class Student {
     public Student(){
     }
 
-    public Student(String name, String surname, String phone, String email,
+    public Student(String name, String surname, String phone, String email, Integer grade,
                    String parent, String parentNumber, String additionalInfo, String avatarUrl) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.grade = grade;
         this.parent = parent;
         this.parentNumber = parentNumber;
         this.additionalInfo = additionalInfo;
@@ -58,6 +61,14 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
     public void setName(String name) {
