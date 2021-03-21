@@ -43,9 +43,9 @@
         <div class="col-md-8 border-right">
             <div class="p-3  shadow bg-white">
                 <div class="d-flex  justify-content-center align-items-center">
-                    <h4 class="heading1 text-center display-5" th:text="|Lekcje ucznia: ${chosenStudent.getName()}|">Lekcje ucznia: Szymon</h4>
+                    <h4 class="heading1 text-center display-5" th:text="|Lekcje ucznia: ${chosenStudent.getName()} ${chosenStudent.getSurname()}|">Lekcje ucznia: Szymon</h4>
                 </div>
-                <div class=" card table-responsive">
+                <div class=" card table-responsive" th:if="${!chosenStudent.getLessons().isEmpty()}">
                     <table class="table table-responsive table-hover">
                         <thead>
                         <th>Nr lekcji</th>
@@ -54,12 +54,12 @@
                         <th>Data</th>
                         <th>Lekcja</th>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Matematyka</td>
-                            <td>Figury geometryczne</td>
-                            <td>1/8/20</td>
+                        <tbody th:remove = "all-but-first">
+                        <tr th:each="lesson:${chosenStudent.getLessons()}">
+                            <td th:text="${lesson.getId()}">1</td>
+                            <td th:text="${lesson.getSubject()}">Matematyka</td>
+                            <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
+                            <td th:text="${lesson.getLessonDate()}">1/8/20</td>
                             <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
@@ -146,6 +146,7 @@
                         </tbody>
                     </table>
                 </div>
+                <div th:if="${chosenStudent.getLessons().isEmpty()}"><h2>W celu dodania lekcji użyj formularza w bocznym panelu</h2></div>
             </div>
             <div class="bg-white shadow card mt-4 border-top p-3">
                 <span class="amount-lessons text-center display-5 "th:text="|Liczba lekcji: ${chosenStudent.getLessons().size()}|">Liczba lekcji: 6</span>

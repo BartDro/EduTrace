@@ -32,6 +32,7 @@ public class StudentPanelController {
                 Student student = studentService.getStudentById(studentId);
                 model.addAttribute("lessonInfo",new LessonFormInfo());
                 model.addAttribute("chosenStudent",student);
+              //  model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
                 return "studentPanel";
             }catch (NoSuchElementException e){
                 System.err.println("Such student does not exist");
@@ -45,6 +46,7 @@ public class StudentPanelController {
         Student student = studentService.getStudentById(lessonInfo.getStudentId());
         studentService.saveLessonToStudent(student,lessonInfo);
         model.addAttribute("chosenStudent",student);
+      //  model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
         return "studentPanel";
     }
 
