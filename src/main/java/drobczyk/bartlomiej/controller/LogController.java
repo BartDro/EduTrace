@@ -1,6 +1,7 @@
 package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.services.LogService;
+import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LogController {
     private LogService logService;
+    private TeacherSession teacherSession;
+
 
     @Autowired
-    public LogController(LogService logService) {
+    public LogController(LogService logService, TeacherSession teacherSession) {
         this.logService = logService;
+        this.teacherSession = teacherSession;
     }
 
     @GetMapping("/")
@@ -31,11 +35,13 @@ public class LogController {
         return "login";
     }
 
-    @PostMapping("/log_in")
+    @PostMapping("/log-in")
     public String log(@RequestParam String login, @RequestParam String password,Model model){
         boolean isLogProcessSuccessful = logService.logTeacher(login,password);
         model.addAttribute("logOutcome",isLogProcessSuccessful);
-        if (isLogProcessSuccessful) return "mainPanel";
+        if (isLogProcessSuccessful){
+            teacherSession.setTeacher(logService.getTeacherByLogin(login));
+            return "redirect:main-panel";}
         return "login";
     }
 }

@@ -1,3 +1,4 @@
+
 .home-jumbo {
     background: url('../img/dark.jpg') center;
 }
@@ -5,16 +6,19 @@
 .footer{
 
 }
+.navbar-brand{
+    margin-left: 200px;
+    font-weight:40;
 
+}
 .img-responsive{
     width: 100%;
     height: auto;
 }
 
-.card{
-
+.footer{
+    background-color: #11426c;
 }
-
 
 .main{
     max-width: 1000px;
@@ -54,7 +58,6 @@
 }
 
 .col2{
-    margin-top: 10px;
     text-align: center;
     font-weight: 200
 
@@ -62,7 +65,8 @@
 
 .col3{
     text-align: center;
-    font-weight: 200
+    font-weight: 200;
+    font-size: 15px;
 }
 
 .user_add{
@@ -76,3 +80,6 @@
 .avatars{
     margin-left: 250px;
 }
+
+
+

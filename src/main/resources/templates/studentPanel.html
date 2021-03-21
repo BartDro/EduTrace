@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="../static/css/userPanel.css" th:href="@{/css/mainView.css}" rel="stylesheet">
+    <link href="../static/css/userPanel.css" th:href="@{/css/userPanel.css}" rel="stylesheet">
 
 </head>
 <body>
@@ -18,20 +18,21 @@
     <h5>Trace of the progress</h5>
 </div>
 <nav class="navbar navbar-expand-sm bg-dark  sticky-top navbar-dark">
-    <a class="navbar-brand" href="#">EduTrace</a>
+    <a class="navbar-brand ml-5" href="#">EduTrace</a>
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon "></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end " id="collapsibleNavbar">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item display-5 mr-5">
                 <a class="nav-link" href="#">Podsumowanie</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item display-5 mr-5">
                 <a class="nav-link" href="#">Grafik</a>
+
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Wyloguj</a>
+            <li class="nav-item display-5">
+                <a class="nav-link mr-5" href="#">Wyloguj</a>
             </li>
         </ul>
     </div>
@@ -42,7 +43,7 @@
         <div class="col-md-8 border-right">
             <div class="p-3  shadow bg-white">
                 <div class="d-flex  justify-content-center align-items-center">
-                    <h6 class="heading1 text-center display-5">Lekcje ucznia: Szymon</h6>
+                    <h4 class="heading1 text-center display-5" th:text="|Lekcje ucznia: ${chosenStudent.getName()}|">Lekcje ucznia: Szymon</h4>
                 </div>
                 <div class=" card table-responsive">
                     <table class="table table-responsive table-hover">
@@ -147,15 +148,15 @@
                 </div>
             </div>
             <div class="bg-white shadow card mt-4 border-top p-3">
-                <span class="amount-lessons text-center display-5 ">Liczba lekcji: 6</span>
+                <span class="amount-lessons text-center display-5 "th:text="|Liczba lekcji: ${chosenStudent.getLessons().size()}|">Liczba lekcji: 6</span>
             </div>
         </div>
         <div class="col-md-4 border-left">
             <div class="p-3 card first-box shadow-lg bg-white">
                 <div class="profile">
-                    <img src="../static/img/avatars/maleAvatar3.png" class="rounded img-fluid profile-picture  " width="220">
+                    <img src="../static/img/avatars/maleAvatar3.png" th:src="@{${chosenStudent.getAvatarUrl()}}" class="rounded img-fluid profile-picture  " width="220">
                 </div>
-                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance">Szymon</span>
+                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance" th:text="${chosenStudent.getName()}">Szymon</span>
                <button type="button" class="btn mt-2 btn-block btn-success" data-toggle="modal" data-target="#profileModal">Zobacz profil</button>
                 <span>
                     <div class="modal fade " id="profileModal">
@@ -173,7 +174,7 @@
                                                         <div class="col-md-4 border-right">
                                                             <div class="p-3 card first-box shadow-lg bg-white">
                                                                 <div class="profile img-fluid">
-                                                                    <img src="../static/img/avatars/maleAvatar3.png" class="rounded img-fluid profile-picture " width="220">
+                                                                    <img src="../static/img/avatars/maleAvatar3.png" th:src="@{${chosenStudent.getAvatarUrl()}}" class="rounded img-fluid profile-picture " width="220">
                                                                 </div>
                                                                 <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance">Szymon</span>
                                                                 <span><a href="#" class="btn mt-2 btn-block btn-warning ">Edytuj profil</a></span>
@@ -187,7 +188,7 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0 mr-4">Imię</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary ">
+                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getName()}">
                                                                             Szymon
                                                                         </div>
                                                                     </div>
@@ -196,16 +197,16 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Nazwisko</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary">
+                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getSurname()}">
                                                                             Gad
                                                                         </div>
                                                                     </div>
                                                                     <hr>
                                                                     <div class="row">
                                                                         <div class="col-sm-7">
-                                                                            <h6 class="mb-0">Email</h6>
+                                                                            <h6 class="mb-0" >Email</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary">
+                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getEmail()}">
                                                                             szymongad@op.pl
                                                                         </div>
                                                                     </div>
@@ -214,7 +215,7 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Telefon ucznia</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary">
+                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getPhone()}">
                                                                            589 458 687
                                                                         </div>
                                                                     </div>
@@ -223,7 +224,7 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Rodzic</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary">
+                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getParent()}">
                                                                             Anna Gad
                                                                         </div>
                                                                     </div>
@@ -232,7 +233,7 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Telefon rodzica</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary">
+                                                                        <div class="col-sm-5 text-secondary"th:text="${chosenStudent.getParentNumber()}">
                                                                             749 852 365
                                                                         </div>
                                                                     </div>
@@ -242,7 +243,7 @@
                                                                             <h6 class="mb-0">Dodatkowe informacje</h6>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-5  text-secondary">
+                                                                        <div class="col-sm-5  text-secondary" th:text="${chosenStudent.getAdditionalInfo()}">
                                                                             Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. </div>
                                                                     </div>
                                                                 </div>
@@ -276,14 +277,13 @@
                                         <div class="card mt-2 mx-auto p-4 bg-light">
                                             <div class="card-body bg-light">
                                                 <div class="container">
-                                                    <form id="lesson-form" role="form">
+                                                    <form id="lesson-form" role="form" action="#" th:action="@{/add-lesson}" method="post">
                                                         <div class="">
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="subject">Wybierz przedmiot lekcji</label>
-                                                                        <select id="subject" name="need" class="form-control" required="required" data-error="Wybierz przedmiot">
-                                                                            <option value="" selected disabled>Wybierz przedmiot</option>
+                                                                        <select id="subject" name="chosenLesson" class="form-control" required="required" data-error="Wybierz przedmiot">
                                                                             <option>Matematyka</option>
                                                                             <option>Fizyka</option>
                                                                             <option>Angielski</option>
@@ -295,7 +295,7 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="lesson-topic">Opisz tematykę lekcji</label>
-                                                                        <input id="lesson-topic" type="text" name="lesson-topic" class="form-control" placeholder=" np. Figury geometryczne" required="required" data-error="Brak opisu">
+                                                                        <input id="lesson-topic" type="text" name="lessonSection" class="form-control" placeholder=" np. Figury geometryczne" required="required" data-error="Brak opisu">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -311,10 +311,11 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="form_message">Komentarz do lekcji</label>
-                                                                        <textarea id="form_message" name="form_message" class="form-control" placeholder="Zwrócić szczególną uwagę na czasy z rodziny perfect " rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                                        <textarea id="form_message" name="lessonComment" class="form-control" placeholder="Zwrócić szczególną uwagę na czasy z rodziny perfect " rows="4" required="required" data-error="Please, leave us a message."></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
+                                                                    <input type="hidden" name="studentId" th:value="${chosenStudent.getId()}">
                                                                     <input type="submit" class="btn btn-block btn-success btn-send pt-2 btn-block " value="Dodaj lekcję">
                                                                 </div>
                                                                 <div class="col-md-12 mt-2">

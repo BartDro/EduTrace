@@ -1,13 +1,11 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.model.Teacher.Teacher;
 import drobczyk.bartlomiej.repo.TeacherRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Optional;
 
 @Service
 public class LogService {
@@ -34,9 +32,10 @@ public class LogService {
     public boolean logTeacher(String login, String password) {
         return teacherRepo.existsTeacherByLoginAndPassword(login, password);
     }
+
+    public Teacher getTeacherByLogin(String login) {
+        return teacherRepo.findByLogin(login);
+    }
+
 }
 
-
-//<a href="#" >
-//                        <img src="../static/img/plus-circle-solid.svg" class="student-add-button"></img>
-//                    </a>

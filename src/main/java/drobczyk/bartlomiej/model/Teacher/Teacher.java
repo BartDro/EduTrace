@@ -1,6 +1,7 @@
 package drobczyk.bartlomiej.model.Teacher;
 
 import drobczyk.bartlomiej.model.Student.Student;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class Teacher {
     private String email;
     private String password;
     private LocalDateTime regisrationDate;
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private Set<Student> students = new HashSet<>();
 
     public Teacher(){};

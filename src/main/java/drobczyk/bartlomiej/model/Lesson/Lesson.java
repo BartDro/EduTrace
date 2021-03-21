@@ -1,36 +1,38 @@
 package drobczyk.bartlomiej.model.Lesson;
 
 import drobczyk.bartlomiej.model.Student.Student;
-import drobczyk.bartlomiej.model.enums.Subject;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table()
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lesson_id")
     private Long id;
-    @Enumerated(EnumType.STRING)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Subject subject;
     private String lessonTopic;
     private String homework;
     private String lessonComment;
     private LocalDateTime lessonDate;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Student student;
 
 
     public Lesson(){}
 
     public Lesson(Subject subject, String lessonTopic, String homework,
-                  String lessonComment, LocalDateTime lessonDate) {
+                  String lessonComment, LocalDateTime lessonDate, Student student) {
         this.subject = subject;
         this.lessonTopic = lessonTopic;
         this.homework = homework;
         this.lessonComment = lessonComment;
         this.lessonDate = lessonDate;
+        this.student = student;
     }
 
     public Long getId() {
