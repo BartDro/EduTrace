@@ -51,7 +51,7 @@
                                 <div class="ml-3 w-100">
                                     <h4 class="mb-0 mt-0 font-weight-bold"th:text="|${student.getName()} ${student.getSurname()}|">Miłosz</h4>
                                     <div class=" mt-2 p-1 d-flex justify-content-between rounded roundCard text-white stats">
-                                        <div class="d-flex flex-column"> <span class="lessons">Lekcje</span> <span class="col1" th:text="${student.getLessons().size()}">38</span> </div>
+                                        <div class="d-flex flex-column"> <span class="lessons">Lekcje</span> <span class="col1" th:text="${student.getLessons().size()-student.getLastArchivedPosition()}">38</span> </div>
                                         <div class="d-flex flex-column">
                                             <h5 class="mr-1">Przedmioty</h5>
                                             <div class="subjects"th:each="subject:${student.getSubjects()}">
@@ -61,7 +61,7 @@
                                         <div class="d-flex flex-column">
                                             <h5 class="mr-1">Dni zajęć</h5>
                                             <div class="subjects"th:each="subject:${student.getDays()}">
-                                                <span class="col3" th:text="${subject.getDay()}">Angielski <br> Matematyka</span>
+                                                <span class="col3" th:text="${subject.getDay()}">Wtorek <br> Czwartek</span>
                                             </div>
                                         </div>
                                     </div>

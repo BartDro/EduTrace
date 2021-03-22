@@ -2,6 +2,7 @@ package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.DTO.StudentFormInfo;
 import drobczyk.bartlomiej.services.MainPanelService;
+import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class MainPanelController {
     private MainPanelService panelService;
     private TeacherSession teacherSession;
+    private StudentService studentService;
 
     @Autowired
     public MainPanelController(MainPanelService panelService, TeacherSession teacherSession) {
@@ -38,7 +40,7 @@ public class MainPanelController {
         return "redirect:/main-panel";
     }
 
-    @GetMapping({"/add-student", "/student-panel","/add-lesson"})
+    @GetMapping({"/add-student", "/student-panel","/add-lesson","/register"})
     public String redirectToLogView() {
         if (teacherSession.isTeacherLogged()) {
             return "redirect:/main-panel";

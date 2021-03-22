@@ -45,8 +45,8 @@
                 <div class="d-flex  justify-content-center align-items-center">
                     <h4 class="heading1 text-center display-5" th:text="|Lekcje ucznia: ${chosenStudent.getName()} ${chosenStudent.getSurname()}|">Lekcje ucznia: Szymon</h4>
                 </div>
-                <div class=" card table-responsive" th:if="${!chosenStudent.getLessons().isEmpty()}">
-                    <table class="table table-responsive table-hover">
+                <div class=" card table-responsive" >
+                    <table class="table table-responsive table-hover" th:if="${currentLessons.size()>0}">
                         <thead>
                         <th>Nr lekcji</th>
                         <th>Rodzaj lekcji</th>
@@ -55,8 +55,8 @@
                         <th>Lekcja</th>
                         </thead>
                         <tbody th:remove = "all-but-first">
-                        <tr th:each="lesson:${chosenStudent.getLessons()}">
-                            <td th:text="${lesson.getId()}">1</td>
+                        <tr th:each="lesson:${currentLessons}">
+                            <td th:text="${currentLessons.indexOf(lesson)+1}">1</td>
                             <td th:text="${lesson.getSubject()}">Matematyka</td>
                             <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
                             <td th:text="${lesson.getLessonDate()}">1/8/20</td>
@@ -146,10 +146,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div th:if="${chosenStudent.getLessons().isEmpty()}"><h2>W celu dodania lekcji użyj formularza w bocznym panelu</h2></div>
+                <div th:if="${currentLessons.size()==0}">
+                    <div class="bg-white shadow card mt-4 border-top p-3">
+                        <span class="amount-lessons text-center display-5 ">Brak lekcji bieżących<br>W celu dodania lekcji użyj formularza w bocznym panelu</span>
+                    </div>
+                </div>
             </div>
             <div class="bg-white shadow card mt-4 border-top p-3">
-                <span class="amount-lessons text-center display-5 "th:text="|Liczba lekcji: ${chosenStudent.getLessons().size()}|">Liczba lekcji: 6</span>
+                <span class="amount-lessons text-center display-5 "th:text="|Liczba lekcji: ${currentLessons.size()}|">Liczba lekcji: 6</span>
             </div>
         </div>
         <div class="col-md-4 border-left">
@@ -336,8 +340,34 @@
                     </div>
                 </div>
                 </span>
-                <span class=" archive"><a href="#" class="btn mt-2 btn-block btn-secondary ">Archiwizuj ostatnie lekcje</a></span>
+                <span class=" archive"><a href="#" class="btn mt-2 btn-block btn-secondary "data-toggle="modal" data-target="#archive">Archiwizuj ostatnie lekcje</a></span>
             </div>
+                 <span>
+                        <div class="modal fade " id="archive">
+                        <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content ">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Archiwizacja bieżących lekcji</h5>
+                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                         </button>
+                                    </div>
+                                        <div class="modal-body">
+                                        <p>Czy na pewno chcesz zarchiwizować bieżące lekcje?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form role="form" action="#" th:action="@{/archive-lesson}" method="post">
+                                            <input type="hidden" name="positionToArchive" th:value="${currentLessons.size()}">
+                                            <input type="hidden" name="studentId" th:value="${chosenStudent.getId()}">
+                                            <input type="submit" class="btn btn-success" value="Archiwizuj">
+
+                                        </form>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
             <div class="p-3 last-lesson shadow-lg mt-2 card py-4 bg-white">
                 <div class="d-flex  justify-content-between">
                     <span class="last-lesson ml-5">

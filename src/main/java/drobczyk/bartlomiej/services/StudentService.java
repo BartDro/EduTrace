@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -41,25 +39,34 @@ public class StudentService {
         Lesson lesson = createLessonFromForm(student,lessonFormInfo);
         student.getLessons().add(lesson);
         lessonRepo.save(lesson);
-
-
     }
     private Lesson createLessonFromForm (Student student, LessonFormInfo lessonFormInfo){
         return new Lesson(subjectService.findSubjectByDesc(lessonFormInfo.getChosenLesson()),lessonFormInfo.getLessonSection(),
                         lessonFormInfo.getHomework(), lessonFormInfo.getLessonComment(), LocalDateTime.now(),student);
     }
 
-    /*
+
     public List<Lesson> getCurrentLessons(Student student){
         List<Lesson> currentLessons;
         if (student.getLastArchivedPosition() != null){
-            currentLessons = student.getLessons()
+            currentLessons = student.getLessons().stream()
+                    .collect(Collectors.toList())
                     .subList(student.getLastArchivedPosition().intValue(),student.getLessons().size());
         }else{
-            currentLessons = student.getLessons();
+            currentLessons = student.getLessons().stream().collect(Collectors.toList());
         }
         return currentLessons;
     }
 
-     */
+    public Student archiveCurrentLessons(Long studentId, Long positionToArchive){
+        Student student = this.getStudentById(studentId);
+        Long newPosition = student.getLastArchivedPosition() + positionToArchive;
+        student.setLastArchivedPosition(newPosition);
+        this.saveStudent(student);
+        return student;
+    }
+
+
+
+
 }

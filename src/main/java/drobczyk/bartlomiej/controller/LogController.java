@@ -23,7 +23,10 @@ public class LogController {
 
     @GetMapping("/")
     public String log(Model model){
-        return "login";
+       if (teacherSession.isTeacherLogged()){
+           return "redirect:/main-panel";
+       }
+       return "login";
     }
 
     @PostMapping("/register")

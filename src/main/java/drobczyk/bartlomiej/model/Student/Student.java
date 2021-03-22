@@ -68,6 +68,7 @@ public class Student {
         this.days = days;
         this.registrationDate = registrationDate;
         this.teacher = teacher;
+        this.lastArchivedPosition = 0L;
     }
 
     public Long getId() {

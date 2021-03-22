@@ -32,7 +32,7 @@ public class StudentPanelController {
                 Student student = studentService.getStudentById(studentId);
                 model.addAttribute("lessonInfo",new LessonFormInfo());
                 model.addAttribute("chosenStudent",student);
-              //  model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
+                model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
                 return "studentPanel";
             }catch (NoSuchElementException e){
                 System.err.println("Such student does not exist");
@@ -46,7 +46,15 @@ public class StudentPanelController {
         Student student = studentService.getStudentById(lessonInfo.getStudentId());
         studentService.saveLessonToStudent(student,lessonInfo);
         model.addAttribute("chosenStudent",student);
-      //  model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
+        model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
+        return "studentPanel";
+    }
+
+    @PostMapping("/archive-lesson") //WYDZIELIC DO SERWISU
+    public String archiveLessons(@RequestParam Long studentId, @RequestParam Long positionToArchive, Model model){
+        Student student = studentService.archiveCurrentLessons(studentId,positionToArchive);
+        model.addAttribute("chosenStudent",student);
+        model.addAttribute("currentLessons",studentService.getCurrentLessons(student));
         return "studentPanel";
     }
 
