@@ -16,12 +16,12 @@
 <body>
     <div class="studentsPresent">
         <div class="jumbotron home-jumbo text-center text-white" style="margin-bottom:0">
-            <h1 class="display-2">EduTrace</h1>
+            <a href="#" th:href="@{/main-panel}"><h1 class="display-2 text-white">EduTrace</h1></a>
             <h5>Trace of the progress</h5>
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark  sticky-top navbar-dark">
-            <a class="navbar-brand display-4 ml-5" href="#">EduTrace</a>
+            <a class="navbar-brand display-4 ml-5" href="#" th:href="@{/main-panel}" >EduTrace</a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon "></span>
             </button>
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="button mt-2  flex-row align-items-center">
-                                       <form action="#" th:action="@{/student-panel}" method="post">
+                                       <form action="#" th:action="@{/student-panel}" method="get">
                                            <input type="hidden" name="studentId" th:value="${student.getId()}">
                                            <input type="submit" class=" btn-sm btn-block font-weight-bold btn-primary text-white" value="Panel dydaktyczny">
                                        </form>

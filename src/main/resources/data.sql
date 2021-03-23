@@ -14,3 +14,4 @@ VALUES ('Poniedziałek'),
 
 insert into teacher (teacher_id, email, login, password, regisration_date)
 VALUES (1,'admin@op.pl','admin','admin','2008-01-01 00:00:01')
+/*spring.datasource.initialization-mode=always

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainPanelController {
-    private MainPanelService panelService;
+    private MainPanelService mainPanelService;
     private TeacherSession teacherSession;
     private StudentService studentService;
 
     @Autowired
     public MainPanelController(MainPanelService panelService, TeacherSession teacherSession) {
-        this.panelService = panelService;
+        this.mainPanelService = panelService;
         this.teacherSession = teacherSession;
     }
 
@@ -36,11 +36,11 @@ public class MainPanelController {
 
     @PostMapping("/add-student")
     public String addStudentToTeacher(@ModelAttribute StudentFormInfo studentBasicInfo) {
-        panelService.addStudentToTeacher(studentBasicInfo, teacherSession.getTeacher());
+        mainPanelService.addStudentToTeacher(studentBasicInfo, teacherSession.getTeacher());
         return "redirect:/main-panel";
     }
 
-    @GetMapping({"/add-student", "/student-panel","/add-lesson","/register"})
+    @GetMapping({"/add-student","/add-lesson","/register"})
     public String redirectToLogView() {
         if (teacherSession.isTeacherLogged()) {
             return "redirect:/main-panel";

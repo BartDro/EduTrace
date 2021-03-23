@@ -14,11 +14,11 @@
 </head>
 <body>
 <div class="jumbotron home-jumbo text-center text-white" style="margin-bottom:0">
-    <h1 class="display-2">EduTrace</h1>
+    <a href="#" th:href="@{/main-panel}"><h1 class="display-2 text-white">EduTrace</h1></a>
     <h5>Trace of the progress</h5>
 </div>
 <nav class="navbar navbar-expand-sm bg-dark  sticky-top navbar-dark">
-    <a class="navbar-brand ml-5" href="#">EduTrace</a>
+    <a class="navbar-brand display-4 ml-5" href="#" th:href="@{/main-panel}" >EduTrace</a>
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon "></span>
     </button>
@@ -60,7 +60,7 @@
                             <td th:text="${lesson.getSubject()}">Matematyka</td>
                             <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
                             <td th:text="${lesson.getLessonDate()}">1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Szczegóły</a></td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -371,7 +371,7 @@
             <div class="p-3 last-lesson shadow-lg mt-2 card py-4 bg-white">
                 <div class="d-flex  justify-content-between">
                     <span class="last-lesson ml-5">
-                        <div class="btn btn-block btn-secondary disabled text-center" role="alert">
+                        <div class="btn btn-block d-flex justify-content-center btn-secondary ml-1 disabled text-center" role="alert" th:text="|Ostatnia lekcja: ${currentLessons.get(currentLessons.size()-1).getSubject()} |">
                          Ostatnia lekcja: Matematyka
                         </div>
                     </span>
@@ -380,14 +380,14 @@
                     <div><h6>Uwagi: </h6>
                         <div class="d-flex justify-content-between">
                             <span class="card-block lesson-dessc ">
-                                <p> Powtórzyć procenty, zamianę liczb całkowitych na ułamki. Przeliczanie procentów</p>
+                                <p th:text="${currentLessons.get(currentLessons.size()-1).getLessonComment()}"> Powtórzyć procenty, zamianę liczb całkowitych na ułamki. Przeliczanie procentów</p>
                             </span>
                         </div>
                     </div>
                     <div class="home-work mt-2"><h6>Zadanie domowe:  </h6>
                         <div class="d-flex  justify-content-between">
                             <span class="card-block lesson-dessc ">
-                                <p> Podręcznik str 146 zadanie 1,2 i 7,8</p>
+                                <p th:text="${currentLessons.get(currentLessons.size()-1).getHomework()}"> Podręcznik str 146 zadanie 1,2 i 7,8</p>
                             </span>
                         </div>
                     </div>
