@@ -14,7 +14,7 @@ public class Subject {
     @Column(name = "subject_id")
     private Long subject_id;
     private String subject;
-    @OneToOne(mappedBy = "subject")
+    @OneToOne
     private Lesson lesson;
     @ManyToMany(mappedBy = "subjects")
     private List<Student> students = new ArrayList<>();

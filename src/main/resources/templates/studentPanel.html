@@ -60,7 +60,28 @@
                             <td th:text="${lesson.getSubject()}">Matematyka</td>
                             <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
                             <td th:text="${lesson.getLessonDate()}">1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Szczegóły</a></td>
+                            <td> <a href="#" class="btn text-center lesson-button btn-primary " data-toggle="modal" data-target="#details">Szczegóły</a></td>
+                            <span>
+                    <div class="modal fade " id="details">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Szczegóły lekcji</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p th:text="${lesson.getLessonComment()}"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Zamknij</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </span>
                         </tr>
                         <tr>
                             <td>2</td>

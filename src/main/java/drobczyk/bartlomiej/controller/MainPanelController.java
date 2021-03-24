@@ -27,7 +27,7 @@ public class MainPanelController {
             model.addAttribute("studentBasicInfo", new StudentFormInfo());
             model.addAttribute("students", teacherSession.getTeacher().getStudents());
             if (teacherSession.getTeacher().getStudents().isEmpty()) {
-                return "firstContact";
+                return "firstContactPanel";
             }
             return "mainPanel";
         }
