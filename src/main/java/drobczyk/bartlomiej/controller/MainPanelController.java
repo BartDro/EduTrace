@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.DTO.StudentFormInfo;
+import drobczyk.bartlomiej.model.DTO.addition_form.StudentFormInfo;
 import drobczyk.bartlomiej.services.MainPanelService;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -16,9 +16,10 @@ public class MainPanelController {
     private StudentService studentService;
 
     @Autowired
-    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession) {
+    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession, StudentService studentService) {
         this.mainPanelService = panelService;
         this.teacherSession = teacherSession;
+        this.studentService = studentService;
     }
 
     @GetMapping("/main-panel")

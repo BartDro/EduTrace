@@ -22,7 +22,7 @@ public class Teacher {
     private String email;
     private String password;
     private LocalDateTime regisrationDate;
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true )
     private Set<Student> students = new HashSet<>();
 
     public Teacher(){};
@@ -89,11 +89,11 @@ public class Teacher {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return Objects.equals(id, teacher.id) && Objects.equals(login, teacher.login) && Objects.equals(email, teacher.email) && Objects.equals(password, teacher.password) && Objects.equals(regisrationDate, teacher.regisrationDate) && Objects.equals(students, teacher.students);
+        return Objects.equals(id, teacher.id) && Objects.equals(login, teacher.login) && Objects.equals(email, teacher.email) && Objects.equals(password, teacher.password) && Objects.equals(regisrationDate, teacher.regisrationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, email, password, regisrationDate, students);
+        return Objects.hash(id, login, email, password, regisrationDate);
     }
 }

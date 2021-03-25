@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.DTO.LessonFormInfo;
+import drobczyk.bartlomiej.model.DTO.addition_form.LessonFormInfo;
 import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -45,6 +45,12 @@ public class StudentPanelController {
     public String archiveLessons(@RequestParam Long studentId, @RequestParam Long positionToArchive) {
         studentService.archiveCurrentLessons(studentId, positionToArchive);
         return "redirect:/student-panel?studentId="+studentId;
+    }
+
+    @PostMapping("/delete-student")
+    public String deleteStudent(@RequestParam Long studentId ){
+        studentService.deleteStudent(studentId);
+        return "redirect:/main-panel";
     }
 
 }

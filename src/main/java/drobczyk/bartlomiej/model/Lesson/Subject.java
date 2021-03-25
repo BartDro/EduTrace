@@ -14,8 +14,6 @@ public class Subject {
     @Column(name = "subject_id")
     private Long subject_id;
     private String subject;
-    @OneToOne
-    private Lesson lesson;
     @ManyToMany(mappedBy = "subjects")
     private List<Student> students = new ArrayList<>();
 
@@ -39,14 +37,6 @@ public class Subject {
 
     public void setSubject(String subject) {
         this.subject = subject;
-    }
-
-    public Lesson getLesson() {
-        return lesson;
-    }
-
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
     }
 
     public List<Student> getStudents() {

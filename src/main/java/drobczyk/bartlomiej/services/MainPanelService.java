@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.DTO.StudentFormInfo;
+import drobczyk.bartlomiej.model.DTO.addition_form.StudentFormInfo;
 import drobczyk.bartlomiej.model.Lesson.Day;
 import drobczyk.bartlomiej.model.Lesson.Subject;
 import drobczyk.bartlomiej.model.Student.Student;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

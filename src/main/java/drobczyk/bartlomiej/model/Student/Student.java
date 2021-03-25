@@ -44,7 +44,7 @@ public class Student {
     private Set<Day> days = new LinkedHashSet<>();
     @ManyToOne
     private Teacher teacher;
-    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     private Set<Lesson > lessons = new LinkedHashSet<>();
 
@@ -197,5 +197,18 @@ public class Student {
 
     public void setLastArchivedPosition(Long lastArchivedPosition) {
         this.lastArchivedPosition = lastArchivedPosition;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.id) && Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(phone, student.phone) && Objects.equals(email, student.email) && Objects.equals(parent, student.parent) && Objects.equals(parentNumber, student.parentNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, phone, email, parent, parentNumber);
     }
 }

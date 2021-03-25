@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.DTO;
+package drobczyk.bartlomiej.model.DTO.addition_form;
 
 import org.springframework.stereotype.Component;
 
