@@ -1,21 +1,22 @@
 package drobczyk.bartlomiej.session;
 
-import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Optional;
-import java.util.Set;
 
 @SessionScope
 @Component
 public class TeacherSession {
     private Teacher teacher;
+    private TeacherService teacherService;
 
     @Autowired
-    public TeacherSession() {
+    public TeacherSession(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
     public Teacher getTeacher() {
         return teacher;
@@ -27,5 +28,10 @@ public class TeacherSession {
 
     public boolean isTeacherLogged(){
         return Optional.ofNullable(teacher).isPresent();
+    }
+
+    public void updateTeacher(){
+        Teacher updatedTeacher = teacherService.updateTeacher(getTeacher());
+        setTeacher(updatedTeacher);
     }
 }

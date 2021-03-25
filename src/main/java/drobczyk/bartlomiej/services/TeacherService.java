@@ -21,4 +21,8 @@ public class TeacherService{
         teacherRepo.save(teacher);
     }
 
+    public Teacher updateTeacher(Teacher teacher){
+        return teacherRepo.save(teacher);
+    }
+
 }

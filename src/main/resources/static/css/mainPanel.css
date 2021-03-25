@@ -2,10 +2,6 @@
 .home-jumbo {
     background: url('../img/dark.jpg') center;
 }
-
-.footer{
-
-}
 .navbar-brand{
     margin-left: 200px;
     font-weight:40;
@@ -20,11 +16,6 @@
     background-color: #11426c;
 }
 
-.main{
-    max-width: 1000px;
-    margin: auto;
-}
-
 .lessons{
     margin-left: 10px;
     margin-right: 10px;
@@ -37,27 +28,49 @@
 }
 
 .grade{
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.days{
+    align-content: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 15px;
     font-weight: 500;
 }
 
 .subjects{
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 20px;
+    align-content: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 10px;
     font-weight: 500;
 }
-
+.lessons{
+    font-weight: 500;
+    margin-right: -5px;
+}
+.day-col{
+    align-content: center;
+    margin-right: 2px;
+    margin-left: -3px;
+    font-weight: 700;
+}
+.sub-col{
+    margin-right: 1px;
+    font-weight: 700;
+}
 
 .col1{
-    margin-top: 10px;
+    margin-top: 5px;
     text-align: center;
-    font-weight: 200
+    font-weight: 200;
 }
 
 .col2{
+    margin-top: 5px;
     text-align: center;
     font-weight: 200
 
@@ -69,8 +82,9 @@
 }
 
 .user_add{
+    margin-right: 30px;
     width: 150px;
-    height: 150px;
+    height: 950px;
 }
 
 .radio_check{

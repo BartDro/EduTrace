@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="../static/css/userPanel.css" th:href="@{/css/userPanel.css}" rel="stylesheet">
+    <link href="../static/css/studentPanel.css" th:href="@{/css/studentPanel.css}" rel="stylesheet">
 
 </head>
 <body>
@@ -25,11 +25,7 @@
     <div class="collapse navbar-collapse justify-content-end " id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item display-5 mr-5">
-                <a class="nav-link" href="#">Podsumowanie</a>
-            </li>
-            <li class="nav-item display-5 mr-5">
-                <a class="nav-link" href="#">Grafik</a>
-
+                <a class="nav-link" href="#">Archiwum</a>
             </li>
             <li class="nav-item display-5">
                 <a class="nav-link mr-5" href="#">Wyloguj</a>
@@ -174,7 +170,7 @@
                 </div>
             </div>
             <div class="bg-white shadow card mt-4 border-top p-3">
-                <span class="amount-lessons text-center display-5 "th:text="|Liczba lekcji: ${currentLessons.size()}|">Liczba lekcji: 6</span>
+                <span class="text-center display-5 "th:text="|Liczba lekcji: ${currentLessons.size()}|">Liczba lekcji: 6</span>
             </div>
         </div>
         <div class="col-md-4 border-left">

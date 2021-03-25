@@ -7,6 +7,7 @@ import drobczyk.bartlomiej.model.Lesson.Day;
 import drobczyk.bartlomiej.model.Lesson.Lesson;
 import drobczyk.bartlomiej.model.Lesson.Subject;
 import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.Teacher.Teacher;
 import drobczyk.bartlomiej.repo.LessonRepo;
 import drobczyk.bartlomiej.repo.StudentRepo;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -51,6 +52,7 @@ public class StudentService {
         Lesson lesson = createLessonFromForm(student, lessonFormInfo);
         student.getLessons().add(lesson);
         lessonRepo.save(lesson);
+        teacherSession.updateTeacher();
     }
 
     private Lesson createLessonFromForm(Student student, LessonFormInfo lessonFormInfo) {
@@ -130,6 +132,7 @@ public class StudentService {
         student.getSubjects().clear();
         teacherSession.getTeacher().getStudents().remove(student);
         studentRepo.delete(student);
-        teacherService.saveTeacher(teacherSession.getTeacher());
+        teacherSession.updateTeacher();
     }
+
 }
