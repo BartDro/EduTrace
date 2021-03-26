@@ -47,4 +47,10 @@ public class LogController {
             return "redirect:main-panel";}
         return "login";
     }
+
+    @GetMapping("/log-out")
+    public String logOut (){
+        teacherSession.setTeacher(null);
+        return "redirect:/";
+    }
 }

@@ -7,7 +7,6 @@ import drobczyk.bartlomiej.model.Lesson.Day;
 import drobczyk.bartlomiej.model.Lesson.Lesson;
 import drobczyk.bartlomiej.model.Lesson.Subject;
 import drobczyk.bartlomiej.model.Student.Student;
-import drobczyk.bartlomiej.model.Teacher.Teacher;
 import drobczyk.bartlomiej.repo.LessonRepo;
 import drobczyk.bartlomiej.repo.StudentRepo;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -64,15 +63,10 @@ public class StudentService {
     public List<Lesson> getCurrentLessons(Student student) {
         List<Lesson> currentLessons;
         if (student.getLastArchivedPosition() > 0) {
-            currentLessons = student.getLessons().stream()
-                    .sorted(Comparator.comparing(Lesson::getLessonDate))
-                    .collect(Collectors.toCollection(ArrayList::new))
+            currentLessons = getOrderedLessons(student)
                     .subList(student.getLastArchivedPosition().intValue(), student.getLessons().size());
-
         } else {
-            currentLessons = student.getLessons().stream()
-                    .sorted(Comparator.comparing(Lesson::getLessonDate))
-                    .collect(Collectors.toList());
+            currentLessons = getOrderedLessons(student);
         }
         return currentLessons;
     }
@@ -83,6 +77,12 @@ public class StudentService {
         student.setLastArchivedPosition(newPosition);
         this.saveStudent(student);
         return student;
+    }
+
+    public List<Lesson> getOrderedLessons(Student student){
+        return student.getLessons().stream()
+                .sorted(Comparator.comparing(Lesson::getLessonDate))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void changeStudentAvatar(String avatar, Long studentId){
@@ -133,6 +133,19 @@ public class StudentService {
         teacherSession.getTeacher().getStudents().remove(student);
         studentRepo.delete(student);
         teacherSession.updateTeacher();
+    }
+
+    public List<Student> findStudentsInArchive(String student){
+        String firstName = "";
+        String lastName = "XDF-GHTYUFV_HJIOP";
+        student.trim();
+        if (student.contains(" ")){
+            String[] splittedToNameAndSurname = student.split(" ");
+            firstName = splittedToNameAndSurname[0];
+            lastName = splittedToNameAndSurname[1];
+            return studentRepo.findAllByNameIsStartingWithOrSurnameStartingWithIgnoreCase(firstName,lastName);
+        }
+        return studentRepo.findAllByNameIsStartingWithOrSurnameStartingWithIgnoreCase(student,lastName);
     }
 
 }

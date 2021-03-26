@@ -45,7 +45,7 @@
     align-content: center;
     margin-left: 5px;
     margin-right: 5px;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: 500;
 }
 .lessons{
@@ -76,15 +76,28 @@
 
 }
 
+* { padding: 0; margin: 0; }
+
+html, body {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+body > * {
+    flex-shrink: 0;
+}
+
 .col3{
     text-align: center;
     font-weight: 200;
 }
+.body{ height:100%; }
 
 .user_add{
     margin-right: 30px;
     width: 150px;
-    height: 950px;
 }
 
 .radio_check{
