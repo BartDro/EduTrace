@@ -27,7 +27,6 @@ public class StudentService {
     private TeacherService teacherService;
 
 
-
     @Autowired
     public StudentService(StudentRepo studentRepo, LessonRepo lessonRepo, SubjectService subjectService, DayService dayService, TeacherSession teacherSession, TeacherService teacherService) {
         this.studentRepo = studentRepo;
@@ -79,19 +78,19 @@ public class StudentService {
         return student;
     }
 
-    public List<Lesson> getOrderedLessons(Student student){
+    public List<Lesson> getOrderedLessons(Student student) {
         return student.getLessons().stream()
                 .sorted(Comparator.comparing(Lesson::getLessonDate))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void changeStudentAvatar(String avatar, Long studentId){
+    public void changeStudentAvatar(String avatar, Long studentId) {
         Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
         student.setAvatarUrl(avatar);
         studentRepo.save(student);
     }
 
-    public void editBasicInfo(BasicInfoEdit basicInfoEdit, Long studentId){
+    public void editBasicInfo(BasicInfoEdit basicInfoEdit, Long studentId) {
         Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
         student.setName(basicInfoEdit.getName());
         student.setSurname(basicInfoEdit.getSurname());
@@ -116,7 +115,9 @@ public class StudentService {
         student.setDays(days);
         student.setAdditionalInfo(subjectInfoEdit.getExtraInfo());
         studentRepo.save(student);
+        teacherSession.updateTeacher();
     }
+
     private Subject matchSubjcetWithFormDescription(String subjectDesc) {
         return subjectService.findSubjectByDesc(subjectDesc);
     }
@@ -135,17 +136,8 @@ public class StudentService {
         teacherSession.updateTeacher();
     }
 
-    public List<Student> findStudentsInArchive(String student){
-        String firstName = "";
-        String lastName = "XDF-GHTYUFV_HJIOP";
-        student.trim();
-        if (student.contains(" ")){
-            String[] splittedToNameAndSurname = student.split(" ");
-            firstName = splittedToNameAndSurname[0];
-            lastName = splittedToNameAndSurname[1];
-            return studentRepo.findAllByNameIsStartingWithOrSurnameStartingWithIgnoreCase(firstName,lastName);
-        }
-        return studentRepo.findAllByNameIsStartingWithOrSurnameStartingWithIgnoreCase(student,lastName);
+    public List<Student> findStudentsInArchive(String studentInfo) {
+    return studentRepo.findMatchedStudentsByString(studentInfo);
     }
 
 }

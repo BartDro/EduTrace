@@ -36,18 +36,21 @@ public class EditPanelController {
     @PostMapping("/edit-student/avatar")
     public String changeAvatar(@RequestParam String avatar,@RequestParam Long studentId){
         studentService.changeStudentAvatar(avatar,studentId);
+        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId="+studentId;
     }
 
     @PostMapping("/edit-student/basic-info")
     public String editBasicInfo(@ModelAttribute BasicInfoEdit basicInfo,@RequestParam Long studentId){
         studentService.editBasicInfo(basicInfo, studentId);
+        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId="+studentId;
     }
 
     @PostMapping("/edit-student/subject-info")
     public String editSubjectInfo(@ModelAttribute SubjectInfoEdit subjectInfoEdit,@RequestParam Long studentId){
         studentService.editSubjectInfo(subjectInfoEdit,studentId);
+        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId="+studentId;
     }
 }

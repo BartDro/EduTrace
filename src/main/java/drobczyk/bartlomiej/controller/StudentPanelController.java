@@ -24,7 +24,7 @@ public class StudentPanelController {
     }
 
     @GetMapping("/student-panel")
-    public String presentPanel(Model model,@RequestParam Long studentId){
+    public String presentPanel(Model model,@RequestParam(required = false) Long studentId){
         if (teacherSession.isTeacherLogged()){
             Student student = studentService.getStudentById(studentId);
             model.addAttribute("lessonInfo", new LessonFormInfo());
