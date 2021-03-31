@@ -126,7 +126,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="name">Imię ucznia</label>
-                                            <input id="name" type="text" name="name" class="form-control" placeholder=" Adam" required="required" data-error="Brak opisu">
+                                            <input id="name" type="text" th:value="${chosenStudent.getName()}" name="name" class="form-control" placeholder=" Adam" required="required" data-error="Brak opisu"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="surname">Nazwisko ucznia</label>
-                                            <input id="surname" type="text" name="surname" class="form-control" placeholder="Wieżbicki" required="required" data-error="Brak opisu">
+                                            <input id="surname" type="text" th:value="${chosenStudent.getSurname()}" name="surname" class="form-control" placeholder="Wieżbicki" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="phone">Telefon</label>
-                                            <input id="phone" type="text" name="phone" class="form-control" placeholder="111-555-777" required="required" data-error="Brak opisu">
+                                            <input id="phone" type="text" th:value="${chosenStudent.getPhone()}" name="phone" class="form-control" placeholder="111-555-777" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="mail">E-mail</label>
-                                            <input id="mail" type="text" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
+                                            <input id="mail" type="text" th:value="${chosenStudent.getEmail()}" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="parent">Opiekun</label>
-                                            <input id="parent" type="text" name="parent" class="form-control" placeholder="Anna Wieżbicka" required="required" data-error="Brak opisu">
+                                            <input id="parent" type="text" th:value="${chosenStudent.getParent()}" name="parent" class="form-control" placeholder="Anna Wieżbicka" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="parentPhone">Telefon opiekuna</label>
-                                            <input id="parentPhone" type="text" name="parentPhone" class="form-control" placeholder="555 777 888" required="required" data-error="Brak opisu">
+                                            <input id="parentPhone" type="text" th:value="${chosenStudent.getParentNumber()}" name="parentPhone" class="form-control" placeholder="555 777 888" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="extraInfo">Informacje dodatkowe</label>
-                                        <textarea id="extraInfo" name="extraInfo" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                        <textarea id="extraInfo" name="extraInfo" th:value="${chosenStudent.getAdditionalInfo()}" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
                                     </div>
                                 </div>
                             </div>

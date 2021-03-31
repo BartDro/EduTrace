@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.DTO.edit_form;
+package drobczyk.bartlomiej.model.dto.edit_form;
 
 import java.util.List;
 

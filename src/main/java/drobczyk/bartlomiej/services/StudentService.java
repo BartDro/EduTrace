@@ -1,8 +1,8 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.DTO.addition_form.LessonFormInfo;
-import drobczyk.bartlomiej.model.DTO.edit_form.BasicInfoEdit;
-import drobczyk.bartlomiej.model.DTO.edit_form.SubjectInfoEdit;
+import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
+import drobczyk.bartlomiej.model.dto.edit_form.BasicInfoEdit;
+import drobczyk.bartlomiej.model.dto.edit_form.SubjectInfoEdit;
 import drobczyk.bartlomiej.model.Lesson.Day;
 import drobczyk.bartlomiej.model.Lesson.Lesson;
 import drobczyk.bartlomiej.model.Lesson.Subject;

@@ -1,7 +1,7 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.DTO.edit_form.BasicInfoEdit;
-import drobczyk.bartlomiej.model.DTO.edit_form.SubjectInfoEdit;
+import drobczyk.bartlomiej.model.dto.edit_form.BasicInfoEdit;
+import drobczyk.bartlomiej.model.dto.edit_form.SubjectInfoEdit;
 import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;

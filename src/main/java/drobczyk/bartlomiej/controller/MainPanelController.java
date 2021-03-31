@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.DTO.addition_form.StudentFormInfo;
+import drobczyk.bartlomiej.model.dto.addition_form.StudentFormInfo;
 import drobczyk.bartlomiej.services.MainPanelService;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
