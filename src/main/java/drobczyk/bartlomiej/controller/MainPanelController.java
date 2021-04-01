@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.dto.addition_form.StudentFormInfo;
+import drobczyk.bartlomiej.model.dto.StudentDto;
 import drobczyk.bartlomiej.services.MainPanelService;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -25,8 +25,7 @@ public class MainPanelController {
     @GetMapping("/main-panel")
     public String presentPanel(Model model) {
         if (teacherSession.isTeacherLogged()) {
-            model.addAttribute("studentBasicInfo", new StudentFormInfo());
-            model.addAttribute("students", teacherSession.getTeacher().getStudents());
+            model.addAttribute("students",studentService.provideStudentsByCurrentSession() );
             if (teacherSession.getTeacher().getStudents().isEmpty()) {
                 return "firstContactPanel";
             }
@@ -36,8 +35,8 @@ public class MainPanelController {
     }
 
     @PostMapping("/add-student")
-    public String addStudentToTeacher(@ModelAttribute StudentFormInfo studentBasicInfo) {
-        mainPanelService.addStudentToTeacher(studentBasicInfo, teacherSession.getTeacher());
+    public String addStudentToTeacher(@ModelAttribute StudentDto studentDto) {
+        mainPanelService.addStudentToTeacher(studentDto, teacherSession.getTeacher());
         return "redirect:/main-panel";
     }
 

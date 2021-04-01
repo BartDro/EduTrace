@@ -1,6 +1,7 @@
-package drobczyk.bartlomiej.model.Lesson;
+package drobczyk.bartlomiej.model.lesson;
 
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.student.Student;
+import drobczyk.bartlomiej.model.subject.Subject;
 
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;

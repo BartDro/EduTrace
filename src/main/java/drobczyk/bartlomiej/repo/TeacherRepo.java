@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.repo;
 
-import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.teacher.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

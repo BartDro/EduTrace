@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.session;
 
-import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.teacher.Teacher;
 import drobczyk.bartlomiej.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

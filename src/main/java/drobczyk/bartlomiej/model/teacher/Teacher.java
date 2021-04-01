@@ -1,7 +1,6 @@
-package drobczyk.bartlomiej.model.Teacher;
+package drobczyk.bartlomiej.model.teacher;
 
-import drobczyk.bartlomiej.model.Student.Student;
-import org.springframework.context.annotation.Bean;
+import drobczyk.bartlomiej.model.student.Student;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

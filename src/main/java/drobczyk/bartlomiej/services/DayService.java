@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.Lesson.Day;
+import drobczyk.bartlomiej.model.day.Day;
 import drobczyk.bartlomiej.repo.DayRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

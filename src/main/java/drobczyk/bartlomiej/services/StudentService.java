@@ -1,12 +1,14 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.model.dto.StudentDto;
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
 import drobczyk.bartlomiej.model.dto.edit_form.BasicInfoEdit;
 import drobczyk.bartlomiej.model.dto.edit_form.SubjectInfoEdit;
-import drobczyk.bartlomiej.model.Lesson.Day;
-import drobczyk.bartlomiej.model.Lesson.Lesson;
-import drobczyk.bartlomiej.model.Lesson.Subject;
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.day.Day;
+import drobczyk.bartlomiej.model.lesson.Lesson;
+import drobczyk.bartlomiej.model.student.StudentMapper;
+import drobczyk.bartlomiej.model.subject.Subject;
+import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.repo.LessonRepo;
 import drobczyk.bartlomiej.repo.StudentRepo;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -25,16 +27,18 @@ public class StudentService {
     private DayService dayService;
     private TeacherSession teacherSession;
     private TeacherService teacherService;
+    private StudentMapper studentMapper;
 
 
     @Autowired
-    public StudentService(StudentRepo studentRepo, LessonRepo lessonRepo, SubjectService subjectService, DayService dayService, TeacherSession teacherSession, TeacherService teacherService) {
+    public StudentService(StudentRepo studentRepo, LessonRepo lessonRepo, SubjectService subjectService, DayService dayService, TeacherSession teacherSession, TeacherService teacherService, StudentMapper studentMapper) {
         this.studentRepo = studentRepo;
         this.lessonRepo = lessonRepo;
         this.subjectService = subjectService;
         this.dayService = dayService;
         this.teacherSession = teacherSession;
         this.teacherService = teacherService;
+        this.studentMapper = studentMapper;
     }
 
     public void saveStudent(Student student) {
@@ -139,5 +143,13 @@ public class StudentService {
     public List<Student> findStudentsInArchive(String studentInfo) {
     return studentRepo.findMatchedStudentsByString(studentInfo);
     }
+
+    public List<StudentDto> provideStudentsByCurrentSession(){
+        Set<Student> students = teacherSession.getTeacher().getStudents();
+        return students.stream()
+                .map(this.studentMapper::toStudentDto)
+                .collect(Collectors.toList());
+    }
+
 
 }

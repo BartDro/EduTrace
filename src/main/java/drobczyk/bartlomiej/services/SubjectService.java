@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.Lesson.Subject;
+import drobczyk.bartlomiej.model.subject.Subject;
 import drobczyk.bartlomiej.repo.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

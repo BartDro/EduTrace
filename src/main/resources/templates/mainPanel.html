@@ -47,18 +47,18 @@
                                     <div class=" mt-2 p-1 d-flex justify-content-between rounded roundCard text-white stats">
                                         <div class="d-flex flex-column">
                                             <span class="lessons">Lekcje</span>
-                                            <span class="col1" th:text="${student.getLessons().size()-student.getLastArchivedPosition()}">38</span>
+                                            <span class="col1" th:text="${student.getLessonsAmount()-student.getLastArchivedPosition()}">38</span>
                                         </div>
                                         <div class="d-flex flex-column">
                                             <span class=" sub-col">Przedmioty</span>
                                             <div class="subjects"th:each="subject:${student.getSubjects()}">
-                                                <span class="col2 " th:text="${subject.getSubject()}">Angielski <br> Matematyka</span>
+                                                <span class="col2 " th:text="${subject}">Angielski <br> Matematyka</span>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column">
                                             <span class="day-col">Dni zajęć</span>
                                             <div class="days"th:each="subject:${student.getDays()}">
-                                                <span class="col3" th:text="${subject.getDay()}">Wtorek <br> Czwartek</span>
+                                                <span class="col3" th:text="${subject}">Wtorek <br> Czwartek</span>
                                             </div>
                                         </div>
                                     </div>
@@ -99,31 +99,31 @@
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar1.png" th:src="@{/img/avatars/maleAvatar1.png}" class="rounded img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/maleAvatar1.png" required >
+                                                                                        <input class="form-check-input ml-0" type="radio" name="avatarUrl"  value="/img/avatars/maleAvatar1.png" required >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar2.png" th:src="@{/img/avatars/maleAvatar2.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"   value="/img/avatars/maleAvatar2.png" >
+                                                                                        <input class="form-check-input ml-0" type="radio" name="avatarUrl"   value="/img/avatars/maleAvatar2.png" >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar3.png" th:src="@{/img/avatars/maleAvatar3.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/maleAvatar3.png"  >
+                                                                                        <input class="form-check-input ml-0" type="radio" name="avatarUrl"  value="/img/avatars/maleAvatar3.png"  >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/femaleAvatar1.png" th:src="@{/img/avatars/femaleAvatar1.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/femaleAvatar1.png">
+                                                                                        <input class="form-check-input ml-0" type="radio" name="avatarUrl"  value="/img/avatars/femaleAvatar1.png">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col ">
                                                                                     <img src="../static/img/avatars/femaleAvatar2.png" th:src="@{/img/avatars/femaleAvatar2.png}" class="rounded img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio"  name="avatar"  value="/img/avatars/femaleAvatar2.png" >
+                                                                                        <input class="form-check-input ml-0" type="radio"  name="avatarUrl"  value="/img/avatars/femaleAvatar2.png" >
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -162,7 +162,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="mail">E-mail</label>
-                                                                                    <input id="mail" type="text" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
+                                                                                    <input id="mail" type="text" name="email" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -205,15 +205,15 @@
 
                                                                         <div class="col-12">
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="math" name="subject" value="Matematyka">
+                                                                                <input class="form-check-input" type="checkbox" id="math" name="subjects" value="Matematyka">
                                                                                 <label class="form-check-label" for="math">Matematyka </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="physics" name="subject" value="Fizyka">
+                                                                                <input class="form-check-input" type="checkbox" id="physics" name="subjects" value="Fizyka">
                                                                                 <label class="form-check-label" for="physics">Fizyka </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="eng" name="subject" value="Angielski">
+                                                                                <input class="form-check-input" type="checkbox" id="eng" name="subjects" value="Angielski">
                                                                                 <label class="form-check-label" for="eng">Angielski</label>
                                                                             </div>
                                                                         </div>
@@ -222,23 +222,23 @@
                                                                     <div class="row text-center">
                                                                         <div class="col-12">
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" name = "day" id="mon" value="Poniedziałek">
+                                                                                <input class="form-check-input" type="checkbox" name = "days" id="mon" value="Poniedziałek">
                                                                                 <label class="form-check-label" for="mon">Poniedziałek </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="tue" name = "day" value="Wtorek">
+                                                                                <input class="form-check-input" type="checkbox" id="tue" name = "days" value="Wtorek">
                                                                                 <label class="form-check-label" for="tue">Wtorek </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="wed" name = "day" value="Środa">
+                                                                                <input class="form-check-input" type="checkbox" id="wed" name = "days" value="Środa">
                                                                                 <label class="form-check-label" for="wed">Środa</label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="thur" name = "day" value="Czwartek">
+                                                                                <input class="form-check-input" type="checkbox" id="thur" name = "days" value="Czwartek">
                                                                                 <label class="form-check-label" for="thur">Czwartek</label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="frid" name = "day" value="Piątek">
+                                                                                <input class="form-check-input" type="checkbox" id="frid" name = "days" value="Piątek">
                                                                                 <label class="form-check-label" for="frid">Piątek</label>
                                                                             </div>
                                                                         </div>
@@ -247,7 +247,7 @@
                                                                         <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 <label for="extraInfo">Informacje dodatkowe</label>
-                                                                                <textarea id="extraInfo" name="extraInfo" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                                                <textarea id="extraInfo" name="additionalInfo" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
