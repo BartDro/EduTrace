@@ -2,12 +2,12 @@ package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.services.StudentService;
+import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -17,11 +17,13 @@ import java.util.List;
 public class ArchiveController {
     private StudentService studentService;
     private TeacherSession teacherSession;
+    private ApiService apiService;
 
     @Autowired
-    public ArchiveController(StudentService studentService, TeacherSession teacherSession) {
+    public ArchiveController(StudentService studentService, TeacherSession teacherSession, ApiService apiService) {
         this.studentService = studentService;
         this.teacherSession = teacherSession;
+        this.apiService = apiService;
     }
 
     @GetMapping("/archive")
@@ -32,6 +34,9 @@ public class ArchiveController {
                 matchedStudents = studentService.findStudentsInArchive(student);
             }
             model.addAttribute("archivedStudents",matchedStudents);
+            model.addAttribute("students", teacherSession.getTeacher().getStudents());
+            model.addAttribute("weather",apiService.provideWeather());
+            model.addAttribute("quote",apiService.provideQuote());
             return "archivePanel";
         }
         return "redirect:/";

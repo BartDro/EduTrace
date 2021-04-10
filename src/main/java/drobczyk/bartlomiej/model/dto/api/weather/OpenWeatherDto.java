@@ -1,8 +1,7 @@
-package drobczyk.bartlomiej.model.dto.apis.weather;
+package drobczyk.bartlomiej.model.dto.api.weather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OpenWeatherDto {

@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.dto.apis.location;
+package drobczyk.bartlomiej.model.dto.api.location;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

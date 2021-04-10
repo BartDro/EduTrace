@@ -3,6 +3,7 @@ package drobczyk.bartlomiej.controller;
 import drobczyk.bartlomiej.model.dto.addition_form.StudentFormInfo;
 import drobczyk.bartlomiej.services.MainPanelService;
 import drobczyk.bartlomiej.services.StudentService;
+import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,14 @@ public class MainPanelController {
     private MainPanelService mainPanelService;
     private TeacherSession teacherSession;
     private StudentService studentService;
+    private ApiService apiService;
 
     @Autowired
-    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession, StudentService studentService) {
+    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession, StudentService studentService, ApiService apiService) {
         this.mainPanelService = panelService;
         this.teacherSession = teacherSession;
         this.studentService = studentService;
+        this.apiService = apiService;
     }
 
     @GetMapping("/main-panel")
@@ -27,6 +30,9 @@ public class MainPanelController {
         if (teacherSession.isTeacherLogged()) {
             model.addAttribute("studentBasicInfo", new StudentFormInfo());
             model.addAttribute("students", teacherSession.getTeacher().getStudents());
+            model.addAttribute("weather",apiService.provideWeather());
+            model.addAttribute("quote",apiService.provideQuote());
+            teacherSession.refresh();
             if (teacherSession.getTeacher().getStudents().isEmpty()) {
                 return "firstContactPanel";
             }

@@ -50,7 +50,7 @@ public class StudentService {
         Lesson lesson = createLessonFromForm(student, lessonFormInfo);
         student.getLessons().add(lesson);
         lessonRepo.save(lesson);
-        teacherSession.updateTeacher();
+        teacherSession.refresh();
     }
 
     private Lesson createLessonFromForm(Student student, LessonFormInfo lessonFormInfo) {
@@ -115,7 +115,7 @@ public class StudentService {
         student.setDays(days);
         student.setAdditionalInfo(subjectInfoEdit.getExtraInfo());
         studentRepo.save(student);
-        teacherSession.updateTeacher();
+        teacherSession.refresh();
     }
 
     private Subject matchSubjcetWithFormDescription(String subjectDesc) {
@@ -133,7 +133,7 @@ public class StudentService {
         student.getSubjects().clear();
         teacherSession.getTeacher().getStudents().remove(student);
         studentRepo.delete(student);
-        teacherSession.updateTeacher();
+        teacherSession.refresh();
     }
 
     public List<Student> findStudentsInArchive(String studentInfo) {

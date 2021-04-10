@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.dto.apis.weather;
+package drobczyk.bartlomiej.model.dto.api.weather;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

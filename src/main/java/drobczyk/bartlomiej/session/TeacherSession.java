@@ -30,7 +30,7 @@ public class TeacherSession {
         return Optional.ofNullable(teacher).isPresent();
     }
 
-    public void updateTeacher(){
+    public void refresh(){
         Teacher updatedTeacher = teacherService.updateTeacher(getTeacher());
         setTeacher(updatedTeacher);
     }

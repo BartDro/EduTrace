@@ -3,6 +3,7 @@ package drobczyk.bartlomiej.controller;
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
 import drobczyk.bartlomiej.model.Student.Student;
 import drobczyk.bartlomiej.services.StudentService;
+import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StudentPanelController {
     private TeacherSession teacherSession;
     private StudentService studentService;
+    private ApiService apiService;
 
     @Autowired
-    public StudentPanelController(TeacherSession teacherSession, StudentService studentService) {
+    public StudentPanelController(TeacherSession teacherSession, StudentService studentService, ApiService apiService) {
         this.teacherSession = teacherSession;
         this.studentService = studentService;
+        this.apiService = apiService;
     }
 
     @GetMapping("/student-panel")
@@ -30,6 +33,10 @@ public class StudentPanelController {
             model.addAttribute("lessonInfo", new LessonFormInfo());
             model.addAttribute("chosenStudent", student);
             model.addAttribute("currentLessons", studentService.getCurrentLessons(student));
+            model.addAttribute("students", teacherSession.getTeacher().getStudents());
+            model.addAttribute("weather",apiService.provideWeather());
+            model.addAttribute("quote",apiService.provideQuote());
+            teacherSession.refresh();
             return "studentPanel";
         }return "redirect:/";
     }

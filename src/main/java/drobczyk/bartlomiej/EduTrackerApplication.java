@@ -4,16 +4,15 @@ import drobczyk.bartlomiej.services.api.location.LocationClient;
 import drobczyk.bartlomiej.services.api.quote.QuoteClient;
 import drobczyk.bartlomiej.services.api.weather.WeatherClient;
 
-import drobczyk.bartlomiej.model.dto.apis.location.LocationDto;
-import drobczyk.bartlomiej.model.dto.apis.quote.QuoteDto;
-import drobczyk.bartlomiej.model.dto.apis.weather.WeatherDto;
+import drobczyk.bartlomiej.model.dto.api.location.LocationDto;
+import drobczyk.bartlomiej.model.dto.api.quote.QuoteDto;
+import drobczyk.bartlomiej.model.dto.api.weather.WeatherDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 @SpringBootApplication

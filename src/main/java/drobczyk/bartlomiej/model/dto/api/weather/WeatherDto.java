@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.dto.apis.weather;
+package drobczyk.bartlomiej.model.dto.api.weather;
 
 public class WeatherDto {
     private double temperature;
@@ -46,5 +46,9 @@ public class WeatherDto {
 
     public String getSunset() {
         return sunset;
+    }
+
+    public String provideIconAdress(){
+        return "http://openweathermap.org/img/wn/"+icon+"@2x.png";
     }
 }

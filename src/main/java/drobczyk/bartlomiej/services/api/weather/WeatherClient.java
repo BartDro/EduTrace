@@ -1,8 +1,8 @@
 package drobczyk.bartlomiej.services.api.weather;
 
-import drobczyk.bartlomiej.model.dto.apis.weather.OpenWeatherDto;
-import drobczyk.bartlomiej.model.dto.apis.weather.WeatherDto;
-import drobczyk.bartlomiej.model.dto.apis.weather.WeatherMapper;
+import drobczyk.bartlomiej.model.dto.api.weather.OpenWeatherDto;
+import drobczyk.bartlomiej.model.dto.api.weather.WeatherDto;
+import drobczyk.bartlomiej.model.dto.api.weather.WeatherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,5 +24,7 @@ public class WeatherClient {
                         OpenWeatherDto.class,lat,lon,API_KEY);
         return WeatherMapper.toAppWeather(openWeatherDto);
     }
+
+
 
 }
