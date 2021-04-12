@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.teacher.Teacher;
 import drobczyk.bartlomiej.repo.TeacherRepo;
 import org.springframework.stereotype.Service;
 

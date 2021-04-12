@@ -2,7 +2,7 @@ package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.dto.edit_form.BasicInfoEdit;
 import drobczyk.bartlomiej.model.dto.edit_form.SubjectInfoEdit;
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -30,10 +30,10 @@ public class EditPanelController {
             Student student = studentService.getStudentById(studentId);
             model.addAttribute("basicInfo", new BasicInfoEdit());
             model.addAttribute("subjectInfo",new SubjectInfoEdit());
-            model.addAttribute("chosenStudent",student);
-            model.addAttribute("students", teacherSession.getTeacher().getStudents());
-            model.addAttribute("weather",apiService.provideWeather());
-            model.addAttribute("quote",apiService.provideQuote());
+            model.addAttribute("chosenStudent",studentService.provideStudentDto(studentId));
+            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
+            model.addAttribute("quote",apiService.provideRandomQuote());
             return "editProfilePanel";
         }
         return "redirect:/";

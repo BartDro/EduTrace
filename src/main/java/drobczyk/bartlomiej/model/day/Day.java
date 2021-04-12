@@ -1,6 +1,6 @@
-package drobczyk.bartlomiej.model.Lesson;
+package drobczyk.bartlomiej.model.day;
 
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.student.Student;
 
 import javax.persistence.*;
 import java.util.ArrayList;

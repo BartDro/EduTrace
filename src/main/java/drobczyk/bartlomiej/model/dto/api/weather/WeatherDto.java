@@ -1,5 +1,7 @@
 package drobczyk.bartlomiej.model.dto.api.weather;
 
+import org.decimal4j.util.DoubleRounder;
+
 public class WeatherDto {
     private double temperature;
     private double feelsLikeTemperature;
@@ -21,15 +23,15 @@ public class WeatherDto {
     }
 
     public double getTemperature() {
-        return temperature;
+        return DoubleRounder.round(temperature,1);
     }
 
     public double getFeelsLikeTemperature() {
-        return feelsLikeTemperature;
+        return DoubleRounder.round(feelsLikeTemperature,1);
     }
 
     public double getWindSpeed() {
-        return windSpeed;
+        return DoubleRounder.round(windSpeed,1);
     }
 
     public String getDescription() {

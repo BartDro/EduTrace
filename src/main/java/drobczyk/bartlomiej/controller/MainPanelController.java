@@ -18,7 +18,8 @@ public class MainPanelController {
     private ApiService apiService;
 
     @Autowired
-    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession, StudentService studentService, ApiService apiService) {
+    public MainPanelController(MainPanelService panelService, TeacherSession teacherSession,
+                               StudentService studentService, ApiService apiService) {
         this.mainPanelService = panelService;
         this.teacherSession = teacherSession;
         this.studentService = studentService;
@@ -28,15 +29,17 @@ public class MainPanelController {
     @GetMapping("/main-panel")
     public String presentPanel(Model model) {
         if (teacherSession.isTeacherLogged()) {
+            Long start = System.nanoTime();
             model.addAttribute("studentBasicInfo", new StudentFormInfo());
-            model.addAttribute("students", teacherSession.getTeacher().getStudents());
-            model.addAttribute("weather",apiService.provideWeather());
-            model.addAttribute("quote",apiService.provideQuote());
-            teacherSession.refresh();
+            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
+            model.addAttribute("quote",apiService.provideRandomQuote());
             if (teacherSession.getTeacher().getStudents().isEmpty()) {
                 return "firstContactPanel";
             }
+            System.err.println(System.nanoTime()-start);
             return "mainPanel";
+
         }
         return "redirect:/";
     }

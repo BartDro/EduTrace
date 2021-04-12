@@ -1,7 +1,9 @@
-package drobczyk.bartlomiej.model.Teacher;
+package drobczyk.bartlomiej.model.teacher;
 
-import drobczyk.bartlomiej.model.Student.Student;
-import org.springframework.context.annotation.Bean;
+import drobczyk.bartlomiej.model.student.Student;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +25,7 @@ public class Teacher {
     private String password;
     private LocalDateTime regisrationDate;
     @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true )
+    @Fetch(value = FetchMode.JOIN)
     private Set<Student> students = new HashSet<>();
 
     public Teacher(){};

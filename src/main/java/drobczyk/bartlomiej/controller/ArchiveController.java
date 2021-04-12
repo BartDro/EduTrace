@@ -1,6 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.model.Student.Student;
+import drobczyk.bartlomiej.model.dto.StudentDto;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -27,29 +27,22 @@ public class ArchiveController {
     }
 
     @GetMapping("/archive")
-    public String findStudentInArchive(@RequestParam(required = false) String student, Model model){
-        if (teacherSession.isTeacherLogged()){
-            List<Student> matchedStudents = new ArrayList<>();
-            if (student!=null){
+    public String findStudentInArchive(@RequestParam(required = false) String student, @RequestParam(required = false) Long studentId, Model model) {
+        if (teacherSession.isTeacherLogged()) {
+            List<StudentDto> matchedStudents = new ArrayList<>();
+            if (student != null) {
                 matchedStudents = studentService.findStudentsInArchive(student);
             }
-            model.addAttribute("archivedStudents",matchedStudents);
-            model.addAttribute("students", teacherSession.getTeacher().getStudents());
-            model.addAttribute("weather",apiService.provideWeather());
-            model.addAttribute("quote",apiService.provideQuote());
-            return "archivePanel";
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping("/archive/present-archive")
-    public String presentArchive(@RequestParam Long studentId, Model model){
-        if (teacherSession.isTeacherLogged()){
-            Student archivedStudent = studentService.getStudentById(studentId);
-
-            model.addAttribute("chosenStudent",archivedStudent);
-            model.addAttribute("currentLessons",studentService.getOrderedLessons(archivedStudent));
-            return "studentArchivePanel";
+            model.addAttribute("archivedStudents", matchedStudents);
+            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
+            model.addAttribute("quote",apiService.provideRandomQuote());
+            if (studentId != null){
+                model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
+                model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
+                return "studentArchivePanel";
+            }
+                return "archivePanel";
         }
         return "redirect:/";
     }

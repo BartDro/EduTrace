@@ -1,8 +1,9 @@
 package drobczyk.bartlomiej.session;
 
-import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.teacher.Teacher;
 import drobczyk.bartlomiej.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -18,6 +19,7 @@ public class TeacherSession {
     public TeacherSession(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
+    
     public Teacher getTeacher() {
         return teacher;
     }

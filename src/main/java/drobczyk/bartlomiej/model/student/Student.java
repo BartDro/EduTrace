@@ -1,9 +1,9 @@
-package drobczyk.bartlomiej.model.Student;
+package drobczyk.bartlomiej.model.student;
 
-import drobczyk.bartlomiej.model.Lesson.Day;
-import drobczyk.bartlomiej.model.Lesson.Lesson;
-import drobczyk.bartlomiej.model.Lesson.Subject;
-import drobczyk.bartlomiej.model.Teacher.Teacher;
+import drobczyk.bartlomiej.model.day.Day;
+import drobczyk.bartlomiej.model.lesson.Lesson;
+import drobczyk.bartlomiej.model.subject.Subject;
+import drobczyk.bartlomiej.model.teacher.Teacher;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 

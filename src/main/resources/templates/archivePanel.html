@@ -95,9 +95,9 @@
                     <div class="image"> <img src="../static/img/avatars/maleAvatar1.png" th:src="${student.getAvatarUrl()}" class="rounded img-fluid" width="155"> </div>
                     <div class="ml-3 w-100">
                         <h4 class="mb-0 mt-0 font-weight-bold text-center"th:text="|${student.getName()} ${student.getSurname()}|">Miłosz</h4>
-                        <h5 class="text-center mt-2" th:text="|Liczba zarchiwizowanych lekcji : ${student.getLessons().size()}|"></h5>
+                        <h5 class="text-center mt-2" th:text="|Liczba zarchiwizowanych lekcji : ${student.getTotalLessonAmount()}|"></h5>
                         <div class="button mt-4  flex-row  align-items-center">
-                            <form action="#" th:action="@{/archive/present-archive}" method="get">
+                            <form action="#" th:action="@{/archive}" method="get">
                                 <input type="hidden" name="studentId" th:value="${student.getId()}">
                                 <input type="submit" class=" btn-sm mb-3 mr-2 btn-block font-weight-bold btn-primary text-white" value="Archiwum">
                             </form>

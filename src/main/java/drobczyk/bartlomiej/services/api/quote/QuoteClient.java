@@ -4,6 +4,9 @@ import drobczyk.bartlomiej.model.dto.api.quote.QuoteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
 @Service
 public class QuoteClient {
     private RestTemplate restTemplate;
