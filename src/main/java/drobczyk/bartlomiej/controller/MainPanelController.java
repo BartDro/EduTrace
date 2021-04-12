@@ -48,6 +48,7 @@ public class MainPanelController {
     public String addStudentToTeacher(@ModelAttribute StudentFormInfo studentBasicInfo) {
         mainPanelService.addStudentToTeacher(studentBasicInfo, teacherSession.getTeacher());
         return "redirect:/main-panel";
+
     }
 
     @GetMapping({"/add-student","/add-lesson","/register"})
