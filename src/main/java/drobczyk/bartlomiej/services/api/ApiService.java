@@ -40,9 +40,12 @@ public class ApiService {
                 location.getLongitude());
     }
 
-    @Cacheable(cacheNames = "quote")
+    @Cacheable(cacheNames = "quote", key = "#location.ip")
     public List<QuoteDto> provideQuotes(LocationDto location) {
-        return quoteClient.provideQuotes();
+        return IntStream.range(0, 100)
+                .mapToObj(x -> quoteClient.getQuote())
+                .filter(x -> x.getQuote().length() < 130)
+                .collect(Collectors.toList());
     }
 
     public QuoteDto provideRandomQuote() {
