@@ -14,4 +14,9 @@ public class QuoteDto {
     public String getAuthor() {
         return author;
     }
+
+    public QuoteDto(String quote, String author) {
+        this.quote = quote;
+        this.author = author;
+    }
 }
