@@ -1,4 +1,4 @@
-package drobczyk.bartlomiej.model.teacher;
+package drobczyk.bartlomiej.model.Teacher;
 
 import drobczyk.bartlomiej.model.student.Student;
 import org.hibernate.annotations.BatchSize;

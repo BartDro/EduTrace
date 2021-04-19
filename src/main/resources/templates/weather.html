@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>EduTrace</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="../static/css/mainPanel.css" th:href="@{/css/mainPanel.css}" rel="stylesheet">
+</head>
+<body>
+<div class="padding">
+    <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body weather-small">
+                    <div class="row">
+                        <div class="col-8 b-r align-self-center">
+                            <div class="d-flex">
+                                <div class="display-6 text-info"><i class="mdi mdi-weather-pouring"></i></div>
+                                <div class="m-l-20">
+                                    <h1 class="font-light text-info m-b-0">32°C</h1> <small>Sunny Rainy day</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h1 class="font-light m-b-0">25<sup>0</sup></h1> <small>Tonight</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>
