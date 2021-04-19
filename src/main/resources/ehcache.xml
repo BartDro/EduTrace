@@ -5,16 +5,16 @@
 
     <cache-template name="weather">
         <expiry>
-            <ttl unit="hours">1</ttl>
+            <ttl unit="hours">2</ttl>
         </expiry>
         <heap unit="entries">500</heap>
     </cache-template>
-    <cache-template name="quote">
+    <cache-template name="quotes">
         <expiry>
             <ttl unit="minutes">45</ttl>
         </expiry>
         <heap unit="entries">1000</heap>
     </cache-template>
     <cache alias="weather" uses-template="weather"></cache>
-    <cache alias="quote" uses-template="quote"></cache>
+    <cache alias="quote" uses-template="quotes"></cache>
  </config>
