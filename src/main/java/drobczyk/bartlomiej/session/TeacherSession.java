@@ -19,7 +19,7 @@ public class TeacherSession {
     public TeacherSession(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
-    
+
     public Teacher getTeacher() {
         return teacher;
     }

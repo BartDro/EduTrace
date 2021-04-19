@@ -41,12 +41,12 @@ public class QuoteList {
     }
 
     public static class Result{
-       private List<String> tags;
-       private String _id;
-       private String content;
-       private String author;
-       private String authorSlug;
-       private Integer length;
+        private List<String> tags;
+        private String _id;
+        private String content;
+        private String author;
+        private String authorSlug;
+        private Integer length;
 
         public List<String> getTags() {
             return tags;

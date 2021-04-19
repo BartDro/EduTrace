@@ -33,14 +33,14 @@ public class Student {
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable (name = "student_subject",
-    joinColumns = {@JoinColumn(name = "id_student",referencedColumnName = "student_id" )},
-    inverseJoinColumns = {@JoinColumn(name = "id_subject",referencedColumnName = "subject_id")})
+            joinColumns = {@JoinColumn(name = "id_student",referencedColumnName = "student_id" )},
+            inverseJoinColumns = {@JoinColumn(name = "id_subject",referencedColumnName = "subject_id")})
     private Set<Subject> subjects = new LinkedHashSet<>();
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "day_student",
-    joinColumns = {@JoinColumn(name = "id_student", referencedColumnName ="student_id")},
-    inverseJoinColumns = {@JoinColumn (name = "id_day",referencedColumnName ="day_id" )})
+            joinColumns = {@JoinColumn(name = "id_student", referencedColumnName ="student_id")},
+            inverseJoinColumns = {@JoinColumn (name = "id_day",referencedColumnName ="day_id" )})
     private Set<Day> days = new LinkedHashSet<>();
     @ManyToOne
     private Teacher teacher;
@@ -53,7 +53,7 @@ public class Student {
     }
 
     public Student( String avatarUrl,String name, String surname, String phone, String email, Integer grade,
-                   String parent, String parentNumber,Set<Subject> subjects,Set<Day> days, String additionalInfo,
+                    String parent, String parentNumber,Set<Subject> subjects,Set<Day> days, String additionalInfo,
                     LocalDateTime registrationDate, Teacher teacher) {
         this.avatarUrl = avatarUrl;
         this.name = name;

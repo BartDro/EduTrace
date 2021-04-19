@@ -7,7 +7,7 @@ import java.util.Date;
 public class WeatherMapper {
 
     public static WeatherDto toAppWeather (OpenWeatherDto openWeatherDto){
-       return new WeatherDto(openWeatherDto.getMain().getTemp(),
+        return new WeatherDto(openWeatherDto.getMain().getTemp(),
                 openWeatherDto.getMain().getFeelsLike(),
                 openWeatherDto.getWind().getSpeed(),
                 openWeatherDto.getWeather().get(0).getDescription(),
