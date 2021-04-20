@@ -1,11 +1,15 @@
 package drobczyk.bartlomiej.model.teacher;
 
+import drobczyk.bartlomiej.model.roles.UserRole;
 import drobczyk.bartlomiej.model.student.Student;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,14 +23,19 @@ public class Teacher {
     @Column(name = "teacher_id")
     private Long id;
     @Column(unique = true)
+    @NotEmpty
     private String login;
     @Column(unique = true)
+    @Email
     private String email;
+    @NotEmpty
     private String password;
     private LocalDateTime regisrationDate;
     @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true )
     @Fetch(value = FetchMode.JOIN)
     private Set<Student> students = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<UserRole> roles = new HashSet<>();
 
     public Teacher(){};
 
@@ -45,6 +54,14 @@ public class Teacher {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
     }
 
     public String getLogin() {

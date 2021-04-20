@@ -26,7 +26,6 @@ public class EditPanelController {
 
     @GetMapping("/edit-student")
     public String presentEditPanel(@RequestParam Long studentId, Model model){
-        if (teacherSession.isTeacherLogged()){
             Student student = studentService.getStudentById(studentId);
             model.addAttribute("basicInfo", new BasicInfoEdit());
             model.addAttribute("subjectInfo",new SubjectInfoEdit());
@@ -36,8 +35,6 @@ public class EditPanelController {
             model.addAttribute("quote",apiService.provideRandomQuote());
             return "editProfilePanel";
         }
-        return "redirect:/";
-    }
 
     @PostMapping("/edit-student/avatar")
     public String changeAvatar(@RequestParam String avatar,@RequestParam Long studentId){

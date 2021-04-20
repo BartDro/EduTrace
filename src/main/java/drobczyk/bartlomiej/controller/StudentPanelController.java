@@ -28,7 +28,6 @@ public class StudentPanelController {
 
     @GetMapping("/student-panel")
     public String presentPanel(Model model, @RequestParam(required = false) Long studentId) {
-        if (teacherSession.isTeacherLogged()) {
             model.addAttribute("lessonInfo", new LessonFormInfo());
             model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
             model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
@@ -36,8 +35,6 @@ public class StudentPanelController {
             model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
             model.addAttribute("quote",apiService.provideRandomQuote());
             return "studentPanel";
-        }
-        return "redirect:/";
     }
 
     @PostMapping("/add-lesson")

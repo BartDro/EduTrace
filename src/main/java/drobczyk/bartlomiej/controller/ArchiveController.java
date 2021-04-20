@@ -28,7 +28,6 @@ public class ArchiveController {
 
     @GetMapping("/archive")
     public String findStudentInArchive(@RequestParam(required = false) String student, @RequestParam(required = false) Long studentId, Model model) {
-        if (teacherSession.isTeacherLogged()) {
             List<StudentDto> matchedStudents = new ArrayList<>();
             if (student != null) {
                 matchedStudents = studentService.findStudentsInArchive(student);
@@ -44,6 +43,4 @@ public class ArchiveController {
             }
             return "archivePanel";
         }
-        return "redirect:/";
     }
-}

@@ -28,20 +28,14 @@ public class MainPanelController {
 
     @GetMapping("/main-panel")
     public String presentPanel(Model model) {
-        if (teacherSession.isTeacherLogged()) {
-            Long start = System.nanoTime();
-            model.addAttribute("studentBasicInfo", new StudentFormInfo());
-            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
-            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
-            model.addAttribute("quote",apiService.provideRandomQuote());
-            if (teacherSession.getTeacher().getStudents().isEmpty()) {
-                return "firstContactPanel";
-            }
-            System.err.println(System.nanoTime()-start);
-            return "mainPanel";
-
+        model.addAttribute("studentBasicInfo", new StudentFormInfo());
+        model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+        model.addAttribute("weather", apiService.provideWeather(apiService.provideLocationDto()));
+        model.addAttribute("quote", apiService.provideRandomQuote());
+        if (teacherSession.getTeacher().getStudents().isEmpty()) {
+            return "firstContactPanel";
         }
-        return "redirect:/";
+        return "mainPanel";
     }
 
     @PostMapping("/add-student")
@@ -50,14 +44,4 @@ public class MainPanelController {
         return "redirect:/main-panel";
 
     }
-
-    @GetMapping({"/add-student","/add-lesson","/register"})
-    public String redirectToLogView() {
-        if (teacherSession.isTeacherLogged()) {
-            return "redirect:/main-panel";
-        }
-        return "redirect:/";
-    }
-
-
 }

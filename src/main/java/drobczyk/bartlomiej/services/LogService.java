@@ -6,20 +6,23 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 @Service
 public class LogService {
     private TeacherRepo teacherRepo;
+    private TeacherService teacherService;
 
-    public LogService(TeacherRepo teacherRepo) {
+    public LogService(TeacherRepo teacherRepo, TeacherService teacherService) {
         this.teacherRepo = teacherRepo;
+        this.teacherService = teacherService;
     }
 
     public boolean registerTeacher(String login, String mail,
                                    String password, String passwordConfirm) {
         if (password.equals(passwordConfirm) && isSuchTeacherAlreadyExists(login, mail)) {
             Teacher regiseredTeacher = new Teacher(login, mail, password, LocalDateTime.now(), new HashSet<>());
-            teacherRepo.save(regiseredTeacher);
+            teacherService.registerTeacher(regiseredTeacher);
             return true;
         }
         return false;
@@ -29,12 +32,8 @@ public class LogService {
         return !teacherRepo.existsTeacherByLoginAndEmail(login, mail);
     }
 
-    public boolean logTeacher(String login, String password) {
-        return teacherRepo.existsTeacherByLoginAndPassword(login, password);
-    }
-
     public Teacher getTeacherByLogin(String login) {
-        return teacherRepo.findByLogin(login);
+        return teacherRepo.findByLogin(login).orElseThrow(NoSuchElementException::new);
     }
 
 }
