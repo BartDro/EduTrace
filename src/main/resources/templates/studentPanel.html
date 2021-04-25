@@ -28,7 +28,7 @@
             </div>
             <div class=" align-self-center">
                 <div class="">
-                    <h8 th:text="${weather.getDescription()}" >test</h8>
+                    <h8 th:text="${weather.getDescription()}">test</h8>
                 </div>
             </div>
             <div class="col  align-self-center">
@@ -38,25 +38,26 @@
             </div>
             <div class="col  align-self-center">
                 <div class="first-col ">
-                    <h5 class="text"th:text="|${weather.getFeelsLikeTemperature()} C|">32</h5>
+                    <h5 class="text" th:text="|${weather.getFeelsLikeTemperature()} C|">32</h5>
                 </div>
             </div>
             <div class="col  align-self-center">
                 <div class="first-col ">
-                    <div><img th:src="@{/img/sunrisee.png}" src="../static/img/sunrisee.png"width="40"></div>
-                    <h8 th:text="${weather.getSunrise()}">Sunny </h8>
+                    <div><img th:src="@{/img/sunrisee.png}" src="../static/img/sunrisee.png" width="40"></div>
+                    <h8 th:text="${weather.getSunrise()}">Sunny</h8>
                 </div>
             </div>
             <div class="col align-self-center">
                 <div class="first-col ">
-                    <div class="ml-1"><img  th:src="@{/img/sunsett.png}" src="../static/img/sunsett.png"width="40"></div>
-                    <h8 th:text="${weather.getSunset()}">Sunny </h8>
+                    <div class="ml-1"><img th:src="@{/img/sunsett.png}" src="../static/img/sunsett.png" width="40">
+                    </div>
+                    <h8 th:text="${weather.getSunset()}">Sunny</h8>
                 </div>
             </div>
             <div class="col align-self-center">
                 <div class="first-col ">
                     <img th:src="@{/img/wind-solid.svg}" src="../static/img/wind-solid.svg" width="40">
-                    <h8 th:text="|${weather.getWindSpeed()} m/s|">Sunny </h8>
+                    <h8 th:text="|${weather.getWindSpeed()} m/s|">Sunny</h8>
                 </div>
             </div>
         </div>
@@ -82,9 +83,11 @@
         <div class="col-md-8 border-right">
             <div class="p-3  shadow bg-white">
                 <div class="d-flex  justify-content-center align-items-center">
-                    <h4 class="heading1 text-center display-5" th:text="|Lekcje ucznia: ${chosenStudent.getName()} ${chosenStudent.getSurname()}|">Lekcje ucznia: Szymon</h4>
+                    <h4 class="heading1 text-center display-5"
+                        th:text="|Lekcje ucznia: ${chosenStudent.getName()} ${chosenStudent.getSurname()}|">Lekcje
+                        ucznia: Szymon</h4>
                 </div>
-                <div class=" card table-responsive" >
+                <div class=" card table-responsive">
                     <table class="table table-responsive table-hover" th:if="${currentLessons.size()>0}">
                         <thead>
                         <th>Nr lekcji</th>
@@ -93,41 +96,45 @@
                         <th>Data</th>
                         <th>Lekcja</th>
                         </thead>
-                        <tbody th:remove = "all-but-first">
+                        <tbody th:remove="all-but-first">
                         <tr th:each="lesson:${currentLessons}">
                             <td th:text="${currentLessons.indexOf(lesson)+1}">1</td>
                             <td th:text="${lesson.getSubject()}">Matematyka</td>
                             <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
                             <td th:text="${#temporals.format(lesson.getLessonDate(),'dd-MM-yyyy HH:mm')}">1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary " data-toggle="modal" data-target="#details">Szczegóły</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary " data-toggle="modal"
+                                   data-target="#details" th:attr="data-target='#details'+${lesson.getId() }">Szczegóły</a>
+                            </td>
                             <span>
-                    <div class="modal fade " id="details">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Szczegóły lekcji</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p th:text="${lesson.getLessonComment()}"></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Zamknij</button>
-                            </div>
-                        </div>
+                                    <div class="modal fade " id="details" th:id="details+${lesson.getId()}">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content ">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Szczegóły lekcji</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p th:text="${lesson.getLessonComment()}"></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-block btn-primary"
+                                                        data-dismiss="modal">Zamknij</button>
+                                            </div>
+                                        </div>
 
-                    </div>
-                </div>
-                </span>
+                                    </div>
+                                </div>
+                            </span>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Fizyka</td>
                             <td>Dynamika ciał</td>
                             <td>1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
 
                         <tr>
@@ -135,21 +142,21 @@
                             <td>Angielski</td>
                             <td>Present perfect, zaimki, słownictwo</td>
                             <td>1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>Matematyka</td>
                             <td>Procenty</td>
                             <td>16/2/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>Fizyka</td>
                             <td>Optyka</td>
                             <td>14/3/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
 
                         <tr>
@@ -157,21 +164,21 @@
                             <td>Angielski</td>
                             <td>Future perfect</td>
                             <td>1/4/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Matematyka</td>
                             <td>Figury geometryczne</td>
                             <td>1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Fizyka</td>
                             <td>Dynamika ciał</td>
                             <td>1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
 
                         <tr>
@@ -179,21 +186,21 @@
                             <td>Angielski</td>
                             <td>Present perfect, zaimki, słownictwo</td>
                             <td>1/8/20</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>Matematyka</td>
                             <td>Procenty</td>
                             <td>16/2/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>Fizyka</td>
                             <td>Optyka</td>
                             <td>14/3/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
 
                         <tr>
@@ -201,7 +208,7 @@
                             <td>Angielski</td>
                             <td>Future perfect</td>
                             <td>1/4/21</td>
-                            <td> <a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
+                            <td><a href="#" class="btn text-center lesson-button btn-primary ">Zobacz</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -213,16 +220,20 @@
                 </div>
             </div>
             <div class="bg-white shadow card mt-4 border-top p-3">
-                <span class="text-center display-5 "th:text="|Liczba lekcji: ${currentLessons.size()}|">Liczba lekcji: 6</span>
+                <span class="text-center display-5 " th:text="|Liczba lekcji: ${currentLessons.size()}|">Liczba lekcji: 6</span>
             </div>
         </div>
         <div class="col-md-4 border-left">
             <div class="p-3 card first-box shadow-lg bg-white">
                 <div class="profile">
-                    <img src="../static/img/avatars/maleAvatar3.png" th:src="@{${chosenStudent.getAvatarUrl()}}" class="rounded img-fluid profile-picture  " width="220">
+                    <img src="../static/img/avatars/maleAvatar3.png" th:src="@{${chosenStudent.getAvatarUrl()}}"
+                         class="rounded img-fluid profile-picture  " width="220">
                 </div>
-                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance" th:text="${chosenStudent.getName()}">Szymon</span>
-               <button type="button" class="btn mt-2 btn-block btn-success" data-toggle="modal" data-target="#profileModal">Zobacz profil</button>
+                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance"
+                      th:text="${chosenStudent.getName()}">Szymon</span>
+                <button type="button" class="btn mt-2 btn-block btn-success" data-toggle="modal"
+                        data-target="#profileModal">Zobacz profil
+                </button>
                 <span>
                     <div class="modal fade " id="profileModal">
                     <div class="modal-dialog modal-xl">
@@ -239,11 +250,19 @@
                                                         <div class="col-md-4 border-right">
                                                             <div class="p-3 card first-box shadow-lg bg-white">
                                                                 <div class="profile img-fluid">
-                                                                    <img src="../static/img/avatars/maleAvatar3.png" th:src="@{${chosenStudent.getAvatarUrl()}}" class="rounded img-fluid profile-picture " width="220">
+                                                                    <img src="../static/img/avatars/maleAvatar3.png"
+                                                                         th:src="@{${chosenStudent.getAvatarUrl()}}"
+                                                                         class="rounded img-fluid profile-picture "
+                                                                         width="220">
                                                                 </div>
-                                                                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance" th:text="${chosenStudent.getName()}">Szymon</span>
-                                                                <span><a href="#" th:href="@{/edit-student(studentId=${chosenStudent.getId()})}" class="btn mt-2 btn-block btn-warning ">Edytuj profil</a></span>
-                                                                <span><a href="#" class="btn mt-2 btn-block btn-success " data-dismiss="modal">Wróć do panelu dydaktycznego</a></span>
+                                                                <span class="mt-3 ml-1 text-center display-4 justify-content-center align-items-center balance"
+                                                                      th:text="${chosenStudent.getName()}">Szymon</span>
+                                                                <span><a href="#"
+                                                                         th:href="@{/edit-student(studentId=${chosenStudent.getId()})}"
+                                                                         class="btn mt-2 btn-block btn-warning ">Edytuj profil</a></span>
+                                                                <span><a href="#"
+                                                                         class="btn mt-2 btn-block btn-success "
+                                                                         data-dismiss="modal">Wróć do panelu dydaktycznego</a></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8">
@@ -253,7 +272,8 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0 mr-4">Imię</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getName()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getName()}">
                                                                             Szymon
                                                                         </div>
                                                                     </div>
@@ -262,16 +282,18 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Nazwisko</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getSurname()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getSurname()}">
                                                                             Gad
                                                                         </div>
                                                                     </div>
                                                                     <hr>
                                                                     <div class="row">
                                                                         <div class="col-sm-7">
-                                                                            <h6 class="mb-0" >Email</h6>
+                                                                            <h6 class="mb-0">Email</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getEmail()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getEmail()}">
                                                                             szymongad@op.pl
                                                                         </div>
                                                                     </div>
@@ -280,7 +302,8 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Telefon ucznia</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getPhone()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getPhone()}">
                                                                            589 458 687
                                                                         </div>
                                                                     </div>
@@ -289,7 +312,8 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Rodzic</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary" th:text="${chosenStudent.getParent()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getParent()}">
                                                                             Anna Gad
                                                                         </div>
                                                                     </div>
@@ -298,7 +322,8 @@
                                                                         <div class="col-sm-7">
                                                                             <h6 class="mb-0">Telefon rodzica</h6>
                                                                         </div>
-                                                                        <div class="col-sm-5 text-secondary"th:text="${chosenStudent.getParentNumber()}">
+                                                                        <div class="col-sm-5 text-secondary"
+                                                                             th:text="${chosenStudent.getParentNumber()}">
                                                                             749 852 365
                                                                         </div>
                                                                     </div>
@@ -308,7 +333,8 @@
                                                                             <h6 class="mb-0">Dodatkowe informacje</h6>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-5  text-secondary" th:text="${chosenStudent.getAdditionalInfo()}">
+                                                                        <div class="col-sm-5  text-secondary"
+                                                                             th:text="${chosenStudent.getAdditionalInfo()}">
                                                                             Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. </div>
                                                                     </div>
                                                                 </div>
@@ -329,7 +355,9 @@
                 </span>
             </div>
             <div class="border-top shadow-lg mt-2 card border-bottom p-3 bg-white transaction">
-                <button type="button" class="btn mt-2 btn-block btn-primary" data-toggle="modal" data-target="#lessonModal">Dodaj nową lekcję</button>
+                <button type="button" class="btn mt-2 btn-block btn-primary" data-toggle="modal"
+                        data-target="#lessonModal">Dodaj nową lekcję
+                </button>
                 <span>
                     <div class="modal fade " id="lessonModal">
                     <div class="modal-dialog modal-lg">
@@ -342,13 +370,16 @@
                                         <div class="card mt-2 mx-auto p-4 bg-light">
                                             <div class="card-body bg-light">
                                                 <div class="container">
-                                                    <form id="lesson-form" role="form" action="#" th:action="@{/add-lesson}" method="post">
+                                                    <form id="lesson-form" role="form" action="#"
+                                                          th:action="@{/add-lesson}" method="post">
                                                         <div class="">
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="subject">Wybierz przedmiot lekcji</label>
-                                                                        <select id="subject" name="chosenLesson" class="form-control" required="required" data-error="Wybierz przedmiot">
+                                                                        <select id="subject" name="chosenLesson"
+                                                                                class="form-control" required="required"
+                                                                                data-error="Wybierz przedmiot">
                                                                             <option>Matematyka</option>
                                                                             <option>Fizyka</option>
                                                                             <option>Angielski</option>
@@ -360,7 +391,11 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="lesson-topic">Opisz tematykę lekcji</label>
-                                                                        <input id="lesson-topic" type="text" name="lessonSection" class="form-control" placeholder=" np. Figury geometryczne" required="required" data-error="Brak opisu">
+                                                                        <input id="lesson-topic" type="text"
+                                                                               name="lessonSection" class="form-control"
+                                                                               placeholder=" np. Figury geometryczne"
+                                                                               required="required"
+                                                                               data-error="Brak opisu">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -368,7 +403,11 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="homework">Wprowadź zadanie domowe</label>
-                                                                        <input id="homework" type="text" name="homework" class="form-control" placeholder=" np. podręcznik str. 45 - zadanie 7 " required="required" data-error="Brak opisu">
+                                                                        <input id="homework" type="text" name="homework"
+                                                                               class="form-control"
+                                                                               placeholder=" np. podręcznik str. 45 - zadanie 7 "
+                                                                               required="required"
+                                                                               data-error="Brak opisu">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -376,15 +415,24 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="form_message">Komentarz do lekcji</label>
-                                                                        <textarea id="form_message" name="lessonComment" class="form-control" placeholder="Zwrócić szczególną uwagę na czasy z rodziny perfect " rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                                        <textarea id="form_message" name="lessonComment"
+                                                                                  class="form-control"
+                                                                                  placeholder="Zwrócić szczególną uwagę na czasy z rodziny perfect "
+                                                                                  rows="4" required="required"
+                                                                                  data-error="Please, leave us a message."></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-                                                                    <input type="hidden" name="studentId" th:value="${chosenStudent.getId()}">
-                                                                    <input type="submit" class="btn btn-block btn-success btn-send pt-2 btn-block " value="Dodaj lekcję">
+                                                                    <input type="hidden" name="studentId"
+                                                                           th:value="${chosenStudent.getId()}">
+                                                                    <input type="submit"
+                                                                           class="btn btn-block btn-success btn-send pt-2 btn-block "
+                                                                           value="Dodaj lekcję">
                                                                 </div>
                                                                 <div class="col-md-12 mt-2">
-                                                                    <input type="button" class="btn btn-block btn-danger" data-dismiss="modal" value="Anuluj">
+                                                                    <input type="button"
+                                                                           class="btn btn-block btn-danger"
+                                                                           data-dismiss="modal" value="Anuluj">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -400,9 +448,10 @@
                     </div>
                 </div>
                 </span>
-                <span class=" archive"><a href="#" class="btn mt-2 btn-block btn-secondary "data-toggle="modal" data-target="#archive">Archiwizuj ostatnie lekcje</a></span>
+                <span class=" archive"><a href="#" class="btn mt-2 btn-block btn-secondary " data-toggle="modal"
+                                          data-target="#archive">Archiwizuj ostatnie lekcje</a></span>
             </div>
-                 <span>
+            <span>
                         <div class="modal fade " id="archive">
                         <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content ">
@@ -417,22 +466,26 @@
                                     </div>
                                     <div class="modal-footer">
                                         <form role="form" action="#" th:action="@{/archive-lesson}" method="post">
-                                            <input type="hidden" name="positionToArchive" th:value="${currentLessons.size()}">
+                                            <input type="hidden" name="positionToArchive"
+                                                   th:value="${currentLessons.size()}">
                                             <input type="hidden" name="studentId" th:value="${chosenStudent.getId()}">
                                             <input type="submit" class="btn btn-success" value="Archiwizuj">
 
                                         </form>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj</button>
+                                        <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Anuluj</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </span>
-            <div class="p-3 last-lesson shadow-lg mt-2 card py-4 bg-white" >
+            <div class="p-3 last-lesson shadow-lg mt-2 card py-4 bg-white">
                 <div th:if="${currentLessons.size()>0}">
                     <div class="d-flex  justify-content-between">
                     <span class="last-lesson ml-5">
-                        <div class="btn btn-block d-flex justify-content-center btn-secondary ml-1 disabled text-center" role="alert" th:text="|Ostatnia lekcja: ${currentLessons.get(currentLessons.size()-1).getSubject()} |">
+                        <div class="btn btn-block d-flex justify-content-center btn-secondary ml-1 disabled text-center"
+                             role="alert"
+                             th:text="|Ostatnia lekcja: ${currentLessons.get(currentLessons.size()-1).getSubject()} |">
                          Ostatnia lekcja: Matematyka
                         </div>
                     </span>
@@ -445,7 +498,7 @@
                             </span>
                             </div>
                         </div>
-                        <div class="home-work mt-2"><h6>Zadanie domowe:  </h6>
+                        <div class="home-work mt-2"><h6>Zadanie domowe: </h6>
                             <div class="d-flex  justify-content-between">
                             <span class="card-block lesson-dessc ">
                                 <p th:text="${currentLessons.get(currentLessons.size()-1).getHomework()}"> Podręcznik str 146 zadanie 1,2 i 7,8</p>
@@ -459,10 +512,12 @@
                 </div>
             </div>
             <div class="border-top shadow-lg mt-3 card border-bottom p-3 bg-white transaction">
-                <button type="button" class="btn mt-2 btn-block btn-danger" data-toggle="modal" data-target="#deleteProfile">
+                <button type="button" class="btn mt-2 btn-block btn-danger" data-toggle="modal"
+                        data-target="#deleteProfile">
                     Usuń profil
                 </button>
-                <div class="modal fade" id="deleteProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal fade" id="deleteProfile" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content ">
                             <div class="modal-header">
@@ -488,9 +543,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <div class="jumbotron footer text-center" style="margin-bottom:0">

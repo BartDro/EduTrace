@@ -1,15 +1,20 @@
 package drobczyk.bartlomiej.model.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class StudentDto {
     private Long id;
     private String name;
     private String surname;
+    @Size(min = 6,max = 6)
     private String phone;
+    @Email
     private String email;
     private int grade;
     private String parent;
+    @Size(min = 6,max = 6)
     private String parentNumber;
     private String additionalInfo;
     private String avatarUrl;

@@ -24,7 +24,6 @@ public class EduTrackerApplication {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext ctx = SpringApplication.run(EduTrackerApplication.class, args);
-
     }
     @Bean
     public static RestTemplate restTemplate(){

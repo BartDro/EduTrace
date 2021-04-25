@@ -12,6 +12,7 @@
     height: auto;
 }
 
+
 .footer{
     background-color: #11426c;
 }
@@ -98,6 +99,7 @@ body > * {
 .user_add{
     margin-right: 30px;
     width: 150px;
+    bottom: 0;
 }
 
 .radio_check{
@@ -106,6 +108,8 @@ body > * {
 .avatars{
     margin-left: 250px;
 }
+
+
 
 
 

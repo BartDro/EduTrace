@@ -2,6 +2,9 @@ package drobczyk.bartlomiej.model.dto.addition_form;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Component
@@ -9,13 +12,18 @@ public class StudentFormInfo {
     private String avatar;
     private String name;
     private String surname;
+    @Size(min = 9,max = 9,message = "Telefon musi mieć 9 znaków")
     private String phone;
+    @Email(message = "Email musi być poprawnie sformatowany ze znakiem \"@\"")
     private String mail;
     private String parent;
+    @Size(min = 9,max = 9, message = "Telefon musi mieć 9 znaków")
     private String parentPhone;
     private String extraInfo;
     private Integer grade;
+    @NotEmpty(message = "Uczeń musi mieć przypisany chociaż jeden przedmiot")
     private List<String> subjects;
+    @NotEmpty(message = "Zajęcia muszą być zdefiniowane w chociaż jednym dniu")
     private List<String> day;
 
     public Integer getGrade() {

@@ -11,14 +11,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="../static/css/mainPanel.css" th:href="@{/css/mainPanel.css}" rel="stylesheet">
+    <script>
+        $(document).ready(function(){
+            $("#additionFailed").modal('show');
+        });
+    </script>
 </head>
 <body>
+
         <div class="jumbotron home-jumbo text-center text-white" style="margin-bottom:0">
             <a href="#" th:href="@{/main-panel}"><h1 class="display-2 text-white">EduTrace</h1></a>
             <h5>Trace of the progress</h5>
         </div>
 
-        <nav class="navbar navbar-expand-sm bg-dark  sticky-top navbar-dark">
+        <nav class="navbar navbar-expand-sm bg-dark  sticky-top navbar-dark" >
             <div class="card">
                 <div class="row ">
                     <div class="col d-flex align-self-center">
@@ -78,8 +84,25 @@
             </div>
         </nav>
 
-
         <div class="container">
+            <div th:if="${additionFailed}">
+                <div id="additionFailed" class="modal fade addError">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-bold">Nie udało się dodać ucznia - nieudana walidacja danych:</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body ml-2">
+                                <ul th:each="error:${errors}">
+                                     <li class="font-italic" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row mt-4 g-4 d-flex justify-content-center">
 
                     <div class="shadow card p-3 mb-4 mt-2 ml-3 mr-4 bg-white rounded" th:each="student:${students}">
@@ -133,7 +156,7 @@
                                                 <div class="card mt-2 mx-auto p-4 bg-light">
                                                     <div class="card-body bg-light">
                                                         <div class="container">
-                                                            <form id="lesson-form"  role="form"  action="#" th:action="@{/add-student}" method="post">
+                                                            <form id="lesson-form"  role="form"  action="#" th:action="@{/add-student}" th:object="${studentBasicInfo}" method="post">
                                                                 <h6>Wybierz avatara ucznia: </h6>
                                                                 <div class="row ">
                                                                     <div class="avatars d-flex  ml-4  mb-3">
@@ -142,31 +165,31 @@
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar1.png" th:src="@{/img/avatars/maleAvatar1.png}" class="rounded img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/maleAvatar1.png" required >
+                                                                                        <input class="form-check-input ml-0" type="radio" th:field="*{avatar}"  value="/img/avatars/maleAvatar1.png" required >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar2.png" th:src="@{/img/avatars/maleAvatar2.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"   value="/img/avatars/maleAvatar2.png" >
+                                                                                        <input class="form-check-input ml-0" type="radio" th:field="*{avatar}"   value="/img/avatars/maleAvatar2.png" >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/maleAvatar3.png" th:src="@{/img/avatars/maleAvatar3.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/maleAvatar3.png"  >
+                                                                                        <input class="form-check-input ml-0" type="radio" th:field="*{avatar}"  value="/img/avatars/maleAvatar3.png"  >
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col border-right">
                                                                                     <img src="../static/img/avatars/femaleAvatar1.png" th:src="@{/img/avatars/femaleAvatar1.png}" class="rounded  img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio" name="avatar"  value="/img/avatars/femaleAvatar1.png">
+                                                                                        <input class="form-check-input ml-0" type="radio" th:field="*{avatar}"  value="/img/avatars/femaleAvatar1.png">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col ">
                                                                                     <img src="../static/img/avatars/femaleAvatar2.png" th:src="@{/img/avatars/femaleAvatar2.png}" class="rounded img-fluid" width="155">
                                                                                     <div>
-                                                                                        <input class="form-check-input ml-0" type="radio"  name="avatar"  value="/img/avatars/femaleAvatar2.png" >
+                                                                                        <input class="form-check-input ml-0" type="radio"  th:field="*{avatar}"  value="/img/avatars/femaleAvatar2.png" >
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -179,7 +202,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="name">Imię ucznia</label>
-                                                                                    <input id="name" type="text" name="name" class="form-control" placeholder=" Adam" required="required" data-error="Brak opisu">
+                                                                                    <input id="name" type="text" th:field="*{name}" class="form-control" placeholder=" Adam" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -187,7 +210,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="surname">Nazwisko ucznia</label>
-                                                                                    <input id="surname" type="text" name="surname" class="form-control" placeholder="Wieżbicki" required="required" data-error="Brak opisu">
+                                                                                    <input id="surname" type="text" th:field="*{surname}" class="form-control" placeholder="Wieżbicki" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -197,7 +220,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="phone">Telefon</label>
-                                                                                    <input id="phone" type="text" name="phone" class="form-control" placeholder="111-555-777" required="required" data-error="Brak opisu">
+                                                                                    <input id="phone" type="number" th:field="*{phone}" size="9" class="form-control" placeholder="111555777" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -205,7 +228,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="mail">E-mail</label>
-                                                                                    <input id="mail" type="text" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
+                                                                                    <input id="mail" type="text" th:field="*{mail}" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -215,7 +238,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="parent">Opiekun</label>
-                                                                                    <input id="parent" type="text" name="parent" class="form-control" placeholder="Anna Wieżbicka" required="required" data-error="Brak opisu">
+                                                                                    <input id="parent" type="text" th:fiel="*{parent}" class="form-control" placeholder="Anna Wieżbicka" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -223,7 +246,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="parentPhone">Telefon opiekuna</label>
-                                                                                    <input id="parentPhone" type="text" name="parentPhone" class="form-control" placeholder="555 777 888" required="required" data-error="Brak opisu">
+                                                                                    <input id="parentPhone" type="number" th:field="*{parentPhone}" size="9" class="form-control" placeholder="555777888" required="required" data-error="Brak opisu">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -232,8 +255,7 @@
                                                                         <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 <label for="subject">Klasa</label>
-                                                                                <select id="subject" name="grade" class="form-control" required="required" data-error="Wybierz przedmiot">
-                                                                                    <option selected disabled>Wybierz klasę</option>
+                                                                                <select id="subject" th:field="*{grade}" class="form-control" required="required" data-error="Wybierz przedmiot">
                                                                                     <option value="4">4</option>
                                                                                     <option value="5">5</option>
                                                                                     <option value="6">6</option>
@@ -248,15 +270,15 @@
 
                                                                         <div class="col-12">
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="math" name="subject" value="Matematyka">
+                                                                                <input class="form-check-input" type="checkbox" id="math" th:field="*{subject}" value="Matematyka">
                                                                                 <label class="form-check-label" for="math">Matematyka </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="physics" name="subject" value="Fizyka">
+                                                                                <input class="form-check-input" type="checkbox" id="physics" th:field="*{subject}" value="Fizyka">
                                                                                 <label class="form-check-label" for="physics">Fizyka </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="eng" name="subject" value="Angielski">
+                                                                                <input class="form-check-input" type="checkbox" id="eng" th:field="*{subject}" value="Angielski">
                                                                                 <label class="form-check-label" for="eng">Angielski</label>
                                                                             </div>
                                                                         </div>
@@ -265,23 +287,23 @@
                                                                     <div class="row text-center">
                                                                         <div class="col-12">
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" name = "day" id="mon" value="Poniedziałek">
+                                                                                <input class="form-check-input" type="checkbox" th:field="*{day}" id="mon" value="Poniedziałek">
                                                                                 <label class="form-check-label" for="mon">Poniedziałek </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="tue" name = "day" value="Wtorek">
+                                                                                <input class="form-check-input" type="checkbox" id="tue" th:field="*{day}" value="Wtorek">
                                                                                 <label class="form-check-label" for="tue">Wtorek </label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="wed" name = "day" value="Środa">
+                                                                                <input class="form-check-input" type="checkbox" id="wed" th:field="*{day}" value="Środa">
                                                                                 <label class="form-check-label" for="wed">Środa</label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="thur" name = "day" value="Czwartek">
+                                                                                <input class="form-check-input" type="checkbox" id="thur" th:field="*{day}" value="Czwartek">
                                                                                 <label class="form-check-label" for="thur">Czwartek</label>
                                                                             </div>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="frid" name = "day" value="Piątek">
+                                                                                <input class="form-check-input" type="checkbox" id="frid" th:field="*{day}" value="Piątek">
                                                                                 <label class="form-check-label" for="frid">Piątek</label>
                                                                             </div>
                                                                         </div>
@@ -290,7 +312,7 @@
                                                                         <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 <label for="extraInfo">Informacje dodatkowe</label>
-                                                                                <textarea id="extraInfo" name="extraInfo" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                                                <textarea id="extraInfo" th:field="*{extraInfo}" class="form-control" placeholder="Uwielbia kursy językowe" rows="4" required="required" data-error="Please, leave us a message."></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>

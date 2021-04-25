@@ -10,7 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="../static/css/studentPanel.css" th:href="@{/css/studentPanel.css}" rel="stylesheet">
-
+    <script>
+        $(document).ready(function(){
+            $("#editionFailed").modal('show');
+        });
+    </script>
 </head>
 <body>
 <div class="jumbotron home-jumbo text-center text-white" style="margin-bottom:0">
@@ -78,6 +82,23 @@
 </nav>
 
 <div class="container mt-4 mb-5">
+    <div th:if="${editionFailed}">
+        <div id="additionFailed" class="modal fade addError">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold">Nie udało się dodać ucznia - nieudana walidacja danych:</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body ml-2">
+                        <ul th:each="error:${errors}">
+                            <li class="font-italic" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-7 ">
             <div class="p-3 card first-box shadow-lg bg-white border-right">
@@ -187,7 +208,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="phone">Telefon</label>
-                                            <input id="phone" type="text" th:value="${chosenStudent.getPhone()}" name="phone" class="form-control" placeholder="111-555-777" required="required" data-error="Brak opisu">
+                                            <input id="phone" type="number" th:value="${chosenStudent.getPhone()}" name="phone" size="9" class="form-control" placeholder="111-555-777" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +216,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="mail">E-mail</label>
-                                            <input id="mail" type="text" th:value="${chosenStudent.getEmail()}" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
+                                            <input id="mail" type="email" th:value="${chosenStudent.getEmail()}" name="mail" class="form-control" placeholder="adamwieżbicki@op.pl" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +234,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="parentPhone">Telefon opiekuna</label>
-                                            <input id="parentPhone" type="text" th:value="${chosenStudent.getParentNumber()}" name="parentPhone" class="form-control" placeholder="555 777 888" required="required" data-error="Brak opisu">
+                                            <input id="parentPhone" type="number" th:value="${chosenStudent.getParentNumber()}" size="9" name="parentPhone" class="form-control" placeholder="555 777 888" required="required" data-error="Brak opisu">
                                         </div>
                                     </div>
                                 </div>
