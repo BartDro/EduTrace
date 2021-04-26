@@ -52,6 +52,7 @@ public class EditPanelController {
             model.addAttribute("errors", errorsList);
             model.addAttribute("editionFailed", true);
         }
+        int x = 10;
         return "editProfilePanel";
     }
 
@@ -63,7 +64,8 @@ public class EditPanelController {
     }
 
     @PostMapping("/edit-student/basic-info")
-    public String editBasicInfo(@Valid @ModelAttribute BasicInfoEdit basicInfo, BindingResult result, @RequestParam Long studentId,
+    public String editBasicInfo(@Valid @ModelAttribute BasicInfoEdit basicInfo, BindingResult result,
+                                @RequestParam Long studentId,
                                 RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             result.getAllErrors().stream()
