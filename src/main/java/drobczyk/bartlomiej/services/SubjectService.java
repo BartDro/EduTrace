@@ -1,5 +1,6 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.NoSuchSubjectException;
 import drobczyk.bartlomiej.model.subject.Subject;
 import drobczyk.bartlomiej.repo.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,6 @@ public class SubjectService {
     }
 
     public Subject findSubjectByDesc(String subjectDesc){
-        return subjectRepo.findBySubject(subjectDesc).orElseThrow(NoSuchElementException::new);
+        return subjectRepo.findBySubject(subjectDesc).orElseThrow(NoSuchSubjectException::new);
     }
 }

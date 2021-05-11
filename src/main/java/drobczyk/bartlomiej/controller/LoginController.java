@@ -2,33 +2,30 @@ package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.dto.TeacherDto;
 import drobczyk.bartlomiej.model.teacher.Teacher;
-import drobczyk.bartlomiej.services.LogService;
+import drobczyk.bartlomiej.services.TeacherService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class LogController {
-    private LogService logService;
+public class LoginController {
     private TeacherSession teacherSession;
+    private TeacherService teacherService;
 
 
     @Autowired
-    public LogController(LogService logService, TeacherSession teacherSession) {
-        this.logService = logService;
+    public LoginController(TeacherSession teacherSession, TeacherService teacherService) {
         this.teacherSession = teacherSession;
+        this.teacherService = teacherService;
     }
 
     @GetMapping("/")
@@ -42,7 +39,7 @@ public class LogController {
     @GetMapping("/success")
     public String logIn(Principal principal){
         String teacherLogin = principal.getName();
-        Teacher loggedTeacher = logService.getTeacherByLogin(teacherLogin);
+        Teacher loggedTeacher = teacherService.getTeacherByLogin(teacherLogin);
         teacherSession.setTeacher(loggedTeacher);
         return "redirect:/";
     }
@@ -71,16 +68,15 @@ public class LogController {
             model.addAttribute("registrationFail",true);
             return "login";
         }
-        boolean isRegistratrionSuccessful =  logService.registerTeacher(dto.getLogin(), dto.getMail(),
-                dto.getPassword(), dto.getPasswordConfirm());
+        boolean isRegistratrionSuccessful =  teacherService.registerTeacher(dto);
         model.addAttribute("registrationOutcome",isRegistratrionSuccessful);
         return "login";
     }
 
     @GetMapping("/log-out")
     public String logOut (Model model){
-        teacherSession.setTeacher(null);
+      //  teacherSession.setTeacher(null);
         model.addAttribute("teacher",new TeacherDto());
-        return "redirect:/";
+        return "login";
     }
 }

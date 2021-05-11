@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TeacherRepo extends JpaRepository<Teacher,Long> {
     boolean existsTeacherByLoginAndEmail(String login, String email);
-    boolean existsTeacherByLoginAndPassword(String login, String password);
     Optional<Teacher> findByLogin(String login);
 }

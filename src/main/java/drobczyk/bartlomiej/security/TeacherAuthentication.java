@@ -2,7 +2,7 @@ package drobczyk.bartlomiej.security;
 
 import drobczyk.bartlomiej.model.roles.UserRole;
 import drobczyk.bartlomiej.model.teacher.Teacher;
-import drobczyk.bartlomiej.services.LogService;
+import drobczyk.bartlomiej.services.TeacherService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,16 +17,16 @@ import java.util.Set;
 @Component
 public class TeacherAuthentication implements UserDetailsService {
 
-    private LogService logService;
+    private TeacherService teacherService;
 
-    public TeacherAuthentication( LogService logService) {
-        this.logService = logService;
+    public TeacherAuthentication(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Teacher teacher = logService.getTeacherByLogin(login);
+        Teacher teacher = teacherService.getTeacherByLogin(login);
         return new User(teacher.getLogin(), teacher.getPassword(), prepareAuthorities(teacher.getRoles()));
     }
 

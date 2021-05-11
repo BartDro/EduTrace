@@ -52,7 +52,6 @@ public class EditPanelController {
             model.addAttribute("errors", errorsList);
             model.addAttribute("editionFailed", true);
         }
-        int x = 10;
         return "editProfilePanel";
     }
 

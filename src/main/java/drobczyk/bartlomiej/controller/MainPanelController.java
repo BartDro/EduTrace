@@ -1,6 +1,5 @@
 package drobczyk.bartlomiej.controller;
 
-import com.sun.xml.bind.v2.TODO;
 import drobczyk.bartlomiej.model.dto.addition_form.StudentFormInfo;
 import drobczyk.bartlomiej.services.MainPanelService;
 import drobczyk.bartlomiej.services.StudentService;
@@ -10,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -36,6 +36,8 @@ public class MainPanelController {
         this.studentService = studentService;
         this.apiService = apiService;
     }
+
+    //ToDo - fix archive presentation
 
     @GetMapping("/main-panel")
     public String presentPanel(Model model, HttpServletRequest request) {
@@ -61,7 +63,7 @@ public class MainPanelController {
 
     @PostMapping("/add-student")
     public String addStudentToTeacher(@Valid @ModelAttribute StudentFormInfo studentBasicInfo, BindingResult result,
-                                            RedirectAttributes redirectAttributes) {
+                                      RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             result.getAllErrors().stream()
                     .forEach(x -> System.err.println(x.getDefaultMessage()));
@@ -70,6 +72,5 @@ public class MainPanelController {
         }
         mainPanelService.addStudentToTeacher(studentBasicInfo, teacherSession.getTeacher());
         return "redirect:/main-panel";
-
     }
 }

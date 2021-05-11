@@ -41,13 +41,13 @@ public class ApiService {
     }
 
     @Cacheable(cacheNames = "quote")
-    public List<QuoteDto> provideQuotes(LocationDto location) {
+    public List<QuoteDto> provideQuotes() {
         return quoteClient.provideQuotes();
     }
 
     public QuoteDto provideRandomQuote() {
         if (quotes.isEmpty()) {
-            quotes = provideQuotes(this.provideLocationDto());
+            quotes = provideQuotes();
         }
         return quotes.get(randomQuoteSelector.nextInt(quotes.size()));
     }

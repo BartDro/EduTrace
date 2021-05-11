@@ -1,5 +1,6 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.NoSuchDayException;
 import drobczyk.bartlomiej.model.day.Day;
 import drobczyk.bartlomiej.repo.DayRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,6 @@ public class DayService {
     }
 
     public Day findDayByDesc(String dayDesc){
-        return dayRepo.findByDay(dayDesc).orElseThrow(NoSuchElementException::new);
+        return dayRepo.findByDay(dayDesc).orElseThrow(NoSuchDayException::new);
     }
 }

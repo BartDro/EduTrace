@@ -1,6 +1,7 @@
 package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.dto.StudentDto;
+import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
@@ -16,13 +17,11 @@ import java.util.List;
 @Controller
 public class ArchiveController {
     private StudentService studentService;
-    private TeacherSession teacherSession;
     private ApiService apiService;
 
     @Autowired
-    public ArchiveController(StudentService studentService, TeacherSession teacherSession, ApiService apiService) {
+    public ArchiveController(StudentService studentService,  ApiService apiService) {
         this.studentService = studentService;
-        this.teacherSession = teacherSession;
         this.apiService = apiService;
     }
 
@@ -37,8 +36,9 @@ public class ArchiveController {
             model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
             model.addAttribute("quote",apiService.provideRandomQuote());
             if (studentId != null){
-                model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
-                model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
+                Student chosenStudent = studentService.getStudentById(studentId);
+                model.addAttribute("chosenStudent", chosenStudent);
+                model.addAttribute("currentLessons", studentService.getOrderedLessons(chosenStudent));
                 return "studentArchivePanel";
             }
             return "archivePanel";

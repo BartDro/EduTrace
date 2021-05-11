@@ -35,6 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .and()
                  .logout()
                   .logoutUrl("/log-out");
-
+        //wyrzucic wgl kompunent sesyjny ?
     }
 }

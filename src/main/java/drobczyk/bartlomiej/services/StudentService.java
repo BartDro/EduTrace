@@ -1,5 +1,6 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
 import drobczyk.bartlomiej.model.dto.LessonDto;
 import drobczyk.bartlomiej.model.dto.StudentDto;
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
@@ -46,7 +47,7 @@ public class StudentService {
 
     public Student getStudentById(Long id) throws NoSuchElementException {
         Optional<Student> student = studentRepo.findById(id);
-        return student.orElseThrow(NoSuchElementException::new);
+        return student.orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     public List<StudentDto> provideStudentsDtosAccordingToTeacher() {
@@ -95,20 +96,20 @@ public class StudentService {
         return student;
     }
 
-    private List<Lesson> getOrderedLessons(Student student) {
+    public List<Lesson> getOrderedLessons(Student student) {
         return student.getLessons().stream()
                 .sorted(Comparator.comparing(Lesson::getLessonDate))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void changeStudentAvatar(String avatar, Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
+        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setAvatarUrl(avatar);
         studentRepo.save(student);
     }
 
     public void editBasicInfo(BasicInfoEdit basicInfoEdit, Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
+        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setName(basicInfoEdit.getName());
         student.setSurname(basicInfoEdit.getSurname());
         student.setPhone(basicInfoEdit.getPhone());
@@ -126,7 +127,7 @@ public class StudentService {
                 .map(this::matchDayWithFormDescription)
                 .collect(Collectors.toSet());
 
-        Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
+        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setGrade(subjectInfoEdit.getGrade());
         student.setSubjects(subjects);
         student.setDays(days);
@@ -144,7 +145,7 @@ public class StudentService {
     }
 
     public void deleteStudent(Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(NoSuchElementException::new);
+        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
         student.getDays().clear();
         student.getLessons().clear();
         student.getSubjects().clear();
@@ -154,7 +155,9 @@ public class StudentService {
     }
 
     public List<StudentDto> findStudentsInArchive(String studentInfo) {
+        Set<Student> teachersStudents = teacherSession.getTeacher().getStudents();
         return studentRepo.findMatchedStudentsByString(studentInfo).stream()
+                .filter(teachersStudents::contains)
                 .map(StudentMapper::toDto)
                 .collect(Collectors.toList());
     }

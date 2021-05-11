@@ -14,6 +14,15 @@ public class TeacherDto {
     @PasswordConditions
     private String password;
     private String passwordConfirm;
+
+    public TeacherDto(){}
+    public TeacherDto(String login, String mail, String password, String passwordConfirm) {
+        this.login = login;
+        this.mail = mail;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+    }
+
     public String getLogin() {
         return login;
     }

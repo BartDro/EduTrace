@@ -27,7 +27,7 @@ public class WrongPageController implements ErrorController {
     }
     @Override
     public String getErrorPath() {
-        //going to be ignored
+        //intentionally going to be ignored
         return null;
     }
 }

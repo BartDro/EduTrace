@@ -15,19 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StudentPanelController {
-    private TeacherSession teacherSession;
     private StudentService studentService;
     private ApiService apiService;
 
     @Autowired
-    public StudentPanelController(TeacherSession teacherSession, StudentService studentService, ApiService apiService) {
-        this.teacherSession = teacherSession;
+    public StudentPanelController(StudentService studentService, ApiService apiService) {
         this.studentService = studentService;
         this.apiService = apiService;
     }
 
     @GetMapping("/student-panel")
-    public String presentPanel(Model model, @RequestParam(required = false) Long studentId) {
+    public String presentPanel(Model model, @RequestParam Long studentId) {
             model.addAttribute("lessonInfo", new LessonFormInfo());
             model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
             model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
@@ -55,5 +53,4 @@ public class StudentPanelController {
         studentService.deleteStudent(studentId);
         return "redirect:/main-panel";
     }
-
 }
