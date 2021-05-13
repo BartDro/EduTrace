@@ -4,7 +4,6 @@ import drobczyk.bartlomiej.model.dto.StudentDto;
 import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
-import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +28,7 @@ public class ArchiveController {
     public String findStudentInArchive(@RequestParam(required = false) String student, @RequestParam(required = false) Long studentId, Model model) {
             List<StudentDto> matchedStudents = new ArrayList<>();
             if (student != null) {
-                matchedStudents = studentService.findStudentsInArchive(student);
+                matchedStudents = studentService.findTeachersStudentsInArchive(student);
             }
             model.addAttribute("archivedStudents", matchedStudents);
             model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());

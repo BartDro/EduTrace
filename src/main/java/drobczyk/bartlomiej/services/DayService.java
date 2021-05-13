@@ -19,5 +19,6 @@ public class DayService {
 
     public Day findDayByDesc(String dayDesc){
         return dayRepo.findByDay(dayDesc).orElseThrow(NoSuchDayException::new);
+
     }
 }

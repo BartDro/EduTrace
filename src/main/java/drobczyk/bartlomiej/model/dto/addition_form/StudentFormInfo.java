@@ -26,6 +26,24 @@ public class StudentFormInfo {
     @NotEmpty(message = "Zajęcia muszą być zdefiniowane w chociaż jednym dniu")
     private List<String> day;
 
+
+    public StudentFormInfo() {}
+
+    public StudentFormInfo(String avatar, String name, String surname, String phone, String mail, String parent,
+                           String parentPhone, String extraInfo, Integer grade, List<String> subjects, List<String> day) {
+        this.avatar = avatar;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.mail = mail;
+        this.parent = parent;
+        this.parentPhone = parentPhone;
+        this.extraInfo = extraInfo;
+        this.grade = grade;
+        this.subjects = subjects;
+        this.day = day;
+    }
+
     public Integer getGrade() {
         return grade;
     }
@@ -50,8 +68,6 @@ public class StudentFormInfo {
         this.day = day;
     }
 
-    public StudentFormInfo() {
-    }
 
     public String getName() {
         return name;

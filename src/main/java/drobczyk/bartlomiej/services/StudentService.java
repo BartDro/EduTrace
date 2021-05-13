@@ -154,7 +154,7 @@ public class StudentService {
         teacherSession.refresh();
     }
 
-    public List<StudentDto> findStudentsInArchive(String studentInfo) {
+    public List<StudentDto> findTeachersStudentsInArchive(String studentInfo) {
         Set<Student> teachersStudents = teacherSession.getTeacher().getStudents();
         return studentRepo.findMatchedStudentsByString(studentInfo).stream()
                 .filter(teachersStudents::contains)
