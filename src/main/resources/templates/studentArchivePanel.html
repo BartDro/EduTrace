@@ -207,9 +207,9 @@
                         <td th:text="${lesson.getSubject()}">Matematyka</td>
                         <td th:text="${lesson.getLessonTopic()}">Figury geometryczne</td>
                         <td th:text="${#temporals.format(lesson.getLessonDate(),'dd-MM-yyyy HH:mm')}">1/8/20</td>
-                        <td> <a href="#" class="btn text-center lesson-button btn-primary " data-toggle="modal" data-target="#details">Szczegóły</a></td>
+                        <td> <a href="#" class="btn text-center lesson-button btn-primary " data-toggle="modal" th:attr="data-target='#details'+${lesson.getId()}">Szczegóły</a></td>
                         <span>
-                    <div class="modal fade " id="details">
+                    <div class="modal fade " id="details" th:id="details+${lesson.getId()}">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content ">
                             <div class="modal-header">
