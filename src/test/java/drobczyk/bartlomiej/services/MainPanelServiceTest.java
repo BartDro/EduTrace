@@ -87,8 +87,6 @@ class MainPanelServiceTest {
                 .hasMessageContaining("Brak wskazanego dnia");
         verify(studentService,never()).saveStudent(any());
         verify(teacherService,never()).saveTeacher(any());
-
-
     }
 
     @Test

@@ -31,10 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                   .defaultSuccessUrl("/success",true)
                   .permitAll()
                 .usernameParameter("login")
-                .passwordParameter("password")
-                .and()
-                 .logout()
-                  .logoutUrl("/log-out");
-        //wyrzucic wgl kompunent sesyjny ?
+                .passwordParameter("password");
     }
 }

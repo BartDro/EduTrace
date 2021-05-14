@@ -4,7 +4,6 @@ import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
 import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
-import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StudentPanelController {
-    private StudentService studentService;
-    private ApiService apiService;
+    private final StudentService studentService;
+    private final ApiService apiService;
 
     @Autowired
     public StudentPanelController(StudentService studentService, ApiService apiService) {

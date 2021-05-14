@@ -2,16 +2,15 @@ package drobczyk.bartlomiej.controller;
 
 import drobczyk.bartlomiej.model.dto.edit_form.BasicInfoEdit;
 import drobczyk.bartlomiej.model.dto.edit_form.SubjectInfoEdit;
-import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -23,9 +22,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class EditPanelController {
-    private StudentService studentService;
-    private TeacherSession teacherSession;
-    private ApiService apiService;
+    private final StudentService studentService;
+    private final TeacherSession teacherSession;
+    private final ApiService apiService;
 
     @Autowired
     public EditPanelController(StudentService studentService, TeacherSession teacherSession, ApiService apiService) {
@@ -46,7 +45,7 @@ public class EditPanelController {
         if (inputFlashMap != null) {
             BindingResult result = (BindingResult) inputFlashMap.get("errors");
             List<String> errorsList = result.getAllErrors().stream()
-                    .map(x -> x.getDefaultMessage())
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .distinct()
                     .collect(Collectors.toList());
             model.addAttribute("errors", errorsList);
@@ -58,7 +57,7 @@ public class EditPanelController {
     @PostMapping("/edit-student/avatar")
     public String changeAvatar(@RequestParam String avatar, @RequestParam Long studentId) {
         studentService.changeStudentAvatar(avatar, studentId);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId=" + studentId;
     }
 
@@ -67,13 +66,10 @@ public class EditPanelController {
                                 @RequestParam Long studentId,
                                 RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            result.getAllErrors().stream()
-                    .forEach(x -> System.err.println(x.getDefaultMessage()));
-            redirectAttributes.addFlashAttribute("errors", result);
-            return "redirect:/edit-student?studentId=" + studentId;
+            return getErrors(studentId,result,redirectAttributes);
         }
         studentService.editBasicInfo(basicInfo, studentId);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId=" + studentId;
     }
 
@@ -81,13 +77,17 @@ public class EditPanelController {
     public String editSubjectInfo(@Valid @ModelAttribute SubjectInfoEdit subjectInfoEdit, BindingResult result,
                                   @RequestParam Long studentId, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            result.getAllErrors().stream()
-                    .forEach(x -> System.err.println(x.getDefaultMessage()));
-            redirectAttributes.addFlashAttribute("errors", result);
-            return "redirect:/edit-student?studentId=" + studentId;
+            return getErrors(studentId, result, redirectAttributes);
         }
         studentService.editSubjectInfo(subjectInfoEdit, studentId);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
+        return "redirect:/edit-student?studentId=" + studentId;
+    }
+
+    private String getErrors(Long studentId, BindingResult result, RedirectAttributes redirectAttributes){
+        result.getAllErrors()
+                .forEach(x -> System.err.println(x.getDefaultMessage()));
+        redirectAttributes.addFlashAttribute("errors", result);
         return "redirect:/edit-student?studentId=" + studentId;
     }
 }

@@ -17,7 +17,7 @@ import java.util.Set;
 @Component
 public class TeacherAuthentication implements UserDetailsService {
 
-    private TeacherService teacherService;
+    private final TeacherService teacherService;
 
     public TeacherAuthentication(TeacherService teacherService) {
         this.teacherService = teacherService;

@@ -1,6 +1,5 @@
 package drobczyk.bartlomiej.services.api;
 
-import com.sun.el.stream.Stream;
 import drobczyk.bartlomiej.model.dto.api.location.LocationDto;
 import drobczyk.bartlomiej.model.dto.api.quote.QuoteDto;
 import drobczyk.bartlomiej.model.dto.api.weather.WeatherDto;
@@ -14,23 +13,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class ApiService {
-    private LocationClient locationClient;
-    private WeatherClient weatherClient;
-    private QuoteClient quoteClient;
+    private final LocationClient locationClient;
+    private final WeatherClient weatherClient;
+    private final QuoteClient quoteClient;
     private List<QuoteDto> quotes = new ArrayList<>();
-    private Random randomQuoteSelector = new Random();
+    private final Random randomQuoteSelector = new Random();
 
     @Autowired
     public ApiService(LocationClient locationClient, WeatherClient weatherClient, QuoteClient quoteClient) {
         this.locationClient = locationClient;
         this.weatherClient = weatherClient;
         this.quoteClient = quoteClient;
-
     }
 
     @Cacheable(cacheNames = "weather", key = "#location.ip")

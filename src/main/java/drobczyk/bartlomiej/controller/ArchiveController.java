@@ -15,8 +15,8 @@ import java.util.List;
 
 @Controller
 public class ArchiveController {
-    private StudentService studentService;
-    private ApiService apiService;
+    private final StudentService studentService;
+    private final ApiService apiService;
 
     @Autowired
     public ArchiveController(StudentService studentService,  ApiService apiService) {

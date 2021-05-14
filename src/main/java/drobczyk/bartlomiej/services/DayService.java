@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 @Repository
 public class DayService {
-    private DayRepo dayRepo;
+    private final DayRepo dayRepo;
 
     @Autowired
     public DayService(DayRepo dayRepo) {

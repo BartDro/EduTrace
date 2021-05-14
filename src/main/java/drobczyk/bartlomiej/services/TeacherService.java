@@ -18,9 +18,9 @@ import java.util.NoSuchElementException;
 
 @Service
 public class TeacherService{
-    private TeacherRepo teacherRepo;
-    private RoleRepo roleRepo;
-    private PasswordEncoder passwordEncoder;
+    private final TeacherRepo teacherRepo;
+    private final RoleRepo roleRepo;
+    private final PasswordEncoder passwordEncoder;
     private static final String DEFAULT_ROLE = "ROLE_USER";
 
 

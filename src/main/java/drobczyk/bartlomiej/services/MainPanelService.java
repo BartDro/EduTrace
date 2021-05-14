@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class MainPanelService {
-    private TeacherService teacherService;
-    private StudentService studentService;
-    private SubjectService subjectService;
-    private DayService dayService;
+    private final TeacherService teacherService;
+    private final StudentService studentService;
+    private final SubjectService subjectService;
+    private final DayService dayService;
 
 
     @Autowired

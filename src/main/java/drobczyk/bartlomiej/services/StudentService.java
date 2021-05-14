@@ -16,7 +16,6 @@ import drobczyk.bartlomiej.repo.LessonRepo;
 import drobczyk.bartlomiej.repo.StudentRepo;
 import drobczyk.bartlomiej.session.TeacherSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,11 +24,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private StudentRepo studentRepo;
-    private LessonRepo lessonRepo;
-    private SubjectService subjectService;
-    private DayService dayService;
-    private TeacherSession teacherSession;
+    private final StudentRepo studentRepo;
+    private final LessonRepo lessonRepo;
+    private final SubjectService subjectService;
+    private final DayService dayService;
+    private final TeacherSession teacherSession;
 
 
     @Autowired
@@ -51,7 +50,7 @@ public class StudentService {
     }
 
     public List<StudentDto> provideStudentsDtosAccordingToTeacher() {
-        return teacherSession.getTeacher().getStudents().stream()
+        return teacherSession.getLoggedTeacher().getStudents().stream()
                 .map(StudentMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -64,11 +63,10 @@ public class StudentService {
         Lesson lesson = createLessonFromForm(student, lessonFormInfo);
         student.getLessons().add(lesson);
         lessonRepo.save(lesson);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
     }
 
     private Lesson createLessonFromForm(Student student, LessonFormInfo lessonFormInfo) {
-
         return new Lesson(subjectService.findSubjectByDesc(lessonFormInfo.getChosenLesson()), lessonFormInfo.getLessonSection(),
                 lessonFormInfo.getHomework(), lessonFormInfo.getLessonComment(), LocalDateTime.now(), student);
     }
@@ -133,7 +131,7 @@ public class StudentService {
         student.setDays(days);
         student.setAdditionalInfo(subjectInfoEdit.getExtraInfo());
         studentRepo.save(student);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
     }
 
     private Subject matchSubjcetWithFormDescription(String subjectDesc) {
@@ -149,13 +147,13 @@ public class StudentService {
         student.getDays().clear();
         student.getLessons().clear();
         student.getSubjects().clear();
-        teacherSession.getTeacher().getStudents().remove(student);
+        teacherSession.getLoggedTeacher().getStudents().remove(student);
         studentRepo.delete(student);
-        teacherSession.refresh();
+        teacherSession.updateTeacher();
     }
 
     public List<StudentDto> findTeachersStudentsInArchive(String studentInfo) {
-        Set<Student> teachersStudents = teacherSession.getTeacher().getStudents();
+        Set<Student> teachersStudents = teacherSession.getLoggedTeacher().getStudents();
         return studentRepo.findMatchedStudentsByString(studentInfo).stream()
                 .filter(teachersStudents::contains)
                 .map(StudentMapper::toDto)

@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 @Service
 
 public class SubjectService {
-    private SubjectRepo subjectRepo;
+    private final SubjectRepo subjectRepo;
 
     @Autowired
     public SubjectService(SubjectRepo subjectRepo) {
