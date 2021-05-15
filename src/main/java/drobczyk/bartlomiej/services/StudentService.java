@@ -1,6 +1,5 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
 import drobczyk.bartlomiej.exceptions.NoSuchLessonToEdit;
 import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
 import drobczyk.bartlomiej.model.dto.LessonDto;
@@ -52,7 +51,9 @@ public class StudentService {
     }
 
     public List<StudentDto> provideStudentsDtosAccordingToTeacher() {
-        return teacherSession.getLoggedTeacher().getStudents().stream()
+        return teacherSession.getLoggedTeacher()
+                .getStudents()
+                .stream()
                 .map(StudentMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -65,7 +66,6 @@ public class StudentService {
         Lesson lesson = createLessonFromForm(student, lessonFormInfo);
         student.getLessons().add(lesson);
         lessonRepo.save(lesson);
-        teacherSession.updateTeacher();
     }
 
     private Lesson createLessonFromForm(Student student, LessonFormInfo lessonFormInfo) {
@@ -88,12 +88,11 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public Student archiveCurrentLessons(Long studentId, Long positionToArchive) {
+    public void archiveCurrentLessons(Long studentId, Long positionToArchive) {
         Student student = this.getStudentById(studentId);
         Long newPosition = student.getLastArchivedPosition() + positionToArchive;
         student.setLastArchivedPosition(newPosition);
         this.saveStudent(student);
-        return student;
     }
 
     public List<Lesson> getOrderedLessons(Student student) {
@@ -133,7 +132,6 @@ public class StudentService {
         student.setDays(days);
         student.setAdditionalInfo(subjectInfoEdit.getExtraInfo());
         studentRepo.save(student);
-        teacherSession.updateTeacher();
     }
 
     private Subject matchSubjcetWithFormDescription(String subjectDesc) {
@@ -149,9 +147,10 @@ public class StudentService {
         student.getDays().clear();
         student.getLessons().clear();
         student.getSubjects().clear();
-        teacherSession.getLoggedTeacher().getStudents().remove(student);
+        teacherSession.getLoggedTeacher()
+                .getStudents()
+                .remove(student);
         studentRepo.delete(student);
-        teacherSession.updateTeacher();
     }
 
     public List<StudentDto> findTeachersStudentsInArchive(String studentInfo) {
@@ -173,28 +172,4 @@ public class StudentService {
         lessonToEdit.setSubject(matchSubjcetWithFormDescription(formInfo.getChosenLesson()));
         lessonRepo.save(lessonToEdit);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

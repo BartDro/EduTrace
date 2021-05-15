@@ -57,7 +57,6 @@ public class EditPanelController {
     @PostMapping("/edit-student/avatar")
     public String changeAvatar(@RequestParam String avatar, @RequestParam Long studentId) {
         studentService.changeStudentAvatar(avatar, studentId);
-        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId=" + studentId;
     }
 
@@ -69,7 +68,6 @@ public class EditPanelController {
             return getErrors(studentId,result,redirectAttributes);
         }
         studentService.editBasicInfo(basicInfo, studentId);
-        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId=" + studentId;
     }
 
@@ -80,7 +78,6 @@ public class EditPanelController {
             return getErrors(studentId, result, redirectAttributes);
         }
         studentService.editSubjectInfo(subjectInfoEdit, studentId);
-        teacherSession.updateTeacher();
         return "redirect:/edit-student?studentId=" + studentId;
     }
 

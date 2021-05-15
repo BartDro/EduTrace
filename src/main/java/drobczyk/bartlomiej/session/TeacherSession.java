@@ -22,10 +22,6 @@ public class TeacherSession implements AuthenticationFacade{
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public void updateTeacher(){
-        teacherService.updateTeacher(getLoggedTeacher());
-    }
-
     public Teacher getLoggedTeacher(){
         String loggedTeacherName = getAuthentication().getName();
         return teacherService.getTeacherByLogin(loggedTeacherName);

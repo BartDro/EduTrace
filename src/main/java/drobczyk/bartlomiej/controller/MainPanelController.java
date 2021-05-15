@@ -56,7 +56,9 @@ public class MainPanelController {
             model.addAttribute("errors", errorsList);
             model.addAttribute("additionFailed", true);
         }
-        if (teacherSession.getLoggedTeacher().getStudents().isEmpty()) {
+        if (teacherSession.getLoggedTeacher()
+                .getStudents()
+                .isEmpty()) {
             return "firstContactPanel";
         }
         return "mainPanel";
