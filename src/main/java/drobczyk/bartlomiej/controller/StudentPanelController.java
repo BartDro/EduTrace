@@ -1,6 +1,8 @@
 package drobczyk.bartlomiej.controller;
 
+import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
+import drobczyk.bartlomiej.model.lesson.Lesson;
 import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
@@ -39,6 +41,33 @@ public class StudentPanelController {
         Student student = studentService.getStudentById(lessonInfo.getStudentId());
         studentService.saveLessonToStudent(student, lessonInfo);
         return "redirect:/student-panel?studentId=" + lessonInfo.getStudentId();
+    }
+
+    @PostMapping("/edit-lesson")
+    public String editStudentLesson(@ModelAttribute LessonFormInfo lessonInfo, @RequestParam Long lessonId,
+                                    @RequestParam(required = false) boolean isArchiveRequest){
+        Student student = studentService.getStudentById(lessonInfo.getStudentId());
+        studentService.editStudentLesson(student, lessonInfo,lessonId);
+        if (isArchiveRequest){
+            return "redirect:/archive?studentId=" + lessonInfo.getStudentId();
+        }
+        return "redirect:/student-panel?studentId=" + lessonInfo.getStudentId();
+    }
+
+    @PostMapping("/delete-lesson")
+    public String deleteLesson(@RequestParam Long lessonId,@RequestParam Long studentId,
+                               @RequestParam(required = false) boolean isArchiveRequest){
+        Student student = studentService.getStudentById(studentId);
+        Lesson lessonToRemove = student.getLessons().stream()
+                .filter(x-> x.getId().equals(lessonId))
+                .findFirst()
+                .orElseThrow(NoSuchLessonToDelete::new);
+        student.getLessons().remove(lessonToRemove);
+        studentService.saveStudent(student);
+        if (isArchiveRequest){
+            return "redirect:/archive?studentId=" + studentId;
+        }
+        return "redirect:/student-panel?studentId=" + studentId;
     }
 
     @PostMapping("/archive-lesson")

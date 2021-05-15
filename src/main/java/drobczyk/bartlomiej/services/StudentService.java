@@ -1,5 +1,7 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
+import drobczyk.bartlomiej.exceptions.NoSuchLessonToEdit;
 import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
 import drobczyk.bartlomiej.model.dto.LessonDto;
 import drobczyk.bartlomiej.model.dto.StudentDto;
@@ -159,5 +161,40 @@ public class StudentService {
                 .map(StudentMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    public void editStudentLesson(Student student, LessonFormInfo formInfo, Long lessonId) {
+        Lesson lessonToEdit = student.getLessons().stream()
+                .filter(x->x.getId().equals(lessonId))
+                .findFirst()
+                .orElseThrow(NoSuchLessonToEdit::new);
+        lessonToEdit.setLessonTopic(formInfo.getLessonSection());
+        lessonToEdit.setHomework(formInfo.getHomework());
+        lessonToEdit.setLessonComment(formInfo.getLessonComment());
+        lessonToEdit.setSubject(matchSubjcetWithFormDescription(formInfo.getChosenLesson()));
+        lessonRepo.save(lessonToEdit);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
