@@ -7,7 +7,7 @@ informacji kontaktowych oraz dodatkowych
 
 Wykorzystane technologie:
 - Java 15 (wyrażenia lambda, strumienie, referencje do metod) ,
-- Spring Framework (Spring MVC, Spring Boot, Spring Data, Spring Validation, Spring Security)
+- Spring Framework (Spring MVC, Spring Boot, Spring Data, Spring Validation, Spring Security, Spring AOP)
 - Hibernate,
 - MySQL od strony produkcyjnej oraz H2 od strony testowej
 - JUnit oraz Mockito
