@@ -41,9 +41,6 @@ public class TeacherService{
                 .orElseThrow(()->new TeacherNotFoundException(login));
     }
 
-    public Teacher updateTeacher(Teacher teacher){
-        return teacherRepo.save(teacher);
-    }
 
     @Transactional
     public boolean registerTeacher(TeacherDto teacherDto){

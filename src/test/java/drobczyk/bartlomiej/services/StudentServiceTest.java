@@ -103,6 +103,7 @@ class StudentServiceTest {
                 .willReturn(Optional.of(testStudent));
         //when
         underTest.archiveCurrentLessons(testStudent.getId(),listSizeAndArchivedPositionDifference);
+
         //then
         ArgumentCaptor<Student> capturedStudent = ArgumentCaptor.forClass(Student.class);
         verify(studentRepo).save(capturedStudent.capture());
