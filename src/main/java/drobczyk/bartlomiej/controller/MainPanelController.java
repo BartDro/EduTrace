@@ -38,7 +38,6 @@ public class MainPanelController {
         this.teacherSession = teacherSession;
     }
 
-    //ToDo - fix archive presentation
 
     @GetMapping("/main-panel")
     public String presentPanel(Model model, HttpServletRequest request) {

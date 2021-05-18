@@ -57,13 +57,7 @@ public class StudentPanelController {
     @PostMapping("/delete-lesson")
     public String deleteLesson(@RequestParam Long lessonId,@RequestParam Long studentId,
                                @RequestParam(required = false) boolean isArchiveRequest){
-        Student student = studentService.getStudentById(studentId);
-        Lesson lessonToRemove = student.getLessons().stream()
-                .filter(x-> x.getId().equals(lessonId))
-                .findFirst()
-                .orElseThrow(NoSuchLessonToDelete::new);
-        student.getLessons().remove(lessonToRemove);
-        studentService.saveStudent(student);
+        studentService.deleteStudentsLesson(studentId, lessonId);
         if (isArchiveRequest){
             return "redirect:/archive?studentId=" + studentId;
         }

@@ -1,5 +1,6 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
 import drobczyk.bartlomiej.exceptions.NoSuchLessonToEdit;
 import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
 import drobczyk.bartlomiej.model.dto.LessonDto;
@@ -153,6 +154,19 @@ public class StudentService {
         studentRepo.delete(student);
     }
 
+    public void deleteStudentsLesson(Long studentId, Long lessonId) {
+        Student student = getStudentById(studentId);
+        Lesson lessonToRemove = student.getLessons().stream()
+                .filter(x -> x.getId().equals(lessonId))
+                .findFirst()
+                .orElseThrow(NoSuchLessonToDelete::new);
+        student.getLessons().remove(lessonToRemove);
+        if (student.getLastArchivedPosition() > 0) {
+            student.setLastArchivedPosition(student.getLastArchivedPosition() - 1);
+        }
+        saveStudent(student);
+    }
+
     public List<StudentDto> findTeachersStudentsInArchive(String studentInfo) {
         Set<Student> teachersStudents = teacherSession.getLoggedTeacher().getStudents();
         return studentRepo.findMatchedStudentsByString(studentInfo).stream()
@@ -163,7 +177,7 @@ public class StudentService {
 
     public void editStudentLesson(Student student, LessonFormInfo formInfo, Long lessonId) {
         Lesson lessonToEdit = student.getLessons().stream()
-                .filter(x->x.getId().equals(lessonId))
+                .filter(x -> x.getId().equals(lessonId))
                 .findFirst()
                 .orElseThrow(NoSuchLessonToEdit::new);
         lessonToEdit.setLessonTopic(formInfo.getLessonSection());
