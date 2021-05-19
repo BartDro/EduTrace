@@ -1,6 +1,5 @@
 package drobczyk.bartlomiej.services;
 
-import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
 import drobczyk.bartlomiej.model.dto.LessonDto;
 import drobczyk.bartlomiej.model.lesson.Lesson;
 import drobczyk.bartlomiej.model.student.Student;
@@ -8,8 +7,6 @@ import drobczyk.bartlomiej.model.subject.Subject;
 import drobczyk.bartlomiej.repo.LessonRepo;
 import drobczyk.bartlomiej.repo.StudentRepo;
 import drobczyk.bartlomiej.session.TeacherSession;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,21 +14,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.zip.DataFormatException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -40,7 +33,6 @@ class StudentServiceTest {
 
     private Student testStudent;
     private Set<Lesson> testLessons;
-    @Mock
     private StudentService underTest;
     @Mock
     private StudentRepo studentRepo;
@@ -61,17 +53,21 @@ class StudentServiceTest {
                 "Comment", getRandomDate(), testStudent))
                 .limit(50)
                 .collect(Collectors.toSet());
-        testLessons.forEach(x -> x.setId(getRandomId()));
+        testLessons.forEach(x -> x.setId(getNextLong()));
         testStudent.setLessons(testLessons);
         testStudent.setLastArchivedPosition(0L);
         testStudent.setId(7L);
         underTest = new StudentService(studentRepo, lessonRepo, subjectService, dayService, teacherSession);
+        given(studentRepo.findById(testStudent.getId()))
+                .willReturn(Optional.of(testStudent));
     }
 
-    private Long getRandomId() {
-        return random.longs(1l, 150l)
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+    private Long getNextLong() {
+        int nonNullSize = testLessons.stream()
+                .filter(x->x.getId()!=null)
+                .collect(Collectors.toSet())
+                .size();
+        return (long) (nonNullSize + 1);
     }
 
     private LocalDateTime getRandomDate() {
@@ -85,29 +81,47 @@ class StudentServiceTest {
     public void shouldProvideOrderedLessonSublist(Long index) {
         //given
         testStudent.setLastArchivedPosition(index);
-        given(studentRepo.findById(testStudent.getId()))
-                .willReturn(Optional.of(testStudent));
         //when
-        List<LessonDto> testetSubList = underTest.getCurrentLessonsDto(testStudent.getId());
+        List<LessonDto> testSubList = underTest.getCurrentLessonsDto(testStudent.getId());
         //then
-        assertThat(testetSubList.size()).isEqualTo(testStudent.getLessons().size() - testStudent.getLastArchivedPosition());
+        assertThat(testSubList.size()).isEqualTo(testStudent.getLessons().size() - testStudent.getLastArchivedPosition());
     }
 
     @ParameterizedTest
     @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 50})
-    public void shouldSetArchivedIndexEqualListSize() {
+    public void shouldSetArchivedIndexEqualListSize(Long index) {
         //given
-        testStudent.setLastArchivedPosition(35L);
+        testStudent.setLastArchivedPosition(index);
         Long listSizeAndArchivedPositionDifference = testStudent.getLessons().size() - testStudent.getLastArchivedPosition();
-        given(studentRepo.findById(testStudent.getId()))
-                .willReturn(Optional.of(testStudent));
         //when
         underTest.archiveCurrentLessons(testStudent.getId(),listSizeAndArchivedPositionDifference);
 
         //then
-        ArgumentCaptor<Student> capturedStudent = ArgumentCaptor.forClass(Student.class);
+        var capturedStudent = ArgumentCaptor.forClass(Student.class);
         verify(studentRepo).save(capturedStudent.capture());
         assertThat(capturedStudent.getValue().getLastArchivedPosition()).isEqualTo(50L);
     }
+
+    @ParameterizedTest
+    @ValueSource(longs = { 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    public void shouldRemoveLessonFromStudent(Long index){
+        //when
+        underTest.deleteStudentsLesson(testStudent.getId(),index);
+        //then
+        assertThat(testStudent.getLessons().size()).isEqualTo(50-1);
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = { 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    public void shouldRemoveLessonWhenStudentArchivePositionIsSet(Long index){
+        //given
+        testStudent.setLastArchivedPosition(10L);
+        Long previousPosition = testStudent.getLastArchivedPosition();
+        //when
+        underTest.deleteStudentsLesson(testStudent.getId(),index);
+        //then
+        assertThat(testStudent.getLastArchivedPosition()).isEqualTo(previousPosition-1);
+    }
+
 
 }

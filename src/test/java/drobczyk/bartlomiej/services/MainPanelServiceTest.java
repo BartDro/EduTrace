@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,8 +68,8 @@ class MainPanelServiceTest {
         given(subjectService.findSubjectByDesc("Fizyka")).willReturn(new Subject("Fizyka"));
         underTest.addStudentToTeacher(studentFormInfo, testTeacher);
         //then
-        ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
-        ArgumentCaptor<Teacher> teacherArgumentCaptor = ArgumentCaptor.forClass(Teacher.class);
+        var studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
+        var teacherArgumentCaptor = ArgumentCaptor.forClass(Teacher.class);
         verify(studentService).saveStudent(studentArgumentCaptor.capture());
         verify(teacherService).saveTeacher(teacherArgumentCaptor.capture());
         assertThat(studentArgumentCaptor.getValue()).isEqualTo(testStudent);
@@ -78,7 +79,7 @@ class MainPanelServiceTest {
     @Test
     void shouldThrowNoSuchDayException() {
         //given
-        studentFormInfo.setDay(Arrays.asList("Wtoooorek"));
+        studentFormInfo.setDay(Collections.singletonList("Wtoooorek"));
         //when
         given(dayService.findDayByDesc(studentFormInfo.getDay().get(0)))
                 .willThrow(new NoSuchDayException());
@@ -92,7 +93,7 @@ class MainPanelServiceTest {
     @Test
     void shouldThrowNoSuchSubjectException() {
         //given
-        studentFormInfo.setSubject(Arrays.asList("Fiiizyka"));
+        studentFormInfo.setSubject(Collections.singletonList("Fiiizyka"));
         //when
         given(subjectService.findSubjectByDesc(studentFormInfo.getSubject().get(0)))
                 .willThrow(new NoSuchSubjectException());
@@ -102,6 +103,4 @@ class MainPanelServiceTest {
         verify(studentService,never()).saveStudent(any());
         verify(teacherService,never()).saveTeacher(any());
     }
-
-
 }

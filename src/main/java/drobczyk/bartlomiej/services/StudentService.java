@@ -121,7 +121,7 @@ public class StudentService {
 
     public void editSubjectInfo(SubjectInfoEdit subjectInfoEdit, Long studentId) {
         Set<Subject> subjects = subjectInfoEdit.getSubject().stream()
-                .map(this::matchSubjcetWithFormDescription)
+                .map(this::matchSubjectWithFormDescription)
                 .collect(Collectors.toSet());
         Set<Day> days = subjectInfoEdit.getDay().stream()
                 .map(this::matchDayWithFormDescription)
@@ -135,7 +135,7 @@ public class StudentService {
         studentRepo.save(student);
     }
 
-    private Subject matchSubjcetWithFormDescription(String subjectDesc) {
+    private Subject matchSubjectWithFormDescription(String subjectDesc) {
         return subjectService.findSubjectByDesc(subjectDesc);
     }
 
@@ -183,7 +183,7 @@ public class StudentService {
         lessonToEdit.setLessonTopic(formInfo.getLessonSection());
         lessonToEdit.setHomework(formInfo.getHomework());
         lessonToEdit.setLessonComment(formInfo.getLessonComment());
-        lessonToEdit.setSubject(matchSubjcetWithFormDescription(formInfo.getChosenLesson()));
+        lessonToEdit.setSubject(matchSubjectWithFormDescription(formInfo.getChosenLesson()));
         lessonRepo.save(lessonToEdit);
     }
 }
