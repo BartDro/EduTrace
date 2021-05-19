@@ -67,7 +67,7 @@ class StudentServiceTest {
                 .filter(x->x.getId()!=null)
                 .collect(Collectors.toSet())
                 .size();
-        return (long) (nonNullSize + 1);
+        return (long) nonNullSize;
     }
 
     private LocalDateTime getRandomDate() {
@@ -77,7 +77,7 @@ class StudentServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 49})
     public void shouldProvideOrderedLessonSublist(Long index) {
         //given
         testStudent.setLastArchivedPosition(index);
@@ -88,7 +88,7 @@ class StudentServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 49})
     public void shouldSetArchivedIndexEqualListSize(Long index) {
         //given
         testStudent.setLastArchivedPosition(index);
@@ -103,7 +103,7 @@ class StudentServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = { 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 49})
     public void shouldRemoveLessonFromStudent(Long index){
         //when
         underTest.deleteStudentsLesson(testStudent.getId(),index);
@@ -112,7 +112,7 @@ class StudentServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = { 5, 10, 15, 20, 25, 30, 35, 45, 50})
+    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 49})
     public void shouldRemoveLessonWhenStudentArchivePositionIsSet(Long index){
         //given
         testStudent.setLastArchivedPosition(10L);
