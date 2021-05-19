@@ -1,5 +1,6 @@
 package drobczyk.bartlomiej.services;
 
+import drobczyk.bartlomiej.exceptions.ArchivedPositionBeyondBoundriesException;
 import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
 import drobczyk.bartlomiej.exceptions.NoSuchLessonToEdit;
 import drobczyk.bartlomiej.exceptions.StudentNotFoundException;
@@ -78,7 +79,9 @@ public class StudentService {
     public List<LessonDto> getCurrentLessonsDto(Long studentId) {
         Student student = getStudentById(studentId);
         List<Lesson> currentLessons;
-        if (student.getLastArchivedPosition() > 0) {
+        if (student.getLastArchivedPosition()>student.getLessons().size() || student.getLastArchivedPosition()<0){
+            throw new ArchivedPositionBeyondBoundriesException();
+        }else if (student.getLastArchivedPosition() > 0) {
             currentLessons = getOrderedLessons(student)
                     .subList(student.getLastArchivedPosition().intValue(), student.getLessons().size());
         } else {
