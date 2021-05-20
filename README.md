@@ -13,4 +13,4 @@ Wykorzystane technologie:
 - JUnit oraz Mockito
 - Thymeleaf + Bootsrap 4 z elementami jQuery 
 
-Wykorzystano między innymi Spring Security dla mechanizmu uwierzetelnienia oraz autoryzacji, Spring Validation w celu sprawdzenia poprawności danych, AOP w celu obłusi błędów RestTemplate w celach komunikacyjnych z klientami HTTP oraz Ehchache w celu zcachowania zapytań
+Wykorzystano między innymi Spring Security dla mechanizmu uwierzetelnienia oraz autoryzacji, Spring Validation w celu sprawdzenia poprawności danych, AOP w celu obsługi błędów RestTemplate w celach komunikacyjnych z klientami HTTP oraz Ehchache w celu zcachowania zapytań
