@@ -76,7 +76,7 @@ class StudentServiceTest {
     }
 
     private LocalDateTime getRandomDate() {
-        return LocalDateTime.now().plusDays(random.longs(1l, 10l)
+        return LocalDateTime.now().plusDays(random.longs(1L, 10L)
                 .findFirst()
                 .orElseThrow(() -> new DateTimeException("Błąd zakresu")));
     }
