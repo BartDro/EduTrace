@@ -117,18 +117,6 @@ class StudentServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {0, 5, 10, 15, 20, 25, 30, 35, 45, 49})
-    public void shouldRemoveLessonWhenStudentArchivePositionIsSet(Long index){
-        //given
-        testStudent.setLastArchivedPosition(10L);
-        Long previousPosition = testStudent.getLastArchivedPosition();
-        //when
-        underTest.deleteStudentsLesson(testStudent.getId(),index);
-        //then
-        assertThat(testStudent.getLastArchivedPosition()).isEqualTo(previousPosition-1);
-    }
-
-    @ParameterizedTest
     @ValueSource(longs = {-345,-734,568,777})
     public void shouldThrowNoSuchLessonException(Long wrongIndex){
         //when

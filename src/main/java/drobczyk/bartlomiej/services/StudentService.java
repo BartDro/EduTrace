@@ -79,9 +79,9 @@ public class StudentService {
     public List<LessonDto> getCurrentLessonsDto(Long studentId) {
         Student student = getStudentById(studentId);
         List<Lesson> currentLessons;
-        if (student.getLastArchivedPosition()>student.getLessons().size() || student.getLastArchivedPosition()<0){
+        if (student.getLastArchivedPosition() > student.getLessons().size() || student.getLastArchivedPosition() < 0) {
             throw new ArchivedPositionBeyondBoundriesException();
-        }else if (student.getLastArchivedPosition() > 0) {
+        } else if (student.getLastArchivedPosition() > 0) {
             currentLessons = getOrderedLessons(student)
                     .subList(student.getLastArchivedPosition().intValue(), student.getLessons().size());
         } else {
@@ -106,13 +106,15 @@ public class StudentService {
     }
 
     public void changeStudentAvatar(String avatar, Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setAvatarUrl(avatar);
         studentRepo.save(student);
     }
 
     public void editBasicInfo(BasicInfoEdit basicInfoEdit, Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setName(basicInfoEdit.getName());
         student.setSurname(basicInfoEdit.getSurname());
         student.setPhone(basicInfoEdit.getPhone());
@@ -130,7 +132,8 @@ public class StudentService {
                 .map(this::matchDayWithFormDescription)
                 .collect(Collectors.toSet());
 
-        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setGrade(subjectInfoEdit.getGrade());
         student.setSubjects(subjects);
         student.setDays(days);
@@ -147,7 +150,8 @@ public class StudentService {
     }
 
     public void deleteStudent(Long studentId) {
-        Student student = studentRepo.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
         student.getDays().clear();
         student.getLessons().clear();
         student.getSubjects().clear();
@@ -164,9 +168,6 @@ public class StudentService {
                 .findFirst()
                 .orElseThrow(NoSuchLessonToDelete::new);
         student.getLessons().remove(lessonToRemove);
-        if (student.getLastArchivedPosition() > 0) {
-            student.setLastArchivedPosition(student.getLastArchivedPosition() - 1);
-        }
         saveStudent(student);
     }
 

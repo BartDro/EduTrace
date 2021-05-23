@@ -54,10 +54,10 @@ class MainPanelServiceTest {
                 studentFormInfo.getPhone(), studentFormInfo.getMail(), studentFormInfo.getGrade(), studentFormInfo.getParent(),
                 studentFormInfo.getParentPhone(),
                 studentFormInfo.getSubject().stream()
-                        .map(x -> new Subject(x))
+                        .map(Subject::new)
                         .collect(Collectors.toSet()),
                 studentFormInfo.getDay().stream()
-                        .map(x -> new Day(x))
+                        .map(Day::new)
                         .collect(Collectors.toSet()), studentFormInfo.getExtraInfo(),
                 LocalDateTime.now(), testTeacher);
     }
@@ -87,8 +87,8 @@ class MainPanelServiceTest {
         assertThatThrownBy(() -> underTest.addStudentToTeacher(studentFormInfo, testTeacher))
                 .isInstanceOf(NoSuchDayException.class)
                 .hasMessageContaining("Brak wskazanego dnia");
-        verify(studentService,never()).saveStudent(any());
-        verify(teacherService,never()).saveTeacher(any());
+        verify(studentService, never()).saveStudent(any());
+        verify(teacherService, never()).saveTeacher(any());
     }
 
     @Test
@@ -101,7 +101,7 @@ class MainPanelServiceTest {
         assertThatThrownBy(() -> underTest.addStudentToTeacher(studentFormInfo, testTeacher))
                 .isInstanceOf(NoSuchSubjectException.class)
                 .hasMessageContaining("Brak wskazanego przedmiotu");
-        verify(studentService,never()).saveStudent(any());
-        verify(teacherService,never()).saveTeacher(any());
+        verify(studentService, never()).saveStudent(any());
+        verify(teacherService, never()).saveTeacher(any());
     }
 }
