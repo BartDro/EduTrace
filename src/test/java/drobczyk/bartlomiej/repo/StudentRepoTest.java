@@ -17,14 +17,8 @@ class StudentRepoTest {
     @Test
     void shouldFindMatchedStudentsByTextSample(){
         //given
-        Student aleksandra = new Student();
-        aleksandra.setName("Aleksandra");
-        aleksandra.setSurname("Jastrzębska");
-        Student magda = new Student();
-        magda.setName("Magdalena");
-        magda.setSurname("Jastojewicz");
-        repoTest.save(aleksandra);
-        repoTest.save(magda);
+        List<Student> testStudent = provideTestStudents();
+        testStudent.forEach(repoTest::save);
         //when
         List<Student> twoMatchedStudentsByFirstNameLetter = repoTest.findMatchedStudentsByString("Al");
         List<Student> twoMatchedStudentsByFirstSurnameLetter = repoTest.findMatchedStudentsByString("Ja");
@@ -35,8 +29,18 @@ class StudentRepoTest {
         assertThat(twoMatchedStudentsByFirstNameLetter.size()).isEqualTo(2);
         assertThat(twoMatchedStudentsByFirstSurnameLetter.size()).isEqualTo(2);
         assertThat(allStudentsByEmptyString.size()).isEqualTo(2);
-        assertThat(exactlyOneStudentByName).isEqualTo(aleksandra);
-        assertThat(exactlyOneStudentBySurname).isEqualTo(magda);
+        assertThat(exactlyOneStudentByName).isEqualTo(testStudent.get(0));
+        assertThat(exactlyOneStudentBySurname).isEqualTo(testStudent.get(1));
+    }
+
+    private List<Student> provideTestStudents(){
+        Student aleksandra = new Student();
+        aleksandra.setName("Aleksandra");
+        aleksandra.setSurname("Jastrzębska");
+        Student magda = new Student();
+        magda.setName("Magdalena");
+        magda.setSurname("Jastojewicz");
+        return List.of(aleksandra,magda);
     }
 
 }

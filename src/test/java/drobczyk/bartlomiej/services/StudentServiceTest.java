@@ -165,16 +165,6 @@ class StudentServiceTest {
     @Test
     public void shouldSaveEditedLesson(){
         //given
-        Lesson testLesson = testStudent.getLessons()
-                .stream()
-                .filter(x->x.getId().equals(1L))
-                .findFirst()
-                .orElseThrow(NoSuchLessonToEdit::new);
-        testLesson.setSubject(new Subject("Fizyka"));
-        testLesson.setLessonTopic("Trygonometria");
-        testLesson.setHomework("ćwiczenia str 18");
-        testLesson.setLessonComment("Powtórzyć twierdzenie cosinusów");
-
         LessonFormInfo editedInfo = new LessonFormInfo();
         editedInfo.setChosenLesson("Matematyka");
         editedInfo.setLessonSection("Ułamki");

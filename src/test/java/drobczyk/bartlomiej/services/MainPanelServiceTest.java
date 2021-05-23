@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +48,7 @@ class MainPanelServiceTest {
         underTest = new MainPanelService(teacherService, studentService, subjectService, dayService);
         studentFormInfo = new StudentFormInfo("/img/avatars/maleAvatar1.png", "Adam",
                 "Vixij", "564789654", "adam@op.pl", "Wojtek", "8456987456",
-                "test", 7, Arrays.asList("Fizyka"), Arrays.asList("Wtorek"));
+                "test", 7, List.of("Fizyka"), List.of("Wtorek"));
         testTeacher = new Teacher();
         testStudent = new Student(studentFormInfo.getAvatar(), studentFormInfo.getName(), studentFormInfo.getSurname(),
                 studentFormInfo.getPhone(), studentFormInfo.getMail(), studentFormInfo.getGrade(), studentFormInfo.getParent(),
