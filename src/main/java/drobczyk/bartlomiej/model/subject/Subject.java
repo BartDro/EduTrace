@@ -17,9 +17,10 @@ public class Subject {
     @ManyToMany(mappedBy = "subjects")
     private List<Student> students = new ArrayList<>();
 
-    public Subject(){}
+    public Subject() {
+    }
 
-    public Subject (String subject){
+    public Subject(String subject) {
         this.subject = subject;
     }
 

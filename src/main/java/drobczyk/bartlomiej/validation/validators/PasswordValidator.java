@@ -9,16 +9,16 @@ public class PasswordValidator implements ConstraintValidator<PasswordConditions
 
     @Override
     public boolean isValid(String passValue, ConstraintValidatorContext constraintValidatorContext) {
-        if (passValue.length()<4){
+        if (passValue.length() < 4) {
             return false;
-        }else if (passValue.chars()
-                .map(x->(char)x)
-                .noneMatch(Character::isDigit)){
+        } else if (passValue.chars()
+                .map(x -> (char) x)
+                .noneMatch(Character::isDigit)) {
             return false;
-        }else if (passValue.chars()
-                .map(x->(char)x)
-                .noneMatch(Character::isUpperCase)){
+        } else if (passValue.chars()
+                .map(x -> (char) x)
+                .noneMatch(Character::isUpperCase)) {
             return false;
-        }else return true;
+        } else return true;
     }
 }

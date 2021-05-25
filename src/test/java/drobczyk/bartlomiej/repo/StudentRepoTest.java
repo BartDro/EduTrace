@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 @DataJpaTest
 class StudentRepoTest {
 
@@ -15,7 +16,7 @@ class StudentRepoTest {
     private StudentRepo repoTest;
 
     @Test
-    void shouldFindMatchedStudentsByTextSample(){
+    void shouldFindMatchedStudentsByTextSample() {
         //given
         List<Student> testStudent = provideTestStudents();
         testStudent.forEach(repoTest::save);
@@ -33,14 +34,14 @@ class StudentRepoTest {
         assertThat(exactlyOneStudentBySurname).isEqualTo(testStudent.get(1));
     }
 
-    private List<Student> provideTestStudents(){
+    private List<Student> provideTestStudents() {
         Student aleksandra = new Student();
         aleksandra.setName("Aleksandra");
         aleksandra.setSurname("Jastrzębska");
         Student magda = new Student();
         magda.setName("Magdalena");
         magda.setSurname("Jastojewicz");
-        return List.of(aleksandra,magda);
+        return List.of(aleksandra, magda);
     }
 
 }

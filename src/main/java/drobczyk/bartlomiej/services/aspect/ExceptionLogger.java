@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-
 public class ExceptionLogger {
 
     @Pointcut("execution(* drobczyk.bartlomiej.controller..*(..))")
-    private void checkEveryController(){}
+    private void checkEveryController() {
+    }
 
-    @AfterThrowing(pointcut = "checkEveryController()",throwing = "error")
-    public void logError(JoinPoint joinPoint, Throwable error){
-        System.err.println(" \n  :: Error :: - Method" +joinPoint.getSignature() + " has thrown following error: "
-                + error.toString()+"\n");
+    @AfterThrowing(pointcut = "checkEveryController()", throwing = "error")
+    public void logError(JoinPoint joinPoint, Throwable error) {
+        System.err.println(" \n  :: Error :: - Method" + joinPoint.getSignature() + " has thrown following error: "
+                + error.toString() + "\n");
         error.printStackTrace();
     }
 }

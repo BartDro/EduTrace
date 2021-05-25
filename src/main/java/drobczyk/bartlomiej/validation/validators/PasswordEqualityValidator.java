@@ -22,9 +22,9 @@ public class PasswordEqualityValidator implements ConstraintValidator<PasswordEq
         Object passwordValue = new BeanWrapperImpl(value).getPropertyValue(password);
         Object confirmedValue = new BeanWrapperImpl(value).getPropertyValue(confirmedPassword);
 
-        if (passwordValue != null){
+        if (passwordValue != null) {
             return passwordValue.equals(confirmedValue);
-        }else {
+        } else {
             return false;
         }
     }

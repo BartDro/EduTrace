@@ -6,45 +6,49 @@ header,
 }
 
 #presentation {
-    background: url('../img/dark.jpg')no-repeat center center fixed;
+    background: url('../img/dark.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-.follow{
+.follow {
     margin-top: 50px;
 }
 
-.logo-text{
+.logo-text {
     margin-top: 670px;
     color: white;
     font-family: 'Roboto', sans-serif;
 }
-.main-text{
+
+.main-text {
 
     position: relative;
     animation: text 3s 1;
 }
 
-.addButton{
+.addButton {
     font-weight: bolder;
     height: 50px;
     width: auto;
 }
 
-.horizontal-line{
+.horizontal-line {
     color: white;
 }
+
 .top-nav-collapse {
     background-color: #24355C;
 }
+
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
         background-color: #24355C;
     }
 }
+
 @media (min-width: 800px) and (max-width: 850px) {
     .navbar:not(.top-nav-collapse) {
         background-color: #24355C;

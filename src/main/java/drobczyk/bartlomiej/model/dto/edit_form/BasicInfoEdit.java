@@ -6,12 +6,12 @@ import javax.validation.constraints.Size;
 public class BasicInfoEdit {
     private String name;
     private String surname;
-    @Size(min = 9,max = 9,message = "Telefon musi mieć 9 znaków")
+    @Size(min = 9, max = 9, message = "Telefon musi mieć 9 znaków")
     private String phone;
     @Email(message = "Email musi być poprawnie sformatowany ze znakiem \"@\"")
     private String mail;
     private String parent;
-    @Size(min = 9,max = 9,message = "Telefon musi mieć 9 znaków")
+    @Size(min = 9, max = 9, message = "Telefon musi mieć 9 znaków")
     private String parentPhone;
 
     public String getName() {

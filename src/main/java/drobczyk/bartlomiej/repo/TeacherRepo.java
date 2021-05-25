@@ -8,7 +8,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface TeacherRepo extends JpaRepository<Teacher,Long> {
+public interface TeacherRepo extends JpaRepository<Teacher, Long> {
     boolean existsTeacherByLoginAndEmail(String login, String email);
+
     Optional<Teacher> findByLogin(String login);
 }

@@ -10,7 +10,10 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -65,7 +68,7 @@ public class EditPanelController {
                                 @RequestParam Long studentId,
                                 RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return getErrors(studentId,result,redirectAttributes);
+            return getErrors(studentId, result, redirectAttributes);
         }
         studentService.editBasicInfo(basicInfo, studentId);
         return "redirect:/edit-student?studentId=" + studentId;
@@ -81,7 +84,7 @@ public class EditPanelController {
         return "redirect:/edit-student?studentId=" + studentId;
     }
 
-    private String getErrors(Long studentId, BindingResult result, RedirectAttributes redirectAttributes){
+    private String getErrors(Long studentId, BindingResult result, RedirectAttributes redirectAttributes) {
         result.getAllErrors()
                 .forEach(x -> System.err.println(x.getDefaultMessage()));
         redirectAttributes.addFlashAttribute("errors", result);

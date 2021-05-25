@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SubjectRepo extends JpaRepository<Subject,Long> {
+public interface SubjectRepo extends JpaRepository<Subject, Long> {
     Optional<Subject> findBySubject(String subjectDesc);
 }

@@ -12,6 +12,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConditions {
     String message() default "Hasło musi mieć chociaż 4 znaki, chociaż jedną dużą literę oraz cyfrę";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

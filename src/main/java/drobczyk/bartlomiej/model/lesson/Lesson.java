@@ -3,7 +3,6 @@ package drobczyk.bartlomiej.model.lesson;
 import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.model.subject.Subject;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -24,7 +23,8 @@ public class Lesson {
     private Student student;
 
 
-    public Lesson(){}
+    public Lesson() {
+    }
 
     public Lesson(Subject subject, String lessonTopic, String homework,
                   String lessonComment, LocalDateTime lessonDate, Student student) {

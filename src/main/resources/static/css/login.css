@@ -1,15 +1,17 @@
 .home-jumbo {
     background: url('../img/clock.png') center;
-    height:250px
+    height: 250px
 }
 
-.logButoon{
+.logButoon {
     bottom: -15px;
 }
-.jumbo-text{
+
+.jumbo-text {
     position: center;
 }
-.shadow-lg{
+
+.shadow-lg {
     margin-top: 0px;
 }
 
@@ -23,7 +25,8 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-.display-7{
+
+.display-7 {
     position: relative;
     right: -11px;
 }

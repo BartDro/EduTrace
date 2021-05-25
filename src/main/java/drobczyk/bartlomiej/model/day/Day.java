@@ -17,9 +17,10 @@ public class Day {
     @ManyToMany(mappedBy = "days")
     private List<Student> students = new ArrayList<>();
 
-    public Day(){}
+    public Day() {
+    }
 
-    public Day(String day){
+    public Day(String day) {
         this.day = day;
     }
 

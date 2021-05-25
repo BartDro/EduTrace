@@ -2,20 +2,21 @@
     background: url('../img/dark.jpg') center;
 }
 
-.lesson-button{
+.lesson-button {
     width: auto;
     height: 40px;
     text-align: center;
 }
-.amount-lessons{
+
+.amount-lessons {
     font-size: 45px;
 }
 
-.profile{
+.profile {
     margin: auto;
     alignment: center;
 }
 
-.footer{
+.footer {
     background-color: #11426c;
 }

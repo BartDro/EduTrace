@@ -17,4 +17,4 @@
     </cache-template>
     <cache alias="weather" uses-template="weather"></cache>
     <cache alias="quote" uses-template="quotes"></cache>
- </config>
+</config>

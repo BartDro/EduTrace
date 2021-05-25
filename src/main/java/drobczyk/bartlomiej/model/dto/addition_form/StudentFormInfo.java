@@ -12,12 +12,12 @@ public class StudentFormInfo {
     private String avatar;
     private String name;
     private String surname;
-    @Size(min = 9,max = 9,message = "Telefon musi mieć 9 znaków")
+    @Size(min = 9, max = 9, message = "Telefon musi mieć 9 znaków")
     private String phone;
     @Email(message = "Email musi być poprawnie sformatowany ze znakiem \"@\"")
     private String mail;
     private String parent;
-    @Size(min = 9,max = 9, message = "Telefon musi mieć 9 znaków")
+    @Size(min = 9, max = 9, message = "Telefon musi mieć 9 znaków")
     private String parentPhone;
     private String extraInfo;
     private Integer grade;
@@ -27,7 +27,8 @@ public class StudentFormInfo {
     private List<String> day;
 
 
-    public StudentFormInfo() {}
+    public StudentFormInfo() {
+    }
 
     public StudentFormInfo(String avatar, String name, String surname, String phone, String mail, String parent,
                            String parentPhone, String extraInfo, Integer grade, List<String> subjects, List<String> day) {

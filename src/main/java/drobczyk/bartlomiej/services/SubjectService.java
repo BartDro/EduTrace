@@ -6,8 +6,6 @@ import drobczyk.bartlomiej.repo.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-
 @Service
 
 public class SubjectService {
@@ -18,7 +16,7 @@ public class SubjectService {
         this.subjectRepo = subjectRepo;
     }
 
-    public Subject findSubjectByDesc(String subjectDesc){
+    public Subject findSubjectByDesc(String subjectDesc) {
         return subjectRepo.findBySubject(subjectDesc).orElseThrow(NoSuchSubjectException::new);
     }
 }

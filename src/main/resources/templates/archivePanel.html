@@ -30,7 +30,7 @@
             </div>
             <div class=" align-self-center">
                 <div class="">
-                    <h8 th:text="${weather.getDescription()}" >test</h8>
+                    <h8 th:text="${weather.getDescription()}">test</h8>
                 </div>
             </div>
             <div class="col  align-self-center">
@@ -40,25 +40,26 @@
             </div>
             <div class="col  align-self-center">
                 <div class="first-col ">
-                    <h5 class="text"th:text="|${weather.getFeelsLikeTemperature()} C|">32</h5>
+                    <h5 class="text" th:text="|${weather.getFeelsLikeTemperature()} C|">32</h5>
                 </div>
             </div>
             <div class="col  align-self-center">
                 <div class="first-col ">
-                    <div><img th:src="@{/img/sunrisee.png}" src="../static/img/sunrisee.png"width="40"></div>
-                    <h8 th:text="${weather.getSunrise()}">Sunny </h8>
+                    <div><img th:src="@{/img/sunrisee.png}" src="../static/img/sunrisee.png" width="40"></div>
+                    <h8 th:text="${weather.getSunrise()}">Sunny</h8>
                 </div>
             </div>
             <div class="col align-self-center">
                 <div class="first-col ">
-                    <div class="ml-1"><img  th:src="@{/img/sunsett.png}" src="../static/img/sunsett.png"width="40"></div>
-                    <h8 th:text="${weather.getSunset()}">Sunny </h8>
+                    <div class="ml-1"><img th:src="@{/img/sunsett.png}" src="../static/img/sunsett.png" width="40">
+                    </div>
+                    <h8 th:text="${weather.getSunset()}">Sunny</h8>
                 </div>
             </div>
             <div class="col align-self-center">
                 <div class="first-col ">
                     <img th:src="@{/img/wind-solid.svg}" src="../static/img/wind-solid.svg" width="40">
-                    <h8 th:text="|${weather.getWindSpeed()} m/s|">Sunny </h8>
+                    <h8 th:text="|${weather.getWindSpeed()} m/s|">Sunny</h8>
                 </div>
             </div>
         </div>
@@ -83,27 +84,34 @@
     <form action="#" th:action="@{/archive}" method="get">
         <div class="col-8 d-flex justify-content-center offset-2">
             <div class="input-group mt-4 ">
-                <input type="search" name="student" class="form-control rounded" placeholder="Podaj dane ucznia" aria-label="Search"
-                       aria-describedby="search-addon" />
+                <input type="search" name="student" class="form-control rounded" placeholder="Podaj dane ucznia"
+                       aria-label="Search"
+                       aria-describedby="search-addon"/>
                 <button type="submit" class="btn btn-outline-primary">Wyszukaj ucznia</button>
             </div>
         </div>
     </form>
     <div th:if="${!archivedStudents.isEmpty()}">
-        <div class=" col-8 offset-2 card shadow mt-4 mb-4 g-4 d-flex justify-content-center" th:each="student:${archivedStudents}">
-                <div class="d-flex mt-2 mb-2 mr-2 ml-2 align-items-center">
-                    <div class="image"> <img src="../static/img/avatars/maleAvatar1.png" th:src="${student.getAvatarUrl()}" class="rounded img-fluid" width="155"> </div>
-                    <div class="ml-3 w-100">
-                        <h4 class="mb-0 mt-0 font-weight-bold text-center"th:text="|${student.getName()} ${student.getSurname()}|">Miłosz</h4>
-                        <h5 class="text-center mt-2" th:text="|Liczba zarchiwizowanych lekcji : ${student.getTotalLessonAmount()}|"></h5>
-                        <div class="button mt-4  flex-row  align-items-center">
-                            <form action="#" th:action="@{/archive}" method="get">
-                                <input type="hidden" name="studentId" th:value="${student.getId()}">
-                                <input type="submit" class=" btn-sm mb-3 mr-2 btn-block font-weight-bold btn-primary text-white" value="Archiwum">
-                            </form>
-                        </div>
+        <div class=" col-8 offset-2 card shadow mt-4 mb-4 g-4 d-flex justify-content-center"
+             th:each="student:${archivedStudents}">
+            <div class="d-flex mt-2 mb-2 mr-2 ml-2 align-items-center">
+                <div class="image"><img src="../static/img/avatars/maleAvatar1.png" th:src="${student.getAvatarUrl()}"
+                                        class="rounded img-fluid" width="155"></div>
+                <div class="ml-3 w-100">
+                    <h4 class="mb-0 mt-0 font-weight-bold text-center"
+                        th:text="|${student.getName()} ${student.getSurname()}|">Miłosz</h4>
+                    <h5 class="text-center mt-2"
+                        th:text="|Liczba zarchiwizowanych lekcji : ${student.getTotalLessonAmount()}|"></h5>
+                    <div class="button mt-4  flex-row  align-items-center">
+                        <form action="#" th:action="@{/archive}" method="get">
+                            <input type="hidden" name="studentId" th:value="${student.getId()}">
+                            <input type="submit"
+                                   class=" btn-sm mb-3 mr-2 btn-block font-weight-bold btn-primary text-white"
+                                   value="Archiwum">
+                        </form>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

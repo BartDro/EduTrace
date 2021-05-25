@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
 public class NoSuchLessonToEdit extends RuntimeException {
-    public NoSuchLessonToEdit(){
+    public NoSuchLessonToEdit() {
         super("Brak takiej lekcji do edycji");
         super.printStackTrace();
     }

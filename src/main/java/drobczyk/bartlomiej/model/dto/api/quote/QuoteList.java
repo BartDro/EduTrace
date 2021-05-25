@@ -40,7 +40,7 @@ public class QuoteList {
         this.results = results;
     }
 
-    public static class Result{
+    public static class Result {
         private List<String> tags;
         private String _id;
         private String content;

@@ -19,24 +19,24 @@
     </script>
 </head>
 <body>
-    <div th:if="${additionFailed}">
-        <div id="additionFailed" class="modal fade addError">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold">Nie udało się dodać ucznia - nieudana walidacja
-                            danych:</h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body ml-2">
-                        <ul th:each="error:${errors}">
-                            <li class="font-italic" th:text="${error}"></li>
-                        </ul>
-                    </div>
+<div th:if="${additionFailed}">
+    <div id="additionFailed" class="modal fade addError">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">Nie udało się dodać ucznia - nieudana walidacja
+                        danych:</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body ml-2">
+                    <ul th:each="error:${errors}">
+                        <li class="font-italic" th:text="${error}"></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <header>
     <div id="presentation" class="view">
         <div class="mask rgba-black-strong">

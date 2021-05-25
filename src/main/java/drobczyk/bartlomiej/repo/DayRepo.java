@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface DayRepo extends JpaRepository<Day,Long> {
+public interface DayRepo extends JpaRepository<Day, Long> {
     Optional<Day> findByDay(String day);
 }

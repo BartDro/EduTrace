@@ -9,10 +9,12 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name="Student")
+@Table(name = "Student")
 public class Student {
 
     @Id
@@ -30,31 +32,31 @@ public class Student {
     private String avatarUrl;
     private LocalDateTime registrationDate;
     private Long lastArchivedPosition;
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable (name = "student_subject",
-            joinColumns = {@JoinColumn(name = "id_student",referencedColumnName = "student_id" )},
-            inverseJoinColumns = {@JoinColumn(name = "id_subject",referencedColumnName = "subject_id")})
+    @JoinTable(name = "student_subject",
+            joinColumns = {@JoinColumn(name = "id_student", referencedColumnName = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_subject", referencedColumnName = "subject_id")})
     private Set<Subject> subjects = new LinkedHashSet<>();
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "day_student",
-            joinColumns = {@JoinColumn(name = "id_student", referencedColumnName ="student_id")},
-            inverseJoinColumns = {@JoinColumn (name = "id_day",referencedColumnName ="day_id" )})
+            joinColumns = {@JoinColumn(name = "id_student", referencedColumnName = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_day", referencedColumnName = "day_id")})
     private Set<Day> days = new LinkedHashSet<>();
     @ManyToOne
     private Teacher teacher;
-    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
-    private Set<Lesson > lessons = new LinkedHashSet<>();
+    private Set<Lesson> lessons = new LinkedHashSet<>();
 
 
-    public Student(){
+    public Student() {
     }
 
-    public Student( String avatarUrl,String name, String surname, String phone, String email, Integer grade,
-                    String parent, String parentNumber,Set<Subject> subjects,Set<Day> days, String additionalInfo,
-                    LocalDateTime registrationDate, Teacher teacher) {
+    public Student(String avatarUrl, String name, String surname, String phone, String email, Integer grade,
+                   String parent, String parentNumber, Set<Subject> subjects, Set<Day> days, String additionalInfo,
+                   LocalDateTime registrationDate, Teacher teacher) {
         this.avatarUrl = avatarUrl;
         this.name = name;
         this.surname = surname;

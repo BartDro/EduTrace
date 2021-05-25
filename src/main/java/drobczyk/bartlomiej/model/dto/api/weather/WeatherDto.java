@@ -11,6 +11,9 @@ public class WeatherDto {
     private String sunrise;
     private String sunset;
 
+    public WeatherDto() {
+    }
+
     public WeatherDto(double temperature, double feelsLikeTemperature, double windSpeed, String description,
                       String icon, String sunrise, String sunset) {
         this.temperature = temperature;
@@ -23,15 +26,15 @@ public class WeatherDto {
     }
 
     public double getTemperature() {
-        return DoubleRounder.round(temperature,1);
+        return DoubleRounder.round(temperature, 1);
     }
 
     public double getFeelsLikeTemperature() {
-        return DoubleRounder.round(feelsLikeTemperature,1);
+        return DoubleRounder.round(feelsLikeTemperature, 1);
     }
 
     public double getWindSpeed() {
-        return DoubleRounder.round(windSpeed,1);
+        return DoubleRounder.round(windSpeed, 1);
     }
 
     public String getDescription() {
@@ -50,7 +53,7 @@ public class WeatherDto {
         return sunset;
     }
 
-    public String provideIconAdress(){
-        return "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+    public String provideIconAdress() {
+        return "http://openweathermap.org/img/wn/" + icon + "@2x.png";
     }
 }

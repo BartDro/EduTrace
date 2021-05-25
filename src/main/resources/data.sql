@@ -1,11 +1,9 @@
+insert into subjects(subject)
+values ('Matematyka'),
+       ('Fizyka'),
+       ('Angielski');
 
-insert into subjects( subject)
-values
-('Matematyka'),
-('Fizyka'),
-('Angielski');
-
-insert into day ( day)
+insert into day (day)
 VALUES ('Poniedziałek'),
        ('Wtorek'),
        ('Środa'),

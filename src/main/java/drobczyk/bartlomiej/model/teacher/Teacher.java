@@ -2,13 +2,11 @@ package drobczyk.bartlomiej.model.teacher;
 
 import drobczyk.bartlomiej.model.roles.UserRole;
 import drobczyk.bartlomiej.model.student.Student;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -31,13 +29,16 @@ public class Teacher {
     @NotEmpty
     private String password;
     private LocalDateTime regisrationDate;
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,orphanRemoval = true )
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @Fetch(value = FetchMode.JOIN)
     private Set<Student> students = new HashSet<>();
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
 
-    public Teacher(){};
+    public Teacher() {
+    }
+
+    ;
 
     public Teacher(String login, String email, String password,
                    LocalDateTime regisrationDate, Set<Student> students) {

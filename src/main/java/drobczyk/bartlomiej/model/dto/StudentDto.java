@@ -8,13 +8,13 @@ public class StudentDto {
     private Long id;
     private String name;
     private String surname;
-    @Size(min = 6,max = 6)
+    @Size(min = 6, max = 6)
     private String phone;
     @Email
     private String email;
     private int grade;
     private String parent;
-    @Size(min = 6,max = 6)
+    @Size(min = 6, max = 6)
     private String parentNumber;
     private String additionalInfo;
     private String avatarUrl;
@@ -22,6 +22,9 @@ public class StudentDto {
     private Long lastArchivedPosition;
     private List<String> subjects;
     private List<String> days;
+
+    public StudentDto() {
+    }
 
     public StudentDto(Long id, String name, String surname, String phone, String email, Integer grade, String parent,
                       String parentNumber, String additionalInfo, String avatarUrl,
@@ -97,4 +100,5 @@ public class StudentDto {
     public List<String> getDays() {
         return days;
     }
+
 }

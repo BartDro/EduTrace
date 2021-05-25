@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TeacherSession implements AuthenticationFacade{
+public class TeacherSession implements AuthenticationFacade {
 
     private final TeacherService teacherService;
 
@@ -22,7 +22,7 @@ public class TeacherSession implements AuthenticationFacade{
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public Teacher getLoggedTeacher(){
+    public Teacher getLoggedTeacher() {
         String loggedTeacherName = getAuthentication().getName();
         return teacherService.getTeacherByLogin(loggedTeacherName);
     }

@@ -16,6 +16,7 @@ public class OpenWeatherDto {
     public List<OpenWeatherDtoWeather> getWeather() {
         return weather;
     }
+
     public OpenWeatherDtoMain getMain() {
         return main;
     }

@@ -1,8 +1,6 @@
 package drobczyk.bartlomiej.controller;
 
-import drobczyk.bartlomiej.exceptions.NoSuchLessonToDelete;
 import drobczyk.bartlomiej.model.dto.addition_form.LessonFormInfo;
-import drobczyk.bartlomiej.model.lesson.Lesson;
 import drobczyk.bartlomiej.model.student.Student;
 import drobczyk.bartlomiej.services.StudentService;
 import drobczyk.bartlomiej.services.api.ApiService;
@@ -27,13 +25,13 @@ public class StudentPanelController {
 
     @GetMapping("/student-panel")
     public String presentPanel(Model model, @RequestParam Long studentId) {
-            model.addAttribute("lessonInfo", new LessonFormInfo());
-            model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
-            model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
-            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
-            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
-            model.addAttribute("quote",apiService.provideRandomQuote());
-            return "studentPanel";
+        model.addAttribute("lessonInfo", new LessonFormInfo());
+        model.addAttribute("chosenStudent", studentService.provideStudentDto(studentId));
+        model.addAttribute("currentLessons", studentService.getCurrentLessonsDto(studentId));
+        model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+        model.addAttribute("weather", apiService.provideWeather(apiService.provideLocationDto()));
+        model.addAttribute("quote", apiService.provideRandomQuote());
+        return "studentPanel";
     }
 
     @PostMapping("/add-lesson")
@@ -45,20 +43,20 @@ public class StudentPanelController {
 
     @PostMapping("/edit-lesson")
     public String editStudentLesson(@ModelAttribute LessonFormInfo lessonInfo, @RequestParam Long lessonId,
-                                    @RequestParam(required = false) boolean isArchiveRequest){
+                                    @RequestParam(required = false) boolean isArchiveRequest) {
         Student student = studentService.getStudentById(lessonInfo.getStudentId());
-        studentService.editStudentLesson(student, lessonInfo,lessonId);
-        if (isArchiveRequest){
+        studentService.editStudentLesson(student, lessonInfo, lessonId);
+        if (isArchiveRequest) {
             return "redirect:/archive?studentId=" + lessonInfo.getStudentId();
         }
         return "redirect:/student-panel?studentId=" + lessonInfo.getStudentId();
     }
 
     @PostMapping("/delete-lesson")
-    public String deleteLesson(@RequestParam Long lessonId,@RequestParam Long studentId,
-                               @RequestParam(required = false) boolean isArchiveRequest){
+    public String deleteLesson(@RequestParam Long lessonId, @RequestParam Long studentId,
+                               @RequestParam(required = false) boolean isArchiveRequest) {
         studentService.deleteStudentsLesson(studentId, lessonId);
-        if (isArchiveRequest){
+        if (isArchiveRequest) {
             return "redirect:/archive?studentId=" + studentId;
         }
         return "redirect:/student-panel?studentId=" + studentId;

@@ -1,13 +1,14 @@
 package drobczyk.bartlomiej.model.dto;
 
-import drobczyk.bartlomiej.validation.annotations.PasswordEqualityCheck;
 import drobczyk.bartlomiej.validation.annotations.PasswordConditions;
+import drobczyk.bartlomiej.validation.annotations.PasswordEqualityCheck;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-@PasswordEqualityCheck(password = "password",confirmedPassword = "passwordConfirm")
+
+@PasswordEqualityCheck(password = "password", confirmedPassword = "passwordConfirm")
 public class TeacherDto {
-    @Size(min = 4,max = 10,message = "Login musi mieć minimum 4 znaki i maximum 10")
+    @Size(min = 4, max = 10, message = "Login musi mieć minimum 4 znaki i maximum 10")
     private String login;
     @Email(message = "Email musi być prawidłowo sformatowany i zawierać znak \"@\"")
     private String mail;
@@ -15,7 +16,9 @@ public class TeacherDto {
     private String password;
     private String passwordConfirm;
 
-    public TeacherDto(){}
+    public TeacherDto() {
+    }
+
     public TeacherDto(String login, String mail, String password, String passwordConfirm) {
         this.login = login;
         this.mail = mail;

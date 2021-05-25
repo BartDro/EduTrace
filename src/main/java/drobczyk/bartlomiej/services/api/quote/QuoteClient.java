@@ -1,4 +1,3 @@
-
 package drobczyk.bartlomiej.services.api.quote;
 
 import drobczyk.bartlomiej.exceptions.QuotesClientException;
@@ -17,15 +16,15 @@ public class QuoteClient {
     private RestTemplate restTemplate;
 
     @Autowired
-    public QuoteClient(RestTemplate restTemplate){
+    public QuoteClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public List<QuoteDto> provideQuotes(){
+    public List<QuoteDto> provideQuotes() {
         return Optional.ofNullable(restTemplate.getForObject("https://api.quotable.io/quotes?maxLength=130&limit=500", QuoteList.class))
                 .orElseThrow(QuotesClientException::new)
                 .getResults().stream()
-                .map(x->new QuoteDto(x.getContent(),x.getAuthor()))
+                .map(x -> new QuoteDto(x.getContent(), x.getAuthor()))
                 .collect(Collectors.toList());
     }
 }

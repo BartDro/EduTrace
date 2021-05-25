@@ -19,27 +19,27 @@ public class ArchiveController {
     private final ApiService apiService;
 
     @Autowired
-    public ArchiveController(StudentService studentService,  ApiService apiService) {
+    public ArchiveController(StudentService studentService, ApiService apiService) {
         this.studentService = studentService;
         this.apiService = apiService;
     }
 
     @GetMapping("/archive")
     public String findStudentInArchive(@RequestParam(required = false) String student, @RequestParam(required = false) Long studentId, Model model) {
-            List<StudentDto> matchedStudents = new ArrayList<>();
-            if (student != null) {
-                matchedStudents = studentService.findTeachersStudentsInArchive(student);
-            }
-            model.addAttribute("archivedStudents", matchedStudents);
-            model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
-            model.addAttribute("weather",apiService.provideWeather(apiService.provideLocationDto()));
-            model.addAttribute("quote",apiService.provideRandomQuote());
-            if (studentId != null){
-                Student chosenStudent = studentService.getStudentById(studentId);
-                model.addAttribute("chosenStudent", chosenStudent);
-                model.addAttribute("currentLessons", studentService.getOrderedLessons(chosenStudent));
-                return "studentArchivePanel";
-            }
-            return "archivePanel";
+        List<StudentDto> matchedStudents = new ArrayList<>();
+        if (student != null) {
+            matchedStudents = studentService.findTeachersStudentsInArchive(student);
         }
+        model.addAttribute("archivedStudents", matchedStudents);
+        model.addAttribute("students", studentService.provideStudentsDtosAccordingToTeacher());
+        model.addAttribute("weather", apiService.provideWeather(apiService.provideLocationDto()));
+        model.addAttribute("quote", apiService.provideRandomQuote());
+        if (studentId != null) {
+            Student chosenStudent = studentService.getStudentById(studentId);
+            model.addAttribute("chosenStudent", chosenStudent);
+            model.addAttribute("currentLessons", studentService.getOrderedLessons(chosenStudent));
+            return "studentArchivePanel";
+        }
+        return "archivePanel";
     }
+}
