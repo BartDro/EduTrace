@@ -168,6 +168,9 @@ public class StudentService {
                 .findFirst()
                 .orElseThrow(NoSuchLessonToDelete::new);
         student.getLessons().remove(lessonToRemove);
+        if(student.getLastArchivedPosition()>student.getLessons().size()){
+            student.setLastArchivedPosition((long) student.getLessons().size());
+        }
         saveStudent(student);
     }
 

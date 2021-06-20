@@ -56,5 +56,4 @@ public class MainPanelService {
     private Day matchDayWithFormDescription(String dayDesc) {
         return dayService.findDayByDesc(dayDesc);
     }
-
 }
